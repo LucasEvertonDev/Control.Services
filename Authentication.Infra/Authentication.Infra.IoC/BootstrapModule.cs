@@ -1,7 +1,9 @@
 ﻿using Authentication.Application.Domain;
+using Authentication.Application.Domain.Plugins.Cryptography;
 using Authentication.Application.Domain.Plugins.JWT;
 using Authentication.Application.Mediator;
 using Authentication.Infra.Data;
+using Authentication.Infra.IoC.Plugins.Cryptography;
 using Authentication.Infra.IoC.Plugins.JWT.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Notification;
@@ -21,5 +23,7 @@ public static class BootstrapModule
         services.RegisterMediatR();
 
         services.AddScoped<ITokenService, TokenService>();
+
+        services.AddScoped<IPasswordHash, PasswordHash>();
     }
 }

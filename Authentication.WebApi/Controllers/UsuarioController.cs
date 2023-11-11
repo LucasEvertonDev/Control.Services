@@ -1,18 +1,18 @@
 ﻿using Authentication.Application.Domain.Contexts.Usuarios.Models;
 using Authentication.Application.Domain.Structure.Models;
-using Authentication.Application.Mediator.Commands.PostLogin;
+using Authentication.Application.Mediator.Commands.Usuarios.PostUsuario;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Authentication.WebApi.Controllers;
 
 [ApiController]
-[Route("api/v1/users")]
+[Route("api/v1/usuarios")]
 public class UsuarioController(IMediator mediator) : BaseController
 {
+    [HttpPost]
     [AllowAnonymous]
-    [HttpPost("login")]
     [ProducesResponseType(typeof(ResponseDto<TokenModel>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> Login([FromBody] PostLoginCommand request)
+    public async Task<IActionResult> Post([FromBody] PostUsuarioCommand request)
     {
         return Result(await mediator.Send<Result>(request));
     }

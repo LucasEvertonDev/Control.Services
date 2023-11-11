@@ -1,17 +1,19 @@
-﻿namespace Authentication.Application.Mediator.Commands.PostFlowLogin;
+﻿using Authentication.Application.Domain.Plugins.Cryptography;
+
+namespace Authentication.Application.Mediator.Commands.Auth.PostFlowLogin;
 
 public class PostFlowLoginCommandHandler(
     IServiceProvider serviceProvider,
-    ITokenService tokenService) : BaseHandler(serviceProvider), IRequestHandler<PostFlowLoginCommand, Result>
+    ITokenService tokenService,
+    IPasswordHash passwordHash) : BaseHandler(serviceProvider), IRequestHandler<PostFlowLoginCommand, Result>
 {
     public async Task<Result> Handle(PostFlowLoginCommand request, CancellationToken cancellationToken)
     {
         var usuario = await UnitOfWork.UsuarioRepository
             .FirstOrDefaultAsync(
-                usuario => usuario.Email == request.Email
-                && usuario.Senha == request.Senha);
+                usuario => usuario.Email == request.Email);
 
-        if (usuario == null)
+        if (usuario == null || !passwordHash.PasswordIsEquals(request.Senha, usuario.Chave, usuario.Senha))
         {
             return Result.Failure<PostFlowLoginCommandHandler>(UsuarioFailures.EmailSenhaInvalidos);
         }

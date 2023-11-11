@@ -13,4 +13,8 @@ public static class UsuarioFailures
     public static readonly FailureModel EmailSenhaInvalidos = new ("EmailSenhaInvalidos", "Email ou senha inválidos");
 
     public static readonly FailureModel NaoFoiPossivelRecuperarUsuarioLogado = new ("NaoFoiPossivelRecuperarUsuarioLogado", "Não foi possível recuperar o usuário logado");
+
+    public static readonly FailureModel EmailExistente = new ("EmailExistente", "Já existe um email cadastrado para o usuário corrente.");
+
+    public static readonly FailureModel ChaveHashObrigatoria = new ("ChaveHashObrigatoria", "Chave hash é obrigatória.");
 }

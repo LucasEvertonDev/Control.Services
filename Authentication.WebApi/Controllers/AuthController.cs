@@ -1,9 +1,9 @@
 ﻿using System.Net;
 using Authentication.Application.Domain.Contexts.Usuarios.Models;
 using Authentication.Application.Domain.Structure.Models;
-using Authentication.Application.Mediator.Commands.PostFlowLogin;
-using Authentication.Application.Mediator.Commands.PostLogin;
-using Authentication.Application.Mediator.Commands.PostRefreshToken;
+using Authentication.Application.Mediator.Commands.Auth.PostFlowLogin;
+using Authentication.Application.Mediator.Commands.Auth.PostLogin;
+using Authentication.Application.Mediator.Commands.Auth.PostRefreshToken;
 using Microsoft.AspNetCore.Authorization;
 using Notification.Notifications.Helpers;
 

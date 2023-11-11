@@ -3,6 +3,16 @@ public class Usuario : BaseEntity<Usuario>
 {
     public Usuario(string email, string senha, string chave)
     {
+        Ensure(email).ForContext(u => u.Email)
+            .NotNullOrEmpty(UsuarioFailures.EmailObrigatorio)
+            .EmailAddress(UsuarioFailures.EmailInvalido);
+
+        Ensure(senha).ForContext(u => u.Senha)
+            .NotNullOrEmpty(UsuarioFailures.SenhaObrigatoria);
+
+        Ensure(chave).ForContext(u => u.Chave)
+            .NotNullOrEmpty(UsuarioFailures.ChaveHashObrigatoria);
+
         Email = email;
         Senha = senha;
         Chave = chave;

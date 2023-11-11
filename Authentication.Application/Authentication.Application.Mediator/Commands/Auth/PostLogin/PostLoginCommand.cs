@@ -1,6 +1,6 @@
 ﻿using Authentication.Application.Domain.Structure.Models;
 
-namespace Authentication.Application.Mediator.Commands.PostLogin;
+namespace Authentication.Application.Mediator.Commands.Auth.PostLogin;
 
 public class PostLoginCommand : IRequest<Result>, IHandler<PostLoginCommandHandler>, IValidationAsync
 {

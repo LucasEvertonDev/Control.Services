@@ -1,11 +1,11 @@
 ﻿using Authentication.Application.Mediator.Structure.Extensions;
 using FluentValidation;
 
-namespace Authentication.Application.Mediator.Commands.PostLogin;
+namespace Authentication.Application.Mediator.Commands.Usuarios.PostUsuario;
 
-public class PostLoginCommandValidator : AbstractValidator<PostLoginCommand>
+public class PostUsuarioCommandValidator : AbstractValidator<PostUsuarioCommand>
 {
-    public PostLoginCommandValidator()
+    public PostUsuarioCommandValidator()
     {
         RuleFor(c => c.Email).NotNullOrEmpty().WithError(UsuarioFailures.EmailObrigatorio).EmailAddress().WithError(UsuarioFailures.EmailInvalido);
 

@@ -1,7 +1,7 @@
 ﻿using Authentication.Application.Domain.Plugins.JWT.Conts;
 using Authentication.Application.Domain.Structure.Extensions;
 
-namespace Authentication.Application.Mediator.Commands.PostRefreshToken;
+namespace Authentication.Application.Mediator.Commands.Auth.PostRefreshToken;
 
 public class PostRefreshTokenCommandHandler(
     IServiceProvider serviceProvider,

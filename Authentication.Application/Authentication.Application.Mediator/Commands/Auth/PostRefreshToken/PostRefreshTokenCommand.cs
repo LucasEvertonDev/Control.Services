@@ -1,4 +1,4 @@
-﻿namespace Authentication.Application.Mediator.Commands.PostRefreshToken;
+﻿namespace Authentication.Application.Mediator.Commands.Auth.PostRefreshToken;
 
 public class PostRefreshTokenCommand : IRequest<Result>, IHandler<PostRefreshTokenCommandHandler>
 {
