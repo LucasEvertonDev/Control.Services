@@ -1,0 +1,1 @@
+﻿namespace Authentication.Application.Mediator.Queries;

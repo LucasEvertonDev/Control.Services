@@ -1,0 +1,10 @@
+﻿global using System.Linq.Expressions;
+global using Authentication.Application.Domain.Structure.Domain;
+global using Authentication.Application.Domain.Structure.Pagination;
+global using Authentication.Application.Domain.Structure.Repositories;
+global using Authentication.Application.Domain.Structure.UnitOfWork;
+global using Authentication.Infra.Data.Structure.Extensions;
+global using Authentication.Infra.Data.Structure.Repositories;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.DependencyInjection;
+global using Notification.Notifications.Context;

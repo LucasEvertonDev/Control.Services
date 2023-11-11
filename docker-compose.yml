@@ -1,0 +1,56 @@
+version: '3.4'
+
+networks:
+  backend2:
+    name: backend2
+    # # external: true
+  
+services:
+  authentication.webapi_auth:
+    image: authentication.webapi_auth
+    container_name: authentication.webapi_auth
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:SignCi=Data Source=FIVBR-APP002V\\QA;Initial Catalog=SignCi;User ID=user_sign;Password=sign;Integrated Security=False;TrustServerCertificate=True"
+      - "Jwt:Key=15e0e0beaaac6edb63dc815b5a732481ef2ff6fc7ee412ecbdd43d989f121069"
+      - "Jwt:ExpireInMinutes=60"
+      - "Logging:LogLevel:SerilogDb=Warning"
+      - "Logging:LogLevel:Default=Information"
+      - "Logging:LogLevel:MicrosoftAspNetCore=Warning"
+      - "Logging:LogLevel:System=Warning"
+      - "Swagger:FlowLogin=http://localhost:5000/api/v1/auth/flowlogin"
+      - "FilterExceptions=false"
+    build:
+      context: .
+      dockerfile: ./Authentication.WebApi/Dockerfile
+    ports:
+      - '5000:80'
+    networks:
+      - 'backend2' 
+
+  limitecredito.webapi_auth:
+    image: limitecredito.webapi_auth
+    container_name: limitecredito.webapi_auth
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:SignCi=Data Source=FIVBR-APP002V\\QA;Initial Catalog=SignCi;User ID=user_sign;Password=sign;Integrated Security=False;TrustServerCertificate=True"
+      - "ConnectionStrings:SignFin=Data Source=FIVBR-APP002V\\QA;Initial Catalog=SignFin;User ID=user_sign;Password=sign;Integrated Security=False;TrustServerCertificate=True"
+      - "ConnectionStrings:SignCom=Data Source=FIVBR-APP002V\\QA;Initial Catalog=SignCom;User ID=user_sign;Password=sign;Integrated Security=False;TrustServerCertificate=True"
+      - "Jwt:Key=15e0e0beaaac6edb63dc815b5a732481ef2ff6fc7ee412ecbdd43d989f121069"
+      - "Jwt:ExpireInMinutes=60"
+      - "Logging:LogLevel:SerilogDb=Warning"
+      - "Logging:LogLevel:Default=Information"
+      - "Logging:LogLevel:MicrosoftAspNetCore=Warning"
+      - "Logging:LogLevel:System=Warning"
+      - "Swagger:FlowLogin=http://localhost:5000/api/v1/auth/flowlogin"
+      - "FilterExceptions=false"
+    depends_on:
+      - authentication.webapi_auth
+    build:
+      context: ../LimiteCreditoAPI
+      dockerfile: ./LimiteCredito.WebApi/Dockerfile
+    ports:
+      - '5001:80'
+    networks:
+      - 'backend2'
+    

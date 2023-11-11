@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34009.444
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication.WebApi", "Authentication.WebApi", "{7D7006D7-4F20-4159-946C-4FA349EAE3EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication.Infra", "Authentication.Infra", "{2A83DD42-A226-4695-A717-9A309AAFBA26}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication.Tests", "Authentication.Tests", "{F67375F9-476A-4FCE-AE40-73C29962C2B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication.Application", "Authentication.Application", "{8F25486B-0C29-4518-8E08-E7CA57BC8C72}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication.Application.Domain", "Authentication.Application\Authentication.Application.Domain\Authentication.Application.Domain.csproj", "{5BFA1960-6A82-4C29-B1C0-1AC578850042}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication.Application.Mediator", "Authentication.Application\Authentication.Application.Mediator\Authentication.Application.Mediator.csproj", "{712303E5-A47A-4627-AFE4-AD5389230552}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication.Infra.Data", "Authentication.Infra\Authentication.Infra.Data\Authentication.Infra.Data.csproj", "{045D190E-D5C1-4AAD-8D87-D7A64196A951}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication.Infra.IoC", "Authentication.Infra\Authentication.Infra.IoC\Authentication.Infra.IoC.csproj", "{D6951C5C-0531-4FDD-A660-64BA21146399}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication.WebApi", "Authentication.WebApi\Authentication.WebApi.csproj", "{1436A71E-8480-471F-BF11-B5F6EB49FCC0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{76DF5EF6-65BB-45A7-AB22-46058B169021}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5BFA1960-6A82-4C29-B1C0-1AC578850042}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BFA1960-6A82-4C29-B1C0-1AC578850042}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BFA1960-6A82-4C29-B1C0-1AC578850042}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BFA1960-6A82-4C29-B1C0-1AC578850042}.Release|Any CPU.Build.0 = Release|Any CPU
+		{712303E5-A47A-4627-AFE4-AD5389230552}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{712303E5-A47A-4627-AFE4-AD5389230552}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{712303E5-A47A-4627-AFE4-AD5389230552}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{712303E5-A47A-4627-AFE4-AD5389230552}.Release|Any CPU.Build.0 = Release|Any CPU
+		{045D190E-D5C1-4AAD-8D87-D7A64196A951}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{045D190E-D5C1-4AAD-8D87-D7A64196A951}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{045D190E-D5C1-4AAD-8D87-D7A64196A951}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{045D190E-D5C1-4AAD-8D87-D7A64196A951}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6951C5C-0531-4FDD-A660-64BA21146399}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6951C5C-0531-4FDD-A660-64BA21146399}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6951C5C-0531-4FDD-A660-64BA21146399}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6951C5C-0531-4FDD-A660-64BA21146399}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1436A71E-8480-471F-BF11-B5F6EB49FCC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1436A71E-8480-471F-BF11-B5F6EB49FCC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1436A71E-8480-471F-BF11-B5F6EB49FCC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1436A71E-8480-471F-BF11-B5F6EB49FCC0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5BFA1960-6A82-4C29-B1C0-1AC578850042} = {8F25486B-0C29-4518-8E08-E7CA57BC8C72}
+		{712303E5-A47A-4627-AFE4-AD5389230552} = {8F25486B-0C29-4518-8E08-E7CA57BC8C72}
+		{045D190E-D5C1-4AAD-8D87-D7A64196A951} = {2A83DD42-A226-4695-A717-9A309AAFBA26}
+		{D6951C5C-0531-4FDD-A660-64BA21146399} = {2A83DD42-A226-4695-A717-9A309AAFBA26}
+		{1436A71E-8480-471F-BF11-B5F6EB49FCC0} = {7D7006D7-4F20-4159-946C-4FA349EAE3EF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3315056A-097B-42B7-B24D-CDFECD82A10F}
+	EndGlobalSection
+EndGlobal

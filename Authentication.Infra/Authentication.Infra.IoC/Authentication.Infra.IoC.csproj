@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference PrivateAssets="none" Include="Serilog.AspNetCore" Version="7.0.0" />
+	<PackageReference PrivateAssets="none" Include="Serilog.Sinks.MSSqlServer" Version="6.3.0" />
+	<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Authentication.Application\Authentication.Application.Domain\Authentication.Application.Domain.csproj" />
+    <ProjectReference Include="..\..\Authentication.Application\Authentication.Application.Mediator\Authentication.Application.Mediator.csproj" />
+    <ProjectReference Include="..\Authentication.Infra.Data\Authentication.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>
