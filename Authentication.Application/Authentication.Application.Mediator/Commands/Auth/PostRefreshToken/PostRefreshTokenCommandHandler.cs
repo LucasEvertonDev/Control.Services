@@ -1,4 +1,6 @@
-﻿using Authentication.Application.Domain.Plugins.JWT.Conts;
+﻿using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
+using Authentication.Application.Domain.Contexts.DbAuth.Usuarios.Models;
+using Authentication.Application.Domain.Plugins.JWT.Conts;
 using Authentication.Application.Domain.Structure.Extensions;
 
 namespace Authentication.Application.Mediator.Commands.Auth.PostRefreshToken;

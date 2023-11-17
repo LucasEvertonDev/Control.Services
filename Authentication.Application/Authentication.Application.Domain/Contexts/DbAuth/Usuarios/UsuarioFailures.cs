@@ -1,4 +1,4 @@
-﻿namespace Authentication.Application.Domain.Contexts.Usuarios;
+﻿namespace Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 
 public static class UsuarioFailures
 {

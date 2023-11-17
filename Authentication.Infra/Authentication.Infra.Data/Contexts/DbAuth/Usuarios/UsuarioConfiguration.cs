@@ -1,4 +1,4 @@
-﻿using Authentication.Application.Domain.Contexts.Usuarios;
+﻿using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Application.Domain.Structure.Enuns;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

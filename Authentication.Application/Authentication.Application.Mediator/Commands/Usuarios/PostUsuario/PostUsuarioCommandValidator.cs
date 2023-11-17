@@ -1,4 +1,5 @@
-﻿using Authentication.Application.Mediator.Structure.Extensions;
+﻿using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
+using Authentication.Application.Mediator.Structure.Extensions;
 using FluentValidation;
 
 namespace Authentication.Application.Mediator.Commands.Usuarios.PostUsuario;

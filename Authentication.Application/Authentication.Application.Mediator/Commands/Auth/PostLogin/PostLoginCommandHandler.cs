@@ -1,4 +1,6 @@
-﻿using Authentication.Application.Domain.Plugins.Cryptography;
+﻿using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
+using Authentication.Application.Domain.Contexts.DbAuth.Usuarios.Models;
+using Authentication.Application.Domain.Plugins.Cryptography;
 using Authentication.Application.Mediator.Commands.Auth.PostFlowLogin;
 
 namespace Authentication.Application.Mediator.Commands.Auth.PostLogin;

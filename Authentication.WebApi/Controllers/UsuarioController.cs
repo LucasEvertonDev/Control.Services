@@ -1,4 +1,4 @@
-﻿using Authentication.Application.Domain.Contexts.Usuarios.Models;
+﻿using Authentication.Application.Domain.Contexts.DbAuth.Usuarios.Models;
 using Authentication.Application.Domain.Structure.Models;
 using Authentication.Application.Mediator.Commands.Usuarios.PostUsuario;
 using Microsoft.AspNetCore.Authorization;

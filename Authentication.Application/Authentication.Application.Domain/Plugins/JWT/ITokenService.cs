@@ -1,4 +1,4 @@
-﻿using Authentication.Application.Domain.Contexts.Usuarios;
+﻿using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 
 namespace Authentication.Application.Domain.Plugins.JWT;
 
