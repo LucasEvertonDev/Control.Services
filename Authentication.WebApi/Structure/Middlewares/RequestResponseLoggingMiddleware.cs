@@ -4,15 +4,8 @@ using Serilog.Context;
 
 namespace Authentication.WebApi.Structure.Middlewares;
 
-public class RequestResponseLoggingMiddleware
+public class RequestResponseLoggingMiddleware(RequestDelegate next)
 {
-    private readonly RequestDelegate _next;
-
-    public RequestResponseLoggingMiddleware(RequestDelegate next)
-    {
-        _next = next;
-    }
-
     public async Task Invoke(HttpContext context)
     {
         string requestBodyPayload = await ReadRequestBody(context.Request);
@@ -29,7 +22,7 @@ public class RequestResponseLoggingMiddleware
             Body = requestBodyPayload
         };
         LogContext.PushProperty("Request", JsonConvert.SerializeObject(httpRequestInfo));
-        await _next(context);
+        await next(context);
     }
 
     private static async Task<string> ReadRequestBody(HttpRequest request)

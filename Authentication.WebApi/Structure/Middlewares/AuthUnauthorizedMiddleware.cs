@@ -31,34 +31,21 @@ public class AuthUnauthorizedMiddleware
         {
             int statusCode = httpContext.Response.StatusCode;
 
-            ResponseError<Dictionary<object, object[]>> errormodel = new ();
-            switch (statusCode)
+            ResponseError<Dictionary<object, object[]>> errormodel = statusCode switch
             {
-                case (int)HttpStatusCode.Unauthorized:
-                    errormodel = new ResponseError<Dictionary<object, object[]>>
-                    {
-                        HttpCode = (int)HttpStatusCode.Unauthorized,
-                        Success = false,
-                        Type = "Authorization",
-                        Errors = new Dictionary<object, object[]>
-                        {
-                            { "Authorization", new object[] { _appSettings.Messages.Unauthorized } }
-                        }
-                    };
-                    break;
-                case (int)HttpStatusCode.Forbidden:
-                    errormodel = new ResponseError<Dictionary<object, object[]>>
-                    {
-                        HttpCode = (int)HttpStatusCode.Forbidden,
-                        Success = false,
-                        Type = "Forbidden",
-                        Errors = new Dictionary<object, object[]>
-                        {
-                            { "Forbidden", new object[] { _appSettings.Messages.Forbidden } }
-                        }
-                    };
-                    break;
-            }
+                (int)HttpStatusCode.Unauthorized => new ResponseError<Dictionary<object, object[]>>(
+                        details: new Dictionary<object, object[]> { { "Unauthorized", [_appSettings.Messages.Unauthorized] } },
+                        httpCode: (int)HttpStatusCode.Unauthorized,
+                        messages: _appSettings.Messages.Unauthorized),
+                (int)HttpStatusCode.Forbidden => new ResponseError<Dictionary<object, object[]>>(
+                        details: new Dictionary<object, object[]> { { "Forbidden", [_appSettings.Messages.Forbidden] } },
+                        httpCode: (int)HttpStatusCode.Forbidden,
+                        messages: _appSettings.Messages.Forbidden),
+                _ => new ResponseError<Dictionary<object, object[]>>(
+                        details: new Dictionary<object, object[]> { { "Exception", [_appSettings.Messages.InternalServerError] } },
+                        httpCode: (int)HttpStatusCode.InternalServerError,
+                        messages: _appSettings.Messages.InternalServerError),
+            };
 
             httpContext.Response.ContentType = "application/json";
             await httpContext.Response.WriteAsync(JsonSerializer.Serialize(errormodel));

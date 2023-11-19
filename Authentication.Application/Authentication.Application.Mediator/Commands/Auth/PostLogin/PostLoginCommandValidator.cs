@@ -13,7 +13,7 @@ public class PostLoginCommandValidator : AbstractValidator<PostLoginCommand>
 
         When(c => !string.IsNullOrWhiteSpace(c.Senha), () =>
         {
-            RuleFor(c => c.Senha.Length).GreaterThanOrEqualTo(8).WithError(UsuarioFailures.SenhaDeveTer8Caracteres);
+            RuleFor(c => c.Senha.Length).GreaterThanOrEqualTo(8).WithError(UsuarioFailures.SenhaDeveTer8Caracteres).OverridePropertyName(c => c.Senha);
         });
     }
 }

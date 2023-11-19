@@ -19,7 +19,6 @@ public class Startup(IConfiguration configuration)
         var appSettings = new AppSettings();
 
         services.AddMvcCore();
-        services.AddSingleton<ModelStateFilter>();
         services.AddSingleton<ExceptionFilter>();
 
         configuration.Bind(appSettings);

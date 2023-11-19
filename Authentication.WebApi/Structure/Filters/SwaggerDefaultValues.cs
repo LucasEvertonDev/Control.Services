@@ -21,10 +21,7 @@ public class SwaggerDefaultValues : IOperationFilter
 
             if (description != null)
             {
-                if (parameter.Description is null)
-                {
-                    parameter.Description = description.ModelMetadata?.Description;
-                }
+                parameter.Description ??= description.ModelMetadata?.Description;
 
                 if (parameter.Schema.Default is null && description.DefaultValue is not null)
                 {

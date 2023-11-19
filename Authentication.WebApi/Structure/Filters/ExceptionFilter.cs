@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Authentication.Application.Domain;
 using Authentication.Application.Domain.Structure.Models;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Prometheus;
@@ -8,6 +9,7 @@ namespace Authentication.WebApi.Structure.Filters;
 
 public class ExceptionFilter(ILogger<ExceptionFilter> logger) : IExceptionFilter
 {
+    private static readonly Messages _messages = new ();
     private static readonly Counter _requisicoesErroo500 = Metrics.CreateCounter("ms_exception", "erro geral");
 
     public void OnException(ExceptionContext context)
@@ -19,18 +21,10 @@ public class ExceptionFilter(ILogger<ExceptionFilter> logger) : IExceptionFilter
 
     private static void HandleUnknownError(ExceptionContext context)
     {
-        var errors = new Dictionary<object, object[]>
-        {
-            { "Erro_Desconhecido", new List<object> { "Algo inesperado aconteceu por favor contate o administrador do sistema." }.ToArray() }
-        };
-
         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-        context.Result = new ObjectResult(new ResponseError<Dictionary<object, object[]>>
-        {
-            Type = "Erro Desconhecido",
-            HttpCode = (int)HttpStatusCode.InternalServerError,
-            Success = false,
-            Errors = errors
-        });
+        context.Result = new ObjectResult(new ResponseError<Dictionary<object, object[]>>(
+                details: new Dictionary<object, object[]> { { "Exception", [_messages.InternalServerError] } },
+                httpCode: (int)HttpStatusCode.InternalServerError,
+                messages: _messages.InternalServerError));
     }
 }

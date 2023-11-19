@@ -23,7 +23,7 @@ public class PostUsuarioCommandHandler(
 
         if (usuario.HasFailures())
         {
-            Result.Failure<Usuario>(usuario);
+            return Result.Failure<Usuario>(usuario);
         }
 
         await UnitOfWork.UsuarioRepository.CreateAsync(usuario);
