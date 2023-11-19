@@ -1,27 +1,28 @@
-﻿using Authentication.Application.Mediator.Commands.PostLogin;
+﻿using Authentication.Application.Domain.Contexts.Usuarios;
+using Authentication.Application.Mediator.Commands.Auth.PostLogin;
 using Authentication.Tests.Structure.Base;
 
 namespace Authentication.Tests.Tests.Commands;
 
-public class LiberacaoAuthenticationCommandTest : BaseTest
+public class LoginCommandTest : BaseTest
 {
     private readonly IMediator _mediator;
 
-    public LiberacaoAuthenticationCommandTest()
+    public LoginCommandTest()
     {
         _mediator = ServiceProvider.GetService<IMediator>();
     }
 
     [Fact]
     [TestPriority(1)]
-    public void PostLoginCommandInvalidoRequest()
+    public async Task PostLoginCommandInvalidoRequest()
     {
-        var postLoginCommand = new PostLoginCommand();
+        var result = await _mediator.Send<Result>(new PostLoginCommand() { });
 
-        var validations = ValidationService.Validate(postLoginCommand).Select(v => v.ErrorMessage);
+        var failures = result.GetFailures().Select(a => a.Error);
 
-        validations.Should().Contain(Failures.PostLoginCommand.LoginObrigatorio);
-        validations.Should().Contain(Failures.PostLoginCommand.PasswordObrigatorio);
+        failures.Should().Contain(UsuarioFailures.EmailObrigatorio)
+            .And.Contain(UsuarioFailures.SenhaObrigatoria);
     }
 
     [Fact]
@@ -30,15 +31,13 @@ public class LiberacaoAuthenticationCommandTest : BaseTest
     {
         var result = await _mediator.Send<Result>(new PostLoginCommand()
         {
-            CodigoFilial = 1,
-            CodigoEmpresa = 2,
-            Login = "Teste",
-            Password = "Teste"
+            Email = "Teste",
+            Senha = "Teste"
         });
 
         var failures = result.GetFailures().Select(a => a.Error);
 
-        failures.Should().NotBeNullOrEmpty();
-        failures.Should().Contain(Failures.Authentication.LoginSenhaInvalido);
+        failures.Should().NotBeNullOrEmpty()
+            .And.Contain(UsuarioFailures.EmailSenhaInvalidos);
     }
 }

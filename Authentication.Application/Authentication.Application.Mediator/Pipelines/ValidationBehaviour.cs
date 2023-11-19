@@ -65,7 +65,7 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
                     {
                         Name = typeParam.Name,
                         Namespace = typeParam.Namespace,
-                        NotificationType = NotificationType.BusinessNotification
+                        NotificationType = NotificationType.RequestNotification
                     }));
         }
     }

@@ -1,5 +1,4 @@
 ﻿global using Authentication.Tests.Structure.Attribute;
-global using Authentication.Tests.Structure.Services;
 global using FluentAssertions;
 global using MediatR;
 global using Microsoft.Extensions.DependencyInjection;

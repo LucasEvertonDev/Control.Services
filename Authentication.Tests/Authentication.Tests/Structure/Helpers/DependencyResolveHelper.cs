@@ -6,7 +6,6 @@ public class DependencyResolverHelper
 {
     private readonly IWebHost _webHost;
 
-    /// <inheritdoc />
     public DependencyResolverHelper(IWebHost webHost) => _webHost = webHost;
 
     public T GetService<T>()

@@ -1,5 +1,7 @@
 ﻿using Authentication.Application.Domain;
 using Authentication.Infra.IoC;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
 namespace Authentication.Tests.Structure;
@@ -22,5 +24,10 @@ public class Startup
         services.AddSingleton<AppSettings>(appSettings);
 
         services.AddInfraStructure(appSettings);
+    }
+
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        // Method intentionally left empty.
     }
 }

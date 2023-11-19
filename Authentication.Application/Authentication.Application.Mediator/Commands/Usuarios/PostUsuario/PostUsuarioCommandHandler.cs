@@ -1,4 +1,5 @@
 ﻿using Authentication.Application.Domain.Plugins.Cryptography;
+using Notification.Extensions;
 
 namespace Authentication.Application.Mediator.Commands.Usuarios.PostUsuario;
 
@@ -20,9 +21,14 @@ public class PostUsuarioCommandHandler(
             senha: passwordHash.EncryptPassword(request.Senha, chaveHash),
             chave: chaveHash);
 
+        if (usuario.HasFailures())
+        {
+            Result.Failure<Usuario>(usuario);
+        }
+
         await UnitOfWork.UsuarioRepository.CreateAsync(usuario);
 
-        return Result;
+        return Result.Ok();
     }
 
     private async Task<bool> EmailJaCadastrado(string email)
