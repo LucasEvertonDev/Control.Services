@@ -10,13 +10,15 @@ public class PostRefreshTokenCommandHandler(
     public async Task<Result> Handle(PostRefreshTokenCommand request, CancellationToken cancellationToken)
     {
         var usuario = await UnitOfWork.UsuarioRepository
-            .FirstOrDefaultAsync(
+            .FirstOrDefaultTrackingAsync(
                 usuario => usuario.Id == new Guid(Identity.GetUserClaim(JwtUserClaims.Id)));
 
         if (usuario == null)
         {
             return Result.Failure<PostRefreshTokenCommandHandler>(UsuarioFailures.NaoFoiPossivelRecuperarUsuarioLogado);
         }
+
+        await UnitOfWork.UsuarioRepository.UpdateAsync(usuario.SetUltimoAcesso());
 
         var (token, dataExpiracao) = await tokenService.GenerateToken(usuario);
 

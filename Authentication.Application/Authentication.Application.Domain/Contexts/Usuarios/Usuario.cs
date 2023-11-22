@@ -26,4 +26,11 @@ public class Usuario : BaseEntity<Usuario>
     public string Chave { get; private set; }
 
     public DateTime UltimoAcesso { get; private set; }
+
+    public Usuario SetUltimoAcesso()
+    {
+        UltimoAcesso = DateTime.Now;
+
+        return this;
+    }
 }

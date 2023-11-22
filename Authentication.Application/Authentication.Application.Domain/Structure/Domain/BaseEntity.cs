@@ -11,4 +11,8 @@ public partial class BaseEntity<TEntity> : Notifiable<TEntity>, IEntity
     public int Situacao { get; protected set; }
 
     public DateTime DataCriacao { get; protected set; }
+
+    public void UpdateDate()
+    {
+    }
 }

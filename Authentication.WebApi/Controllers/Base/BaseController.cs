@@ -85,7 +85,7 @@ public class BaseController(AppSettings appSettings) : ControllerBase
         var agrupados = notifications.OrderByDescending(a => (int)a.NotificationInfo.EntityInfo.NotificationType)
             .Select(a => new
             {
-                key = a.NotificationInfo.PropInfo.MemberName ?? nameof(NotificationType.BusinessNotification),
+                key = !string.IsNullOrWhiteSpace(a.NotificationInfo.PropInfo.MemberName) ? a.NotificationInfo.PropInfo.MemberName : nameof(NotificationType.BusinessNotification),
                 a.Error.message,
             })
             .GroupBy(a => a.key).Select(a => new
