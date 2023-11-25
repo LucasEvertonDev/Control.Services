@@ -4,4 +4,5 @@ namespace Authentication.Application.Domain.Structure.Domain;
 
 public interface IEntity
 {
+    void AtualizarDataDeEstados(EntityState entityState);
 }

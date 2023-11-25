@@ -38,7 +38,6 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
             .HasDefaultValueSql("getdate()")
             .ValueGeneratedOnAdd();
 
-        builder.Property(u => u.DataAtualizacao)
-            .ValueGeneratedOnUpdate();
+        builder.Property(u => u.DataAtualizacao);
     }
 }

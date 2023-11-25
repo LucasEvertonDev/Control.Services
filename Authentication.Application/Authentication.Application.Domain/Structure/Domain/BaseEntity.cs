@@ -16,4 +16,16 @@ public partial class BaseEntity<TEntity> : Notifiable<TEntity>, IEntity
     public DateTime DataCriacao { get; private set; }
 
     public DateTime? DataAtualizacao { get; private set; }
+
+    public virtual void AtualizarDataDeEstados(EntityState entityState)
+    {
+        if (entityState == EntityState.Added)
+        {
+            DataCriacao = DateTime.Now;
+        }
+        else if(entityState == EntityState.Modified)
+        {
+            DataAtualizacao = DateTime.Now;
+        }
+    }
 }

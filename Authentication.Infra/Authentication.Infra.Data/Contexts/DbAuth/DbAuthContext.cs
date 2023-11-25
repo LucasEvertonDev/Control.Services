@@ -3,6 +3,7 @@ using Authentication.Application.Domain.Contexts.DbAuth.Audits;
 using Authentication.Application.Domain.Contexts.DbAuth.Audits.Enums;
 using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Application.Domain.Plugins.JWT.Contants;
+using Authentication.Application.Domain.Structure.Domain;
 using Authentication.Application.Domain.Structure.Extensions;
 using Authentication.Infra.Data.Structure.Exceptions;
 using Authentication.Infra.Data.Structure.Log;
@@ -50,6 +51,11 @@ public class DbAuthContext(
                 if (entry.Entity is Audit || entry.State is EntityState.Detached or EntityState.Unchanged)
                 {
                     continue;
+                }
+
+                if (entry.Entity is IEntity entity )
+                {
+                    entity.AtualizarDataDeEstados((Application.Domain.Structure.Enuns.EntityState)entry.State);
                 }
 
                 var auditEntry = new AuditEntry(entry) { TableName = entry.Entity.GetType().Name, UserId = userId };
