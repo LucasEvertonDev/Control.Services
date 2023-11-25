@@ -1,4 +1,4 @@
-﻿using Authentication.Application.Domain.Contexts.Usuarios;
+﻿using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Application.Domain.Plugins.Cryptography;
 using Authentication.Tests.Structure;
 using Authentication.Tests.Structure.Attribute;

@@ -104,7 +104,7 @@ public class BaseRepository<TContext, TEntity> : IRepository<TEntity>
     {
         if (_noticationContext.HasNotifications)
         {
-            throw new DomainWithFailuresException("Não foi possível completar a ação pois existem erros que não foram tratados.");
+            throw new DomainWithFailuresException();
         }
     }
 }

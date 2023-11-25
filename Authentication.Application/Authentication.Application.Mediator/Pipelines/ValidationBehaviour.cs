@@ -49,7 +49,7 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
         return new List<NotificationModel>();
     }
 
-    private IEnumerable<NotificationModel> GetNotifications(IEnumerable<ValidationFailure> failures, Type typeParam)
+    private static IEnumerable<NotificationModel> GetNotifications(IEnumerable<ValidationFailure> failures, Type typeParam)
     {
         foreach (var failure in failures)
         {
@@ -88,6 +88,6 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
         }
 
         var validationResult = await validatorInstance.ValidateAsync(new ValidationContext<object>(value));
-        return validationResult.Errors ?? new List<ValidationFailure>();
+        return validationResult.Errors ?? [];
     }
 }

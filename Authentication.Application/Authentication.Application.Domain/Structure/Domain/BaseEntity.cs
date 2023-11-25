@@ -1,18 +1,19 @@
-﻿namespace Authentication.Application.Domain.Structure.Domain;
+﻿using Authentication.Application.Domain.Structure.Enuns;
+
+namespace Authentication.Application.Domain.Structure.Domain;
 
 public partial class BaseEntity<TEntity> : Notifiable<TEntity>, IEntity
 {
     public BaseEntity()
     {
+        Situacao = Situacao.Ativo;
     }
 
     public Guid Id { get; protected set; }
 
-    public int Situacao { get; protected set; }
+    public Situacao Situacao { get; protected set; }
 
-    public DateTime DataCriacao { get; protected set; }
+    public DateTime DataCriacao { get; private set; }
 
-    public void UpdateDate()
-    {
-    }
+    public DateTime? DataAtualizacao { get; private set; }
 }

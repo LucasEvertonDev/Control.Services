@@ -22,7 +22,7 @@ public class BaseTestInMemoryDb : IClassFixture<IntegrationTestInMemoryDbFactory
 
     protected IServiceProvider ServiceProvider { get; }
 
-    protected RefitSettings GetSettings()
+    protected static RefitSettings GetSettings()
     {
         return new RefitSettings()
         {
@@ -38,12 +38,12 @@ public class BaseTestInMemoryDb : IClassFixture<IntegrationTestInMemoryDbFactory
         return RestService.For<TApi>(HttpClient, GetSettings());
     }
 
-    protected string MemberName<TClass>(Expression<Func<TClass, dynamic>> exp)
+    protected static string MemberName<TClass>(Expression<Func<TClass, dynamic>> exp)
     {
         return string.Join(string.Empty, ResultServiceHelpers.TranslateLambda(exp).Split(".").Skip(1).ToList());
     }
 
-    protected (string email, string senha) CriaUsuario()
+    protected static (string email, string senha) CriaUsuario()
     {
         return (new Faker().Person.Email, new Faker().Internet.Password(10));
     }
@@ -63,7 +63,7 @@ public class BaseTestInDatabase : IClassFixture<IntegrationTestInDatabaseFactory
 
     protected IServiceProvider ServiceProvider { get; }
 
-    protected RefitSettings GetSettings()
+    protected static RefitSettings GetSettings()
     {
         return new RefitSettings()
         {
@@ -79,12 +79,12 @@ public class BaseTestInDatabase : IClassFixture<IntegrationTestInDatabaseFactory
         return RestService.For<TApi>(HttpClient, GetSettings());
     }
 
-    protected string MemberName<TClass>(Expression<Func<TClass, dynamic>> exp)
+    protected static string MemberName<TClass>(Expression<Func<TClass, dynamic>> exp)
     {
         return string.Join(string.Empty, ResultServiceHelpers.TranslateLambda(exp).Split(".").Skip(1).ToList());
     }
 
-    protected (string email, string senha) CriaUsuario()
+    protected static (string email, string senha) CriarUsuario()
     {
         return (new Faker().Person.Email, new Faker().Internet.Password(10));
     }

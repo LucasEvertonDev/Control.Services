@@ -1,5 +1,5 @@
 ﻿using Authentication.Application.Domain;
-using Authentication.Application.Domain.Contexts.Usuarios;
+using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Application.Mediator.Commands.Auth.PostLogin;
 using Authentication.Application.Mediator.Commands.Auth.PostRefreshToken;
 using Authentication.Application.Mediator.Commands.Usuarios.PostUsuario;

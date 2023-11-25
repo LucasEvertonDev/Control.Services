@@ -12,20 +12,62 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Authentication.Infra.Data.Migrations
 {
     [DbContext(typeof(DbAuthContext))]
-    [Migration("20231111150722_CriarTabelaUsuarios")]
-    partial class CriarTabelaUsuarios
+    [Migration("20231125195621_Start")]
+    partial class Start
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.13")
+                .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Authentication.Application.Domain.Contexts.Usuarios.Usuario", b =>
+            modelBuilder.Entity("Authentication.Application.Domain.Contexts.DbAuth.Audits.Audit", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AffectedColumns")
+                        .HasMaxLength(8000)
+                        .HasColumnType("varchar");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NewValues")
+                        .HasMaxLength(8000)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("OldValues")
+                        .HasMaxLength(8000)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("PrimaryKey")
+                        .HasMaxLength(8000)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("TableName")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("Type")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("UserId")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AuditLogs", (string)null);
+                });
+
+            modelBuilder.Entity("Authentication.Application.Domain.Contexts.DbAuth.Usuarios.Usuario", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,6 +78,10 @@ namespace Authentication.Infra.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
+
+                    b.Property<DateTime?>("DataAtualizacao")
+                        .ValueGeneratedOnUpdate()
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataCriacao")
                         .ValueGeneratedOnAdd()
@@ -53,9 +99,7 @@ namespace Authentication.Infra.Data.Migrations
                         .HasColumnType("nvarchar(300)");
 
                     b.Property<int>("Situacao")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(1);
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UltimoAcesso")
                         .HasColumnType("datetime2");

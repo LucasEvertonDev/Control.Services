@@ -1,6 +1,7 @@
-﻿namespace Authentication.Application.Domain.Structure.Domain;
+﻿using Authentication.Application.Domain.Structure.Enuns;
+
+namespace Authentication.Application.Domain.Structure.Domain;
 
 public interface IEntity
 {
-    public void UpdateDate();
 }

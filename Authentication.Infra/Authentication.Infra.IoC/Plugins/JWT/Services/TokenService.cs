@@ -2,9 +2,9 @@
 using System.Security.Claims;
 using System.Text;
 using Authentication.Application.Domain;
-using Authentication.Application.Domain.Contexts.Usuarios;
+using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Application.Domain.Plugins.JWT;
-using Authentication.Application.Domain.Plugins.JWT.Conts;
+using Authentication.Application.Domain.Plugins.JWT.Contants;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Authentication.Infra.IoC.Plugins.JWT.Services;
@@ -20,8 +20,8 @@ public class TokenService(AppSettings appSettings) : ITokenService
         {
             Subject = new ClaimsIdentity(new Claim[]
             {
-                new Claim(JwtUserClaims.Email, usuario.Email),
-                new Claim(JwtUserClaims.Id, usuario.Id.ToString()),
+                new (JwtUserClaims.Email, usuario.Email),
+                new (JwtUserClaims.Id, usuario.Id.ToString()),
             }),
             Expires = DateTime.UtcNow.AddMinutes(appSettings.Jwt.ExpireInMinutes),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

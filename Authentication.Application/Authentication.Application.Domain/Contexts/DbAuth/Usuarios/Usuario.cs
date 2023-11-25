@@ -1,4 +1,4 @@
-﻿namespace Authentication.Application.Domain.Contexts.Usuarios;
+﻿namespace Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 public class Usuario : BaseEntity<Usuario>
 {
     public Usuario(string email, string senha, string chave)

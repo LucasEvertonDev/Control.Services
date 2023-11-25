@@ -13,7 +13,7 @@ public class IntegrationTestInMemoryDbFactory<TStartup> : WebApplicationFactory<
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.UseEnvironment("TestInMemoryDatabase")
+        builder.UseEnvironment("TestInMemoryDb")
             .ConfigureServices(services =>
             {
                 var descritor = services.SingleOrDefault(d => d.ServiceType == typeof(DbAuthContext));

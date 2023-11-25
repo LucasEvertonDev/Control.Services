@@ -1,4 +1,4 @@
-﻿using Authentication.Application.Domain.Plugins.JWT.Conts;
+﻿using Authentication.Application.Domain.Plugins.JWT.Contants;
 using Authentication.Application.Domain.Structure.Extensions;
 
 namespace Authentication.Application.Mediator.Commands.Auth.PostRefreshToken;

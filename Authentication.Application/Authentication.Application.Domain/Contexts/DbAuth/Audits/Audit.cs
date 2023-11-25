@@ -1,4 +1,4 @@
-﻿namespace Authentication.Application.Domain.Structure.Domain;
+﻿namespace Authentication.Application.Domain.Contexts.DbAuth.Audits;
 
 public class Audit
 {

@@ -2,8 +2,8 @@
 
 public enum Situacao
 {
+    Pendente = 0,
     Ativo = 1,
     Inativo = 2,
-    Excluido = 3,
-    AguardandoProcessamento = 4
+    Excluido = 3
 }

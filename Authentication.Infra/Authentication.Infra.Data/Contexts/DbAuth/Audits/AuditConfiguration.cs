@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Authentication.Application.Domain.Contexts.DbAuth.Audits;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Authentication.Infra.Data.Contexts.DbAuth;
+namespace Authentication.Infra.Data.Contexts.DbAuth.Audits;
 
 public class AuditConfigurations : IEntityTypeConfiguration<Audit>
 {

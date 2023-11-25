@@ -1,6 +1,8 @@
-﻿namespace Authentication.Application.Mediator.Commands.Usuarios.PostUsuario;
+﻿using Authentication.Application.Domain.Structure.Models;
 
-public class PostUsuarioCommand : IRequest<Result>, IHandler<PostUsuarioCommandHandler>
+namespace Authentication.Application.Mediator.Commands.Usuarios.PostUsuario;
+
+public class PostUsuarioCommand : IRequest<Result>, IHandler<PostUsuarioCommandHandler>, IValidationAsync<PostUsuarioCommandValidator>
 {
     public string Email { get; set; }
 

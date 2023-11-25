@@ -22,47 +22,7 @@ namespace Authentication.Infra.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Authentication.Application.Domain.Contexts.Usuarios.Usuario", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(50)
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Chave")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<DateTime>("DataCriacao")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Senha")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<int>("Situacao")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(1);
-
-                    b.Property<DateTime>("UltimoAcesso")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Usuarios", (string)null);
-                });
-
-            modelBuilder.Entity("Authentication.Application.Domain.Structure.Domain.Audit", b =>
+            modelBuilder.Entity("Authentication.Application.Domain.Contexts.DbAuth.Audits.Audit", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -102,6 +62,48 @@ namespace Authentication.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AuditLogs", (string)null);
+                });
+
+            modelBuilder.Entity("Authentication.Application.Domain.Contexts.DbAuth.Usuarios.Usuario", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Chave")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<DateTime?>("DataAtualizacao")
+                        .ValueGeneratedOnUpdate()
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<int>("Situacao")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UltimoAcesso")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuarios", (string)null);
                 });
 #pragma warning restore 612, 618
         }

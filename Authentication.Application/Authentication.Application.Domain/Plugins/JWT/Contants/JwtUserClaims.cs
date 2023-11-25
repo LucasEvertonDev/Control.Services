@@ -1,4 +1,4 @@
-﻿namespace Authentication.Application.Domain.Plugins.JWT.Conts;
+﻿namespace Authentication.Application.Domain.Plugins.JWT.Contants;
 
 public static class JwtUserClaims
 {

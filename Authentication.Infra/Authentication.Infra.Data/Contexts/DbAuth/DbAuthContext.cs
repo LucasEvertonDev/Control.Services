@@ -1,12 +1,19 @@
 ﻿using Authentication.Application.Domain;
-using Authentication.Application.Domain.Contexts.Usuarios;
-using Authentication.Infra.Data.Structure;
+using Authentication.Application.Domain.Contexts.DbAuth.Audits;
+using Authentication.Application.Domain.Contexts.DbAuth.Audits.Enums;
+using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
+using Authentication.Application.Domain.Plugins.JWT.Contants;
+using Authentication.Application.Domain.Structure.Extensions;
+using Authentication.Infra.Data.Structure.Exceptions;
+using Authentication.Infra.Data.Structure.Log;
+using Microsoft.AspNetCore.Http;
 
 namespace Authentication.Infra.Data.Contexts.DbAuth;
 
 public class DbAuthContext(
     DbContextOptions<DbAuthContext> options,
-    AppSettings appSettings) : DbContext(options)
+    AppSettings appSettings,
+    IHttpContextAccessor httpContextAccessor) : DbContext(options)
 {
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
@@ -33,27 +40,31 @@ public class DbAuthContext(
     {
         try
         {
-            var login = "lcseverton@gmail.com";
+            List<Audit> audits = [];
+            var userId = httpContextAccessor?.HttpContext?.User?.Identity?.GetUserClaim(JwtUserClaims.Id) ?? "Anonymous";
+
             ChangeTracker.DetectChanges();
 
             foreach (var entry in ChangeTracker.Entries())
             {
-                if (entry.Entity is IEntity auditable)
-                {
-                    // entry.State
-                    auditable.UpdateDate();
-                }
-
                 if (entry.Entity is Audit || entry.State is EntityState.Detached or EntityState.Unchanged)
                 {
                     continue;
                 }
 
-                var auditEntry = new AuditEntry(entry) { TableName = entry.Entity.GetType().Name, UserId = login };
+                var auditEntry = new AuditEntry(entry) { TableName = entry.Entity.GetType().Name, UserId = userId };
+
+                List<string> ignoreProperties = ["DataCriacao", "DataAtualizacao"];
 
                 foreach (var property in entry.Properties)
                 {
                     var propertyName = property.Metadata.Name;
+
+                    if (ignoreProperties.Contains(propertyName))
+                    {
+                        continue;
+                    }
+
                     if (property.Metadata.IsPrimaryKey())
                     {
                         auditEntry.KeyValues[propertyName] = property.CurrentValue;
@@ -83,12 +94,14 @@ public class DbAuthContext(
                     }
                 }
 
-                await Audits.AddAsync(auditEntry.ToAudit());
+                audits.Add(auditEntry.ToAudit());
             }
+
+            await Audits.AddRangeAsync(audits);
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex);
+            throw new AuditLogException(ex.Message);
         }
     }
 }

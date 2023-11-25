@@ -1,4 +1,4 @@
-﻿using Authentication.Application.Domain.Contexts.Usuarios;
+﻿using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Infra.Data.Contexts.DbAuth;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -24,7 +24,7 @@ public class UnitOfWork(
 
     public async Task<TRetorno> OnTransactionAsync<TRetorno>(Func<Task<TRetorno>> func)
     {
-        transactions = new ();
+        transactions = [];
 
         try
         {
