@@ -5,7 +5,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

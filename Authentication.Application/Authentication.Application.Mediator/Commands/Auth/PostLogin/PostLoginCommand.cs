@@ -2,7 +2,7 @@
 
 namespace Authentication.Application.Mediator.Commands.Auth.PostLogin;
 
-public class PostLoginCommand : IRequest<Result>, IHandler<PostLoginCommandHandler>, IValidationAsync
+public class PostLoginCommand : IRequest<Result>, IHandler<PostLoginCommandHandler>, IValidationAsync<PostLoginCommandValidator>
 {
     public string Email { get; set; }
 

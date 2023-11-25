@@ -13,6 +13,8 @@ public class AppSettings
     public Swagger Swagger { get; set; }
 
     public bool FilterExceptions { get; set; }
+
+    public bool DatabaseInMemory { get; set; }
 }
 
 public class Logging

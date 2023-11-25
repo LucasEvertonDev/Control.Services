@@ -8,11 +8,14 @@ public static class BootstrapModule
 {
     public static void RegisterInfraData(this IServiceCollection services, AppSettings configuration)
     {
-        services.AddDbContext<DbAuthContext>(options =>
-            options.UseSqlServer(
-                configuration.ConnectionStrings.DefaultConnection,
-                b => b.MigrationsAssembly(typeof(DbAuthContext).Assembly.FullName)).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+        if (!configuration.DatabaseInMemory)
+        {
+            services.AddDbContext<DbAuthContext>(options =>
+                 options.UseSqlServer(
+                     configuration.ConnectionStrings.DefaultConnection,
+                     b => b.MigrationsAssembly(typeof(DbAuthContext).Assembly.FullName)).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
-        services.AddScoped<IUnitOfWorkTransaction, UnitOfWork>();
+            services.AddScoped<IUnitOfWorkTransaction, UnitOfWork>();
+        }
     }
 }

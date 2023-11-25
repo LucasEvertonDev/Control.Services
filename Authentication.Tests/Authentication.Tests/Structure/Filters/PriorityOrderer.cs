@@ -1,4 +1,8 @@
-﻿namespace Authentication.Tests.Structure.Filters;
+﻿using Authentication.Tests.Structure.Attribute;
+using Xunit.Abstractions;
+using Xunit.Sdk;
+
+namespace Authentication.Tests.Structure.Filters;
 
 public class PriorityOrderer : ITestCaseOrderer
 {

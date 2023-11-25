@@ -1,9 +1,12 @@
-﻿using Authentication.Application.Domain.Contexts.Usuarios;
+﻿using Authentication.Application.Domain;
+using Authentication.Application.Domain.Contexts.Usuarios;
 using Authentication.Infra.Data.Structure;
 
 namespace Authentication.Infra.Data.Contexts.DbAuth;
 
-public class DbAuthContext(DbContextOptions<DbAuthContext> options) : DbContext(options)
+public class DbAuthContext(
+    DbContextOptions<DbAuthContext> options,
+    AppSettings appSettings) : DbContext(options)
 {
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
@@ -19,8 +22,11 @@ public class DbAuthContext(DbContextOptions<DbAuthContext> options) : DbContext(
     {
         base.OnModelCreating(modelBuilder);
 
-        // Apply configurations automatic
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(DbAuthContext).Assembly);
+        if (!appSettings.DatabaseInMemory)
+        {
+            // Apply configurations automatic
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(DbAuthContext).Assembly);
+        }
     }
 
     private async Task BeforeSaveChanges()
