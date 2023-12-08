@@ -13,7 +13,13 @@ public static class BootstrapModule
             services.AddDbContext<DbAuthContext>(options =>
                  options.UseSqlServer(
                      configuration.ConnectionStrings.DefaultConnection,
-                     b => b.MigrationsAssembly(typeof(DbAuthContext).Assembly.FullName)).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+                     (b) =>
+                     {
+                         b.UseCompatibilityLevel(150);
+
+                         b.MigrationsAssembly(typeof(DbAuthContext).Assembly.FullName);
+                     })
+                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
             services.AddScoped<IUnitOfWorkTransaction, UnitOfWork>();
         }
