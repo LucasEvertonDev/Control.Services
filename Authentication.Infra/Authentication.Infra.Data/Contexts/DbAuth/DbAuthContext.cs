@@ -3,7 +3,6 @@ using Authentication.Application.Domain.Contexts.DbAuth.Audits;
 using Authentication.Application.Domain.Contexts.DbAuth.Audits.Enums;
 using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Application.Domain.Plugins.JWT.Contants;
-using Authentication.Application.Domain.Structure.Domain;
 using Authentication.Application.Domain.Structure.Extensions;
 using Authentication.Infra.Data.Structure.Exceptions;
 using Authentication.Infra.Data.Structure.Log;

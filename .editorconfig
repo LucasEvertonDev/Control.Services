@@ -133,6 +133,7 @@ csharp_style_prefer_primary_constructors = true:silent
 dotnet_diagnostic.SA1204.severity = silent
 dotnet_diagnostic.SA1010.severity = silent
 dotnet_diagnostic.SA1000.severity = silent
+dotnet_diagnostic.SA1116.severity = silent
 
 [*.vb]
 #### Estilos de nomenclatura ####

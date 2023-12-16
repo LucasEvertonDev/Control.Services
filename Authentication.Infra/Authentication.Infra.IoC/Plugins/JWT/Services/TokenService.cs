@@ -27,6 +27,8 @@ public class TokenService(AppSettings appSettings) : ITokenService
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
 
+        tokenDescriptor.Subject.AddClaim(new Claim(ClaimTypes.Role, "admin"));
+
         var token = tokenHandler.CreateToken(tokenDescriptor);
 
         return Task.FromResult((tokenHandler.WriteToken(token), DateTime.Now.AddMinutes(appSettings.Jwt.ExpireInMinutes)));

@@ -1,45 +1,78 @@
 ﻿using System.Net;
+using System.Text.Json;
 using Authentication.Application.Domain;
 using Authentication.Application.Domain.Structure.Models;
 using Notification.Notifications.Enum;
 
-namespace Authentication.WebApi.Controllers.Base;
+namespace Authentication.WebApi.Structure.Extensions;
 
-public class BaseController(AppSettings appSettings) : ControllerBase
+public static class ResultExtensions
 {
-    [ApiExplorerSettings(IgnoreApi = true)]
-    public IActionResult Result(Result result, bool useContainer = true)
+    public static Task<IResult> GetResponse(this Result result, bool useContainer = true)
     {
         if (result.HasFailures())
         {
             var response = GetResponseError(result);
-            return StatusCode(response.HttpCode, response);
+            return Task.FromResult(Results.Extensions.DynamicResponse(response, response.HttpCode));
         }
         else
         {
             if (!useContainer)
             {
-                return Ok(result.GetContent<dynamic>());
+                return Task.FromResult((IResult)Results.Ok(result.GetContent<dynamic>()));
             }
 
             if (result.GetContent<dynamic>() == null)
             {
-                return Ok(new ResponseDto
+                return Task.FromResult(Results.Ok(new ResponseDto
                 {
                     Success = true
-                });
+                }));
             }
             else
             {
-                return Ok(new ResponseDto<dynamic>()
+                return Task.FromResult(Results.Ok(new ResponseDto<dynamic>()
                 {
                     Content = result.GetContent<dynamic>()
-                });
+                }));
             }
         }
     }
 
-    protected ResponseError<Dictionary<object, object[]>> GetResponseError(Result result)
+    public static RouteHandlerBuilder AllowAnonymous<TResponseSucess>(this RouteHandlerBuilder route)
+    {
+        route.AllowAnonymous().Produces<TResponseSucess>(StatusCodes.Status200OK)
+           .Produces<ResponseError<Dictionary<object, object[]>>>(StatusCodes.Status400BadRequest);
+        return route;
+    }
+
+    public static RouteHandlerBuilder Authorization<TResponseSucess>(this RouteHandlerBuilder route, string policy = null)
+    {
+        route.RequireAuthorization(policy).Produces<TResponseSucess>(StatusCodes.Status200OK)
+           .Produces<ResponseError<Dictionary<object, object[]>>>(StatusCodes.Status400BadRequest);
+        return route;
+    }
+
+    public static RouteHandlerBuilder Authorization(this RouteHandlerBuilder route, string policy = null)
+    {
+        if (!string.IsNullOrEmpty(policy))
+        {
+            route.RequireAuthorization(policy);
+        }
+        else
+        {
+            route.RequireAuthorization();
+        }
+
+        return route;
+    }
+
+    public static async Task<IResult> SendAsync(this IMediator mediator, IRequest<Result> obj, bool useContainer = true)
+    {
+        return await mediator.Send<Result>(obj).Result.GetResponse(useContainer);
+    }
+
+    private static ResponseError<Dictionary<object, object[]>> GetResponseError(Result result)
     {
         var failures = result.GetFailures();
 
@@ -57,7 +90,7 @@ public class BaseController(AppSettings appSettings) : ControllerBase
         {
             return new ResponseError<Dictionary<object, object[]>>(
                 details: GetErros(requestNotifications),
-                messages: appSettings.Messages.BadRequest);
+                messages: new Messages().BadRequest);
         }
         else if (businessNotifications.Any())
         {
@@ -70,17 +103,17 @@ public class BaseController(AppSettings appSettings) : ControllerBase
             return new ResponseError<Dictionary<object, object[]>>(
                 details: GetErros(domainNotifications),
                 httpCode: (int)HttpStatusCode.InternalServerError,
-                messages: appSettings.Messages.InternalServerError);
+                messages: new Messages().InternalServerError);
         }
 
         return new ResponseError<Dictionary<object, object[]>>(
             details: null,
-            messages: appSettings.Messages.InternalServerError);
+            messages: new Messages().InternalServerError);
     }
 
-    private Dictionary<object, object[]> GetErros(List<NotificationModel> notifications)
+    private static Dictionary<object, object[]> GetErros(List<NotificationModel> notifications)
     {
-        Dictionary<object, object[]> dic = new ();
+        Dictionary<object, object[]> dic = new();
 
         var agrupados = notifications.OrderByDescending(a => (int)a.NotificationInfo.EntityInfo.NotificationType)
             .Select(a => new
@@ -101,5 +134,22 @@ public class BaseController(AppSettings appSettings) : ControllerBase
         });
 
         return dic;
+    }
+
+    private static IResult DynamicResponse(this IResultExtensions resultExtensions, ResponseError<Dictionary<object, object[]>> content, int statusCode)
+    {
+        ArgumentNullException.ThrowIfNull(content);
+
+        return new CustomResults(content, statusCode);
+    }
+}
+
+public class CustomResults(ResponseError<Dictionary<object, object[]>> content, int statusCode) : IResult
+{
+    public async Task ExecuteAsync(HttpContext httpContext)
+    {
+        httpContext.Response.ContentType = "application/json";
+        httpContext.Response.StatusCode = statusCode;
+        await httpContext.Response.WriteAsync(JsonSerializer.Serialize(content));
     }
 }

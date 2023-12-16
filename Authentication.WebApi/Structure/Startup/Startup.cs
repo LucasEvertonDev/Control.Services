@@ -1,11 +1,13 @@
 ﻿using System.Text;
+using Architecture.WebApi.Endpoints;
 using Authentication.Application.Domain;
 using Authentication.Application.Domain.Structure.Models;
 using Authentication.Infra.IoC;
-using Authentication.WebApi.Structure.Extensions;
 using Authentication.WebApi.Structure.Filters;
 using Authentication.WebApi.Structure.Middlewares;
+using Authentication.WebApi.Structure.PolicyProviders;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Prometheus;
 using Swashbuckle.AspNetCore.Filters;
@@ -18,7 +20,6 @@ public class Startup(IConfiguration configuration)
     {
         var appSettings = new AppSettings();
 
-        services.AddMvcCore();
         services.AddSingleton<ExceptionFilter>();
 
         configuration.Bind(appSettings);
@@ -59,15 +60,14 @@ public class Startup(IConfiguration configuration)
                 };
             });
 
-        services.AddSingleton(appSettings);
-
         services.AddSwaggerGen(c =>
         {
             c.RegisterSwaggerDefaultConfig(true, appSettings.Swagger.FlowLogin);
-
-            // var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"
-            // c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename), includeControllerXmlComments: false)
         });
+
+        services.AddSingleton<AppSettings>(appSettings);
+
+        services.AddSingleton<IAuthorizationPolicyProvider, DatabasePolicyProvider>();
 
         services.AddSwaggerExamples();
 
@@ -108,7 +108,11 @@ public class Startup(IConfiguration configuration)
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapControllers();
+            endpoints
+                .MapGroup("api/v1/")
+                .WithOpenApi()
+                .AddAuthEndpoints("auth", "Auth")
+                .AddUsuariosEndpoint("usuarios", "Usuarios");
         });
     }
 }
