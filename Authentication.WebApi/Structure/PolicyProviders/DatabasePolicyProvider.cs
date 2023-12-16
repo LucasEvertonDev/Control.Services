@@ -17,7 +17,7 @@ public class DatabasePolicyProvider() : IAuthorizationPolicyProvider
     {
         var authorizationPolicy = new AuthorizationPolicyBuilder();
 
-        authorizationPolicy.RequireRole("admqin");
+        authorizationPolicy.RequireRole("admin");
 
         return Task.FromResult(authorizationPolicy.Build());
     }
