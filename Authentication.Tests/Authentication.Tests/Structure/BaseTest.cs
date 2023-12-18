@@ -43,9 +43,9 @@ public class BaseTestInMemoryDb : IClassFixture<IntegrationTestInMemoryDbFactory
         return string.Join(string.Empty, ResultServiceHelpers.TranslateLambda(exp).Split(".").Skip(1).ToList());
     }
 
-    protected static (string email, string senha) CriaUsuario()
+    protected static (string nome, string email, string senha) CriaUsuario()
     {
-        return (new Faker().Person.Email, new Faker().Internet.Password(10));
+        return (new Faker().Person.FullName, new Faker().Person.Email, new Faker().Internet.Password(10));
     }
 }
 
@@ -73,7 +73,6 @@ public class BaseTestInDatabase : IClassFixture<IntegrationTestInDatabaseFactory
             }
         };
     }
-
     protected TApi InstanceApi<TApi>()
     {
         return RestService.For<TApi>(HttpClient, GetSettings());
@@ -84,8 +83,8 @@ public class BaseTestInDatabase : IClassFixture<IntegrationTestInDatabaseFactory
         return string.Join(string.Empty, ResultServiceHelpers.TranslateLambda(exp).Split(".").Skip(1).ToList());
     }
 
-    protected static (string email, string senha) CriarUsuario()
+    protected static (string nome, string email, string senha) CriaUsuario()
     {
-        return (new Faker().Person.Email, new Faker().Internet.Password(10));
+        return (new Faker().Person.FullName, new Faker().Person.Email, new Faker().Internet.Password(10));
     }
 }

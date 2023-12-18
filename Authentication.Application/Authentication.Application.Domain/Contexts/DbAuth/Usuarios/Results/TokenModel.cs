@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Authentication.Application.Domain.Contexts.DbAuth.Usuarios.Models;
+namespace Authentication.Application.Domain.Contexts.DbAuth.Usuarios.Results;
 
 public class TokenModel
 {

@@ -17,6 +17,7 @@ public class PostUsuarioCommandHandler(
         var chaveHash = passwordHash.GeneratePasswordHash();
 
         var usuario = new Usuario(
+            nome: request.Nome,
             email: request.Email,
             senha: passwordHash.EncryptPassword(request.Senha, chaveHash),
             chave: chaveHash);

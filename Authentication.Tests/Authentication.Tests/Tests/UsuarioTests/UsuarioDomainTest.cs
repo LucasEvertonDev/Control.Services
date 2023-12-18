@@ -26,6 +26,7 @@ public class UsuarioDomainTest : BaseTestInMemoryDb
     {
         var chaveHash = _passwordHash.GeneratePasswordHash();
         var usuario = new Usuario(
+            nome: new Faker().Person.FullName,
             email: new Faker().Person.Email,
             senha: _passwordHash.EncryptPassword(new Faker().Internet.Password(), chaveHash),
             chave: chaveHash);
@@ -39,12 +40,14 @@ public class UsuarioDomainTest : BaseTestInMemoryDb
     public void Create_User_Error()
     {
         var usuario = new Usuario(
+            nome: null,
             email: null,
             senha: string.Empty,
             chave: string.Empty);
 
         usuario.GetFailures().Should()
             .NotBeNullOrEmpty()
+            .And.Contain(UsuarioFailures.NomeObrigatorio)
             .And.Contain(UsuarioFailures.EmailObrigatorio)
             .And.Contain(UsuarioFailures.ChaveHashObrigatoria)
             .And.Contain(UsuarioFailures.SenhaObrigatoria);

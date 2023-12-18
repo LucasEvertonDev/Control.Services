@@ -1,4 +1,4 @@
-﻿using Authentication.Application.Domain.Contexts.DbAuth.Usuarios.Models;
+﻿using Authentication.Application.Domain.Contexts.DbAuth.Usuarios.Results;
 using Authentication.Application.Domain.Structure.Models;
 using Authentication.Application.Mediator.Commands.Auth.PostLogin;
 using Authentication.Application.Mediator.Commands.Auth.PostRefreshToken;

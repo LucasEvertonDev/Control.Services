@@ -1,7 +1,7 @@
 ﻿namespace Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 public class Usuario : BaseEntity<Usuario>
 {
-    public Usuario(string email, string senha, string chave)
+    public Usuario(string nome, string email, string senha, string chave)
     {
         Ensure(email).ForContext(u => u.Email)
             .NotNullOrEmpty(UsuarioFailures.EmailObrigatorio)
@@ -13,11 +13,17 @@ public class Usuario : BaseEntity<Usuario>
         Ensure(chave).ForContext(u => u.Chave)
             .NotNullOrEmpty(UsuarioFailures.ChaveHashObrigatoria);
 
+        Ensure(nome).ForContext(u => u.Nome)
+            .NotNullOrEmpty(UsuarioFailures.NomeObrigatorio);
+
+        Nome = nome;
         Email = email;
         Senha = senha;
         Chave = chave;
         UltimoAcesso = DateTime.Now;
     }
+
+    public string Nome { get; private set; }
 
     public string Email { get; private set; }
 
@@ -32,5 +38,18 @@ public class Usuario : BaseEntity<Usuario>
         UltimoAcesso = DateTime.Now;
 
         return this;
+    }
+
+    public void AtualizaUsuario(string nome, string email)
+    {
+        Ensure(email).ForContext(u => u.Email)
+           .NotNullOrEmpty(UsuarioFailures.EmailObrigatorio)
+           .EmailAddress(UsuarioFailures.EmailInvalido);
+
+        Ensure(nome).ForContext(u => u.Nome)
+            .NotNullOrEmpty(UsuarioFailures.NomeObrigatorio);
+
+        Nome = nome;
+        Email = email;
     }
 }

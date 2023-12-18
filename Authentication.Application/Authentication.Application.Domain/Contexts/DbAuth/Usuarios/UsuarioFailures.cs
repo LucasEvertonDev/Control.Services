@@ -17,4 +17,8 @@ public static class UsuarioFailures
     public static readonly FailureModel EmailExistente = new("EmailExistente", "Já existe um email cadastrado para o usuário corrente.");
 
     public static readonly FailureModel ChaveHashObrigatoria = new("ChaveHashObrigatoria", "Chave hash é obrigatória.");
+
+    public static readonly FailureModel NomeObrigatorio = new("NomeObrigatorio", "O nome é obrigatório!");
+
+    public static readonly FailureModel UsuarioInexistente = new("UsuarioInexistente", "O usuário não foi encontrado");
 }

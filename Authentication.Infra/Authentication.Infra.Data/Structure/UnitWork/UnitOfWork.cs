@@ -1,5 +1,6 @@
 ﻿using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Infra.Data.Contexts.DbAuth;
+using Authentication.Infra.Data.Contexts.DbAuth.Usuarios;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Authentication.Infra.Data.Structure.UnitWork;
@@ -8,15 +9,15 @@ public class UnitOfWork(
     IServiceProvider serviceProvider,
     DbAuthContext signCiContext) : IUnitOfWorkTransaction
 {
-    private IRepository<Usuario> _usuarioRepository;
+    private IUsuarioRepository _usuarioRepository;
 
     private List<IDbContextTransaction> transactions;
 
-    public IRepository<Usuario> UsuarioRepository
+    public IUsuarioRepository UsuarioRepository
     {
         get
         {
-            _usuarioRepository ??= new BaseRepository<DbAuthContext, Usuario>(serviceProvider);
+            _usuarioRepository ??= new UsuarioRepository(serviceProvider);
 
             return _usuarioRepository;
         }

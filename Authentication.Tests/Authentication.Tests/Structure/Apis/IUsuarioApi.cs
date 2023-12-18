@@ -1,5 +1,4 @@
-﻿using Authentication.Application.Mediator.Commands.Auth.PostLogin;
-using Authentication.Application.Mediator.Commands.Usuarios.PostUsuario;
+﻿using Authentication.Application.Mediator.Commands.Usuarios.PostUsuario;
 using Authentication.Tests.Structure.Response;
 using Refit;
 

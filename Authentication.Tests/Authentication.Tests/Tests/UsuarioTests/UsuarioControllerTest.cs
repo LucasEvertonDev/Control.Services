@@ -14,15 +14,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Notification.Notifications.Enum;
 
 namespace Authentication.Tests.Tests.UsuarioTests;
-public class UsuarioControllerTest : BaseTestInMemoryDb
+public class UsuarioControllerTest : BaseTestInDatabase
 {
     private readonly IUsuarioApi _usuarioApi;
 
     private readonly IAuthApi _authApi;
     private readonly AppSettings _appSettings;
-    private readonly (string email, string senha) _usuario;
+    private readonly (string nome, string email, string senha) _usuario;
 
-    public UsuarioControllerTest(IntegrationTestInMemoryDbFactory<Program> integrationTestFactory)
+    public UsuarioControllerTest(IntegrationTestInDatabaseFactory<Program> integrationTestFactory)
     : base(integrationTestFactory)
     {
         _usuarioApi = InstanceApi<IUsuarioApi>();
@@ -37,6 +37,7 @@ public class UsuarioControllerTest : BaseTestInMemoryDb
     {
         var response = await _usuarioApi.Post(new PostUsuarioCommand
         {
+            Nome = _usuario.nome,
             Email = _usuario.email,
             Senha = _usuario.senha
         });
@@ -54,6 +55,7 @@ public class UsuarioControllerTest : BaseTestInMemoryDb
     {
         await _usuarioApi.Post(new PostUsuarioCommand
         {
+            Nome = _usuario.nome,
             Email = _usuario.email,
             Senha = _usuario.senha
         });
@@ -126,6 +128,7 @@ public class UsuarioControllerTest : BaseTestInMemoryDb
     {
         await _usuarioApi.Post(new PostUsuarioCommand
         {
+            Nome = _usuario.nome,
             Email = _usuario.email,
             Senha = _usuario.senha
         });

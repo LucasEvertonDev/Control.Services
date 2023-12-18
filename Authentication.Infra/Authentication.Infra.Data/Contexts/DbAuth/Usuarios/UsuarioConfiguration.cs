@@ -1,5 +1,4 @@
 ﻿using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
-using Authentication.Application.Domain.Structure.Enuns;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Authentication.Infra.Data.Contexts.DbAuth.Usuarios;
@@ -17,6 +16,10 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
             .HasMaxLength(50)
             .ValueGeneratedOnAdd()
             .IsRequired();
+
+        builder.Property(u => u.Nome)
+            .IsRequired()
+            .HasMaxLength(100);
 
         builder.Property(u => u.Email)
             .IsRequired()
