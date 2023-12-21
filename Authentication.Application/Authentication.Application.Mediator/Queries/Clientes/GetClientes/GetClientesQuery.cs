@@ -2,8 +2,8 @@
 using Authentication.Application.Mediator.Queries.Usuarios.GetUsuarioQuery;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Authentication.Application.Mediator.Queries.Usuarios.GetUsuarioQuerry;
-public class GetUsuariosQuery : IRequest<Result>, IHandler<GetUsuariosQueryHandler>
+namespace Authentication.Application.Mediator.Queries.Clientes.GetClientes;
+internal class GetClientesQuery : IRequest<Result>, IHandler<GetUsuariosQueryHandler>
 {
     [DefaultValue("1")]
     [FromRoute(Name = "pagenumber")]
@@ -15,7 +15,4 @@ public class GetUsuariosQuery : IRequest<Result>, IHandler<GetUsuariosQueryHandl
 
     [FromQuery(Name = "nome")]
     public string Nome { get; set; }
-
-    [FromQuery(Name = "email")]
-    public string Email { get; set; }
 }
