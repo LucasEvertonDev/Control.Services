@@ -5,7 +5,6 @@ using Authentication.Application.Mediator.Commands.Usuarios.DeleteUsuario;
 using Authentication.Application.Mediator.Commands.Usuarios.PostUsuario;
 using Authentication.Application.Mediator.Commands.Usuarios.PutUsuario;
 using Authentication.Application.Mediator.Queries.Usuarios.GetUsuarioQuerry;
-using Authentication.WebApi.Structure.Helpers;
 
 namespace Architecture.WebApi.Endpoints;
 

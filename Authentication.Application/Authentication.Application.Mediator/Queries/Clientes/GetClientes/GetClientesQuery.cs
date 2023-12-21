@@ -3,7 +3,7 @@ using Authentication.Application.Mediator.Queries.Usuarios.GetUsuarioQuery;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Authentication.Application.Mediator.Queries.Clientes.GetClientes;
-internal class GetClientesQuery : IRequest<Result>, IHandler<GetUsuariosQueryHandler>
+public class GetClientesQuery : IRequest<Result>, IHandler<GetUsuariosQueryHandler>
 {
     [DefaultValue("1")]
     [FromRoute(Name = "pagenumber")]

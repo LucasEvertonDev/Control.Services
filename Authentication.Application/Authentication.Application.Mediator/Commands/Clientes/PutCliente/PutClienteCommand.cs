@@ -9,10 +9,10 @@ public class PutClienteCommand : IRequest<Result>, IHandler<PutClienteCommandHan
     public virtual Guid Id { get; set; }
 
     [FromBody]
-    public UsuarioEdit Body { get; set; }
+    public ClienteEdit Body { get; set; }
 }
 
-public class UsuarioEdit
+public class ClienteEdit
 {
     public DateTime? DataNascimento { get; set; }
 
