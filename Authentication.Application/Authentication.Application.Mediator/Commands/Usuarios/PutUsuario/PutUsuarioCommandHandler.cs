@@ -11,7 +11,9 @@ public class PutUsuarioCommandHandler(IServiceProvider serviceProvider) : BaseHa
             return Result.Failure<PutUsuarioCommandHandler>(UsuarioFailures.EmailExistente);
         }
 
-        var usuario = await UnitOfWork.UsuarioRepository.FirstOrDefaultAsync(u => u.Id.Equals(request.Id));
+        var usuario = await UnitOfWork.UsuarioRepository.FirstOrDefaultAsync(
+            where: u => u.Id.Equals(request.Id),
+            cancellationToken: cancellationToken);
 
         if (usuario == null)
         {
@@ -24,10 +26,12 @@ public class PutUsuarioCommandHandler(IServiceProvider serviceProvider) : BaseHa
 
         if (usuario.HasFailures())
         {
-            return Result.Failure<Usuario>(usuario);
+            return Result.Failure<PutUsuarioCommandHandler>(usuario);
         }
 
-        await UnitOfWork.UsuarioRepository.UpdateAsync(usuario);
+        await UnitOfWork.UsuarioRepository.UpdateAsync(
+            domain: usuario,
+            cancellationToken: cancellationToken);
 
         return Result.Ok();
     }

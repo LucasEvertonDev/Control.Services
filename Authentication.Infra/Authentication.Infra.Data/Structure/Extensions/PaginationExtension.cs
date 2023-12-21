@@ -2,14 +2,14 @@
 
 public static class PaginationExtension
 {
-    public static async Task<PagedResult<T>> PaginationAsync<T>(this IQueryable<T> elements, int pageNumber, int pageSize)
+    public static async Task<PagedResult<T>> PaginationAsync<T>(this IQueryable<T> elements, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
     {
-        var count = await elements.CountAsync();
+        var count = await elements.CountAsync(cancellationToken);
 
         var itens = await elements
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
 
         return new PagedResult<T>(itens, pageNumber, pageSize, count);
     }

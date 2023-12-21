@@ -67,9 +67,9 @@ public static class ResultExtensions
         return route;
     }
 
-    public static async Task<IResult> SendAsync(this IMediator mediator, IRequest<Result> obj, bool useContainer = true)
+    public static async Task<IResult> SendAsync(this IMediator mediator, IRequest<Result> obj, CancellationToken cancellationToken = default,  bool useContainer = true)
     {
-        return await mediator.Send<Result>(obj).Result.GetResponse(useContainer);
+        return await mediator.Send<Result>(obj, cancellationToken).Result.GetResponse(useContainer);
     }
 
     private static ResponseError<Dictionary<object, object[]>> GetResponseError(Result result)

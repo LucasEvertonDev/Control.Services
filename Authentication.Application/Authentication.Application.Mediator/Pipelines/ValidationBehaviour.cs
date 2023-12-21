@@ -21,7 +21,7 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        var failures = await ValidateParameterAsync(request);
+        var failures = await ValidateParameterAsync(request, cancellationToken);
 
         if (failures.Any())
         {
@@ -33,12 +33,12 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
         return await next();
     }
 
-    private async Task<IEnumerable<NotificationModel>> ValidateParameterAsync(object parameter)
+    private async Task<IEnumerable<NotificationModel>> ValidateParameterAsync(object parameter, CancellationToken cancellationToken)
     {
         var typeParam = parameter.GetType();
         if (typeParam.GetInterface(nameof(IValidationAsync)) != null)
         {
-            var failures = await GetValidationErrorsAsync(parameter);
+            var failures = await GetValidationErrorsAsync(parameter, cancellationToken);
 
             if (failures.Any())
             {
@@ -70,7 +70,7 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
         }
     }
 
-    private async Task<IEnumerable<ValidationFailure>> GetValidationErrorsAsync(object value)
+    private async Task<IEnumerable<ValidationFailure>> GetValidationErrorsAsync(object value, CancellationToken cancellationToken)
     {
         if (value == null)
         {
@@ -87,7 +87,7 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
             return new List<ValidationFailure>();
         }
 
-        var validationResult = await validatorInstance.ValidateAsync(new ValidationContext<object>(value));
+        var validationResult = await validatorInstance.ValidateAsync(new ValidationContext<object>(value), cancellationToken);
         return validationResult.Errors ?? [];
     }
 }

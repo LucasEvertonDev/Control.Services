@@ -11,7 +11,7 @@ namespace Authentication.Infra.IoC.Plugins.JWT.Services;
 
 public class TokenService(AppSettings appSettings) : ITokenService
 {
-    public Task<(string, DateTime)> GenerateToken(Usuario usuario)
+    public Task<(string, DateTime)> GenerateTokenAsync(Usuario usuario, CancellationToken cancellationToken = default)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(appSettings.Jwt.Key);

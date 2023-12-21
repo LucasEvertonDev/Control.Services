@@ -12,16 +12,19 @@ public class PostRefreshTokenCommandHandler(
     {
         var usuario = await UnitOfWork.UsuarioRepository
             .FirstOrDefaultTrackingAsync(
-                usuario => usuario.Id == new Guid(Identity.GetUserClaim(JwtUserClaims.Id)));
+                where: usuario => usuario.Id == new Guid(Identity.GetUserClaim(JwtUserClaims.Id)),
+                cancellationToken: cancellationToken);
 
         if (usuario == null)
         {
             return Result.Failure<PostRefreshTokenCommandHandler>(UsuarioFailures.NaoFoiPossivelRecuperarUsuarioLogado);
         }
 
-        await UnitOfWork.UsuarioRepository.UpdateAsync(usuario.SetUltimoAcesso());
+        await UnitOfWork.UsuarioRepository.UpdateAsync(
+            domain: usuario.SetUltimoAcesso(),
+            cancellationToken: cancellationToken);
 
-        var (token, dataExpiracao) = await tokenService.GenerateToken(usuario);
+        var (token, dataExpiracao) = await tokenService.GenerateTokenAsync(usuario);
 
         return Result.Ok(new TokenModel
         {

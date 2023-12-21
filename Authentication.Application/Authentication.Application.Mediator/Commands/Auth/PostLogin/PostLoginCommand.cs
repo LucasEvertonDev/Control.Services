@@ -9,9 +9,9 @@ public class PostLoginCommand : IRequest<Result>, IHandler<PostLoginCommandHandl
 
     public string Senha { get; set; }
 
-    public static async Task<PostLoginCommand> ConvertForm(HttpRequest request)
+    public static async Task<PostLoginCommand> ConvertForm(HttpRequest request, CancellationToken cancellationToken = default)
     {
-        var form = await request.ReadFormAsync();
+        var form = await request.ReadFormAsync(cancellationToken);
 
         return new PostLoginCommand()
         {

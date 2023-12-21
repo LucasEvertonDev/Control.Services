@@ -4,5 +4,5 @@ namespace Authentication.Application.Domain.Plugins.JWT;
 
 public interface ITokenService
 {
-    Task<(string, DateTime)> GenerateToken(Usuario usuario);
+    Task<(string, DateTime)> GenerateTokenAsync(Usuario usuario, CancellationToken cancellationToken = default);
 }

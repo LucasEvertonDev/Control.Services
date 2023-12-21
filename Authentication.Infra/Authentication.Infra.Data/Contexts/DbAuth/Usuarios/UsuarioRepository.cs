@@ -4,7 +4,7 @@ using Authentication.Application.Domain.Contexts.DbAuth.Usuarios.Results;
 namespace Authentication.Infra.Data.Contexts.DbAuth.Usuarios;
 public class UsuarioRepository(IServiceProvider serviceProvider) : BaseRepository<DbAuthContext, Usuario>(serviceProvider), IUsuarioRepository
 {
-    public async Task<PagedResult<UsuarioModel>> GetUsuariosAsync(string email, string nome, int pageNumber, int pageSize)
+    public async Task<PagedResult<UsuarioModel>> GetUsuariosAsync(string email, string nome, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
     {
         return await Context.Usuarios
             .Where(usuario => (string.IsNullOrEmpty(email) || usuario.Email.Contains(email))
@@ -15,6 +15,6 @@ public class UsuarioRepository(IServiceProvider serviceProvider) : BaseRepositor
                 Email = usuario.Email,
                 Name = usuario.Nome,
             })
-            .PaginationAsync(pageNumber, pageSize);
+            .PaginationAsync(pageNumber, pageSize, cancellationToken);
     }
 }

@@ -5,14 +5,19 @@ public class DeleteUsuarioCommandHandler(IServiceProvider serviceProvider) : Bas
 {
     public async Task<Result> Handle(DeleteUsuarioCommand request, CancellationToken cancellationToken)
     {
-        var usuario = await UnitOfWork.UsuarioRepository.FirstOrDefaultAsync(u => u.Id.Equals(request.Id));
+        var usuario = await UnitOfWork.UsuarioRepository.FirstOrDefaultAsync(
+            where: u => u.Id.Equals(request.Id),
+            cancellationToken: cancellationToken);
 
         if (usuario == null)
         {
             return Result.Failure<PutUsuarioCommandHandler>(UsuarioFailures.UsuarioInexistente);
         }
 
-        await UnitOfWork.UsuarioRepository.DeleteAsync(usuario);
+        await UnitOfWork.UsuarioRepository.DeleteAsync(
+            where: u => u.Id.Equals(request.Id),
+            cancellationToken: cancellationToken);
+
         return Result.Ok();
     }
 }

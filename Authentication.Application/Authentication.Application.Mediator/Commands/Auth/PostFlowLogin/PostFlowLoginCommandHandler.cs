@@ -12,14 +12,17 @@ public class PostFlowLoginCommandHandler(
     {
         var usuario = await UnitOfWork.UsuarioRepository
             .FirstOrDefaultAsync(
-                usuario => usuario.Email == request.Email);
+                where: usuario => usuario.Email == request.Email,
+                cancellationToken: cancellationToken);
 
         if (usuario == null || !passwordHash.PasswordIsEquals(request.Senha, usuario.Chave, usuario.Senha))
         {
             return Result.Failure<PostFlowLoginCommandHandler>(UsuarioFailures.EmailSenhaInvalidos);
         }
 
-        var (token, dataExpiracao) = await tokenService.GenerateToken(usuario);
+        var (token, dataExpiracao) = await tokenService.GenerateTokenAsync(
+            usuario: usuario,
+            cancellationToken: cancellationToken);
 
         return Result.Ok(new TokenModel
         {

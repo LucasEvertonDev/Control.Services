@@ -12,18 +12,18 @@ public static class AuthEndpoints
         var authEndpoints = app.MapGroup(route).WithTags(tag);
 
         authEndpoints.MapPost("login/",
-            async ([FromServices] IMediator mediator, [FromBody] PostLoginCommand request) =>
-                 await mediator.SendAsync(request))
+            async ([FromServices] IMediator mediator, [FromBody] PostLoginCommand request, CancellationToken cancellationToken) =>
+                 await mediator.SendAsync(request, cancellationToken))
             .AllowAnonymous<ResponseDto<TokenModel>>();
 
         authEndpoints.MapPost("refreshtoken/",
-            async ([FromServices] IMediator mediator, PostRefreshTokenCommand refreshTokenCommand) =>
-                await mediator.SendAsync(refreshTokenCommand))
+            async ([FromServices] IMediator mediator, PostRefreshTokenCommand refreshTokenCommand, CancellationToken cancellationToken) =>
+                await mediator.SendAsync(refreshTokenCommand, cancellationToken))
             .Authorization<ResponseDto<TokenModel>>("admin");
 
         authEndpoints.MapPost("flowlogin/",
-            async ([FromServices] IMediator mediator, HttpRequest request) =>
-                await mediator.SendAsync(await PostLoginCommand.ConvertForm(request), false))
+            async ([FromServices] IMediator mediator, HttpRequest request, CancellationToken cancellationToken) =>
+                await mediator.SendAsync(await PostLoginCommand.ConvertForm(request, cancellationToken), cancellationToken, false))
             .AllowAnonymous<TokenModel>();
 
         return app;

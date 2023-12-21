@@ -1,4 +1,5 @@
-﻿using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
+﻿using Authentication.Application.Domain.Contexts.DbAuth.Clientes;
+using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Infra.Data.Contexts.DbAuth;
 using Authentication.Infra.Data.Contexts.DbAuth.Usuarios;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -7,11 +8,11 @@ namespace Authentication.Infra.Data.Structure.UnitWork;
 
 public class UnitOfWork(
     IServiceProvider serviceProvider,
-    DbAuthContext signCiContext) : IUnitOfWorkTransaction
+    DbAuthContext dbAuthContext) : IUnitOfWorkTransaction
 {
     private IUsuarioRepository _usuarioRepository;
-
     private List<IDbContextTransaction> transactions;
+    private IRepository<Cliente> _clienteRepository;
 
     public IUsuarioRepository UsuarioRepository
     {
@@ -23,46 +24,56 @@ public class UnitOfWork(
         }
     }
 
-    public async Task<TRetorno> OnTransactionAsync<TRetorno>(Func<Task<TRetorno>> func)
+    public IRepository<Cliente> ClienteRepository
+    {
+        get
+        {
+            _clienteRepository ??= new BaseRepository<DbAuthContext, Cliente>(serviceProvider);
+
+            return _clienteRepository;
+        }
+    }
+
+    public async Task<TRetorno> OnTransactionAsync<TRetorno>(Func<Task<TRetorno>> func, CancellationToken cancellationToken = default)
     {
         transactions = [];
 
         try
         {
-            await OpenTransaction();
+            await OpenTransaction(cancellationToken);
 
             TRetorno retorno = await func();
 
-            await CommitTransaction();
+            await CommitTransaction(cancellationToken);
 
             return retorno;
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex);
-            await RollbackTransaction();
+            await RollbackTransaction(cancellationToken);
             throw;
         }
     }
 
-    private async Task OpenTransaction()
+    private async Task OpenTransaction(CancellationToken cancellationToken = default)
     {
-        transactions.Add(await signCiContext.Database.BeginTransactionAsync());
+        transactions.Add(await dbAuthContext.Database.BeginTransactionAsync(cancellationToken));
     }
 
-    private async Task CommitTransaction()
+    private async Task CommitTransaction(CancellationToken cancellationToken = default)
     {
         foreach (var transaction in transactions)
         {
-            await transaction.CommitAsync();
+            await transaction.CommitAsync(cancellationToken);
         }
     }
 
-    private async Task RollbackTransaction()
+    private async Task RollbackTransaction(CancellationToken cancellationToken = default)
     {
         foreach (var transaction in transactions)
         {
-            await transaction.RollbackAsync();
+            await transaction.RollbackAsync(cancellationToken);
         }
     }
 }

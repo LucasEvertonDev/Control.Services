@@ -9,7 +9,7 @@ public class PostUsuarioCommandHandler(
 {
     public async Task<Result> Handle(PostUsuarioCommand request, CancellationToken cancellationToken)
     {
-        if (await EmailJaCadastrado(request.Email))
+        if (await EmailJaCadastrado(request.Email, cancellationToken))
         {
             return Result.Failure<PostUsuarioCommandHandler>(UsuarioFailures.EmailExistente);
         }
@@ -24,18 +24,21 @@ public class PostUsuarioCommandHandler(
 
         if (usuario.HasFailures())
         {
-            return Result.Failure<Usuario>(usuario);
+            return Result.Failure<PostUsuarioCommandHandler>(usuario);
         }
 
-        await UnitOfWork.UsuarioRepository.CreateAsync(usuario);
+        await UnitOfWork.UsuarioRepository.CreateAsync(
+            domain: usuario,
+            cancellationToken: cancellationToken);
 
         return Result.Ok();
     }
 
-    private async Task<bool> EmailJaCadastrado(string email)
+    private async Task<bool> EmailJaCadastrado(string email, CancellationToken cancellationToken = default)
     {
         return (await UnitOfWork.UsuarioRepository
             .FirstOrDefaultAsync(
-                usuario => usuario.Email == email)) != null;
+                where: usuario => usuario.Email == email,
+                cancellationToken: cancellationToken)) != null;
     }
 }

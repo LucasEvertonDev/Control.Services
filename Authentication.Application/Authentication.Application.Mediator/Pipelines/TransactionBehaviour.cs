@@ -12,7 +12,7 @@ public class TransactionBehaviour<TRequest, TResponse>(IUnitOfWorkTransaction un
             return await unitWorkTransaction.OnTransactionAsync(async () =>
             {
                 return await next();
-            });
+            }, cancellationToken);
         }
         catch (Exception exception)
         {
