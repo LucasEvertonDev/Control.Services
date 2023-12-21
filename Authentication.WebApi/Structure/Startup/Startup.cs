@@ -112,7 +112,9 @@ public class Startup(IConfiguration configuration)
                 .MapGroup("api/v1/")
                 .WithOpenApi()
                 .AddAuthEndpoints("auth", "Auth")
-                .AddUsuariosEndpoint("usuarios", "Usuarios");
+                .AddUsuariosEndpoint("usuarios", "Usuarios")
+                .AddClientesEndpoint("cliente", "Clientes")
+                ;
         });
     }
 }
