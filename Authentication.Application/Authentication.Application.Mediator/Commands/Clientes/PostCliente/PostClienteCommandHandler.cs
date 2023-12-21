@@ -1,18 +1,35 @@
-﻿using Authentication.Application.Mediator.Commands.Usuarios.PostUsuario;
+﻿using Authentication.Application.Domain.Contexts.DbAuth.Clientes;
+using Notification.Extensions;
 
 namespace Authentication.Application.Mediator.Commands.Clientes.PostCliente;
 public class PostClienteCommandHandler(
-    IServiceProvider serviceProvider) : BaseHandler(serviceProvider), IRequestHandler<PostUsuarioCommand, Result>
+    IServiceProvider serviceProvider) : BaseHandler(serviceProvider), IRequestHandler<PostClienteCommand, Result>
 {
-    public async Task<Result> Handle(PostUsuarioCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(PostClienteCommand request, CancellationToken cancellationToken)
     {
-        var cliente = await UnitOfWork.ClienteRepository
-            .FirstOrDefaultAsync(cliente => cliente.Nome == request.Nome);
+        var clienteDb = await UnitOfWork.ClienteRepository.FirstOrDefaultAsync(
+            where: cliente => cliente.Nome == request.Nome,
+            cancellationToken: cancellationToken);
 
-        if (cliente == null)
+        if (clienteDb != null)
         {
-            Console.WriteLine("teste");
+            return Result.Failure<PostClienteCommandHandler>(ClienteFailures.ClienteJaCadastrado);
         }
+
+        var cliente = new Cliente(
+            cpf: request.CPF,
+            nome: request.Nome,
+            dataNascimento: request.DataNascimento,
+            telefone: request.Telefone);
+
+        if (cliente.HasFailures())
+        {
+            return Result.Failure<PostClienteCommandHandler>(cliente);
+        }
+
+        await UnitOfWork.ClienteRepository.CreateAsync(
+            domain: cliente,
+            cancellationToken: cancellationToken);
 
         return Result.Ok();
     }

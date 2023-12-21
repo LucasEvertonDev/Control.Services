@@ -3,6 +3,9 @@ public class Cliente : BaseEntity<Cliente>
 {
     public Cliente(string cpf, string nome, DateTime? dataNascimento, string telefone)
     {
+        Ensure(nome).ForContext(c => c.Nome)
+            .NotNullOrEmpty(ClienteFailures.NomeObrigatorio);
+
         Cpf = cpf;
         Nome = nome;
         DataNascimento = dataNascimento;
@@ -16,4 +19,15 @@ public class Cliente : BaseEntity<Cliente>
     public DateTime? DataNascimento { get; private set; }
 
     public string Telefone { get; private set; }
+
+    public void UpdateUsuario(string cpf, string nome, DateTime? dataNascimento, string telefone)
+    {
+        Ensure(nome).ForContext(c => c.Nome)
+            .NotNullOrEmpty(ClienteFailures.NomeObrigatorio);
+
+        Cpf = cpf;
+        Nome = nome;
+        DataNascimento = dataNascimento;
+        Telefone = telefone;
+    }
 }
