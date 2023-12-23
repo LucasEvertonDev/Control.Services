@@ -1,7 +1,8 @@
 ﻿using System.Net;
-using System.Text.Json;
 using Authentication.Application.Domain;
 using Authentication.Application.Domain.Structure.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Authentication.WebApi.Structure.Middlewares;
 
@@ -48,7 +49,10 @@ public class AuthUnauthorizedMiddleware
             };
 
             httpContext.Response.ContentType = "application/json";
-            await httpContext.Response.WriteAsync(JsonSerializer.Serialize(errormodel));
+            await httpContext.Response.WriteAsync(JsonConvert.SerializeObject(errormodel, new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            }));
         }
     }
 }

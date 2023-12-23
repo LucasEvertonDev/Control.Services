@@ -16,7 +16,7 @@ public static class ClientesEndpoint
         clientesEndpoint.MapPost("/",
             async ([FromServices] IMediator mediator, [FromBody] PostClienteCommand postClienteCommand, CancellationToken cancellationToken) =>
                  await mediator.SendAsync(postClienteCommand, cancellationToken))
-            .AllowAnonymous<ResponseDto>();
+            .Authorization<ResponseDto>();
 
         clientesEndpoint.MapGet($"/{Params.GetRoute<GetClientesQuery>()}",
             async ([FromServices] IMediator mediator, [AsParameters] GetClientesQuery getClientesQuery, CancellationToken cancellationToken) =>

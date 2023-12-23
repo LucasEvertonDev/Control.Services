@@ -1,7 +1,8 @@
 ﻿using System.Net;
-using System.Text.Json;
 using Authentication.Application.Domain;
 using Authentication.Application.Domain.Structure.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Notification.Notifications.Enum;
 
 namespace Authentication.WebApi.Structure.Extensions;
@@ -150,6 +151,9 @@ public class CustomResults(ResponseError<Dictionary<object, object[]>> content, 
     {
         httpContext.Response.ContentType = "application/json";
         httpContext.Response.StatusCode = statusCode;
-        await httpContext.Response.WriteAsync(JsonSerializer.Serialize(content));
+        await httpContext.Response.WriteAsync(JsonConvert.SerializeObject(content, new JsonSerializerSettings
+        {
+            ContractResolver = new CamelCasePropertyNamesContractResolver()
+        }));
     }
 }

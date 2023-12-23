@@ -11,7 +11,7 @@ public class PutUsuarioCommandHandler(IServiceProvider serviceProvider) : BaseHa
             return Result.Failure<PutUsuarioCommandHandler>(UsuarioFailures.EmailExistente);
         }
 
-        var usuario = await UnitOfWork.UsuarioRepository.FirstOrDefaultAsync(
+        var usuario = await UnitOfWork.UsuarioRepository.FirstOrDefaultTrackingAsync(
             where: u => u.Id.Equals(request.Id),
             cancellationToken: cancellationToken);
 
