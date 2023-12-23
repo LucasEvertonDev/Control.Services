@@ -7,7 +7,7 @@ public class PutClienteCommandHandler(
 {
     public async Task<Result> Handle(PutClienteCommand request, CancellationToken cancellationToken)
     {
-        var cliente = await UnitOfWork.ClienteRepository.FirstOrDefaultAsync(
+        var cliente = await UnitOfWork.ClienteRepository.FirstOrDefaultTrackingAsync(
             where: cliente => cliente.Id == request.Id,
             cancellationToken: cancellationToken);
 
