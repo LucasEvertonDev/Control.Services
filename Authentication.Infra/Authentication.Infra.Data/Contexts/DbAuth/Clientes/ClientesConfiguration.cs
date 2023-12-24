@@ -16,14 +16,14 @@ public class ClientesConfiguration : IEntityTypeConfiguration<Cliente>
             .IsRequired();
 
         builder.Property(u => u.Cpf)
-            .HasMaxLength(11);
+            .HasMaxLength(14);
 
         builder.Property(u => u.Nome)
             .IsRequired()
             .HasMaxLength(100);
 
         builder.Property(u => u.Telefone)
-            .HasMaxLength(50);
+            .HasMaxLength(19);
 
         builder.Property(u => u.DataNascimento)
             .IsRequired();

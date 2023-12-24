@@ -113,7 +113,7 @@ public class Startup(IConfiguration configuration)
                 .WithOpenApi()
                 .AddAuthEndpoints("auth", "Auth")
                 .AddUsuariosEndpoint("usuarios", "Usuarios")
-                .AddClientesEndpoint("cliente", "Clientes")
+                .AddClientesEndpoint("clientes", "Clientes")
                 ;
         });
     }

@@ -1,4 +1,6 @@
-﻿namespace Authentication.Application.Mediator.Queries.Clientes.GetClientes;
+﻿using Authentication.Application.Domain.Structure.Enuns;
+
+namespace Authentication.Application.Mediator.Queries.Clientes.GetClientes;
 public class GetClientesQueryHandler(IServiceProvider serviceProvider) : BaseHandler(serviceProvider), IRequestHandler<GetClientesQuery, Result>
 {
     public async Task<Result> Handle(GetClientesQuery request, CancellationToken cancellationToken)
@@ -7,7 +9,10 @@ public class GetClientesQueryHandler(IServiceProvider serviceProvider) : BaseHan
             .ToListAsync(
                 pageNumber: request.PageNumber,
                 pageSize: request.PageSize,
-                where: cliente => (string.IsNullOrWhiteSpace(request.Nome) || cliente.Nome.Contains(request.Nome)),
+                where: cliente =>
+                    (string.IsNullOrWhiteSpace(request.Nome) || cliente.Nome.Contains(request.Nome))
+                    && (string.IsNullOrWhiteSpace(request.Cpf) || cliente.Cpf.Contains(request.Cpf))
+                    && (request.Situacao == 0 || cliente.Situacao == (Situacao)request.Situacao),
                 cancellationToken: cancellationToken);
 
         return Result.Ok(clientes);

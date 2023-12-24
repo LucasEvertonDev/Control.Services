@@ -13,6 +13,12 @@ public class GetClientesQuery : IRequest<Result>, IHandler<GetUsuariosQueryHandl
     [FromRoute(Name = "pagesize")]
     public int PageSize { get; set; }
 
+    [FromQuery(Name = "cpf")]
+    public string Cpf { get; set; }
+
     [FromQuery(Name = "nome")]
     public string Nome { get; set; }
+
+    [FromQuery(Name = "situacao")]
+    public int Situacao { get; set; }
 }
