@@ -1,15 +1,15 @@
 version: '3.4'
 
 networks:
-  backend:
-    name: backend
+  teste:
+    name: teste
   
 services:
   sqlserver:
     restart: always
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sqlserver
-    hostname: 'sqlserver'
+    hostname: sqlserver
     environment:
       ACCEPT_EULA: 'Y'
       SA_PASSWORD: "Numsey#2021"
@@ -18,7 +18,7 @@ services:
     ports:
       - 11433:1433
     networks:
-      - backend
+      - teste
       
   authentication.webapi_auth:
     image: authentication.webapi_auth
@@ -34,12 +34,13 @@ services:
       - "Logging:LogLevel:System=Warning"
       - "Swagger:FlowLogin=http://localhost:7028/api/v1/auth/flowlogin"
       - "FilterExceptions=false"
+
     build:
       context: .
       dockerfile: ./Authentication.WebApi/Dockerfile
     ports:
-      - '7028:80'
+      - '7028:8080'
     depends_on:
       - sqlserver
     networks:
-      - backend
+      - teste
