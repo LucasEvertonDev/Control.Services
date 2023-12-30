@@ -11,15 +11,9 @@ public static class BootstrapModule
         if (!configuration.DatabaseInMemory)
         {
             services.AddDbContext<DbAuthContext>(options =>
-                 options.UseSqlServer(
-                     configuration.ConnectionStrings.DefaultConnection,
-                     (b) =>
-                     {
-                         b.UseCompatibilityLevel(150);
-
-                         b.MigrationsAssembly(typeof(DbAuthContext).Assembly.FullName);
-                     })
-                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+                options.UseMySql(configuration.ConnectionStrings.DefaultConnection,
+                    ServerVersion.AutoDetect(configuration.ConnectionStrings.DefaultConnection))
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
             services.AddScoped<IUnitOfWorkTransaction, UnitOfWork>();
         }

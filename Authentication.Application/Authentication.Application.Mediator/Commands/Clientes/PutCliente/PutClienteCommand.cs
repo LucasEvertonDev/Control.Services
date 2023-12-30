@@ -21,4 +21,6 @@ public class ClienteEdit
     public string CPF { get; set; }
 
     public string Telefone { get; set; }
+
+    public int Situacao { get; set; }
 }

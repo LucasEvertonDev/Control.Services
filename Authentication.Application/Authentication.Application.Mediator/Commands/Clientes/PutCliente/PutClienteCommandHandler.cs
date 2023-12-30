@@ -20,7 +20,8 @@ public class PutClienteCommandHandler(
             cpf: request.Body.CPF,
             nome: request.Body.Nome,
             dataNascimento: request.Body.DataNascimento,
-            telefone: request.Body.Telefone);
+            telefone: request.Body.Telefone,
+            situacao: request.Body.Situacao);
 
         if (cliente.HasFailures())
         {

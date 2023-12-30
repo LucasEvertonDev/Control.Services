@@ -12,9 +12,9 @@ public class AuditConfigurations : IEntityTypeConfiguration<Audit>
         builder.Property(p => p.UserId).HasMaxLength(100);
         builder.Property(p => p.Type).HasMaxLength(100);
         builder.Property(p => p.TableName).HasMaxLength(100);
-        builder.Property(p => p.OldValues).HasMaxLength(8000);
-        builder.Property(p => p.NewValues).HasMaxLength(8000);
-        builder.Property(p => p.AffectedColumns).HasMaxLength(8000);
-        builder.Property(p => p.PrimaryKey).HasMaxLength(8000);
+        builder.Property(p => p.OldValues).HasColumnType("BLOB");
+        builder.Property(p => p.NewValues).HasColumnType("BLOB");
+        builder.Property(p => p.AffectedColumns).HasColumnType("BLOB");
+        builder.Property(p => p.PrimaryKey).HasColumnType("BLOB");
     }
 }

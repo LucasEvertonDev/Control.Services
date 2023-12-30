@@ -13,6 +13,8 @@ public class ClienteModel : BaseModel
 
     public string Telefone { get; protected set; }
 
+    public int Situacao { get; protected set; }
+
     public override BaseModel FromEntity(IEntity entity)
     {
         var cliente = (Cliente)entity;
@@ -24,6 +26,7 @@ public class ClienteModel : BaseModel
             Telefone = cliente.Telefone,
             DataNascimento = cliente.DataNascimento,
             Nome = cliente.Nome,
+            Situacao = (int)cliente.Situacao
         };
 
         return clienteModel;

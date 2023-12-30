@@ -17,7 +17,7 @@ public partial class Program
         Host.CreateDefaultBuilder(args)
             .ConfigureAppConfiguration((hostingContext, config) =>
             {
-                hostingContext.RegisterSerilog(config);
+                hostingContext.RegisterSerilogMySql(config);
             })
             .UseSerilog()
             .ConfigureWebHostDefaults(webBuilder =>

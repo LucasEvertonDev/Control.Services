@@ -11,11 +11,25 @@ using Microsoft.AspNetCore.Http;
 
 namespace Authentication.Infra.Data.Contexts.DbAuth;
 
-public class DbAuthContext(
-    DbContextOptions<DbAuthContext> options,
-    AppSettings appSettings,
-    IHttpContextAccessor httpContextAccessor) : DbContext(options)
+public class DbAuthContext : DbContext
 {
+    private readonly AppSettings _appSettings;
+    private readonly IHttpContextAccessor _httpContextAccessor;
+
+    public DbAuthContext()
+    {
+    }
+
+    public DbAuthContext(
+        DbContextOptions<DbAuthContext> options,
+        AppSettings appSettings,
+        IHttpContextAccessor httpContextAccessor)
+        : base(options)
+    {
+        this._appSettings = appSettings;
+        this._httpContextAccessor = httpContextAccessor;
+    }
+
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
     public virtual DbSet<Audit> Audits { get; set; }
@@ -32,7 +46,7 @@ public class DbAuthContext(
     {
         base.OnModelCreating(modelBuilder);
 
-        if (!appSettings.DatabaseInMemory)
+        if (!_appSettings.DatabaseInMemory)
         {
             // Apply configurations automatic
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DbAuthContext).Assembly);
@@ -44,7 +58,7 @@ public class DbAuthContext(
         try
         {
             List<Audit> audits = [];
-            var userId = httpContextAccessor?.HttpContext?.User?.Identity?.GetUserClaim(JwtUserClaims.Id) ?? "Anonymous";
+            var userId = _httpContextAccessor?.HttpContext?.User?.Identity?.GetUserClaim(JwtUserClaims.Id) ?? "Anonymous";
 
             ChangeTracker.DetectChanges();
 

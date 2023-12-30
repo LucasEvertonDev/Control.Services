@@ -1,31 +1,34 @@
 version: '3.4'
 
 networks:
-  teste:
-    name: teste
+  backend:
+    name: backend
   
 services:
-  sqlserver:
-    restart: always
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sqlserver
-    hostname: sqlserver
-    environment:
-      ACCEPT_EULA: 'Y'
-      SA_PASSWORD: "Numsey#2021"
-    volumes:
-      - c:\dados\volumes\mssql:/var/opt/mssql/data
+  mysql:
+    image: mysql:8.0.20
+    container_name: mysql
     ports:
-      - 11433:1433
+      - 3306:3306
+    volumes:
+      - c:/dados/volumes/mysql:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: lucas
+      MYSQL_PASSWORD: 123456
+      MYSQL_DATABASE: DbAuth
     networks:
-      - teste
-      
+      - 'backend'
+    expose:
+      - 3306
+
   authentication.webapi_auth:
     image: authentication.webapi_auth
     container_name: authentication.webapi_auth
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings:DefaultConnection=Server=sqlserver;Database=DbAuth;User Id=sa;Password=Numsey#2021;TrustServerCertificate=True;"
+      - "ConnectionStrings:DefaultConnection=server=mysql;port=3306;userid=lucas;password=123456;database=DbAuth;"
       - "Jwt:Key=15e0e0beaaac6edb63dc815b5a732481ef2ff6fc7ee412ecbdd43d989f121069"
       - "Jwt:ExpireInMinutes=60"
       - "Logging:LogLevel:SerilogDb=Warning"
@@ -41,6 +44,6 @@ services:
     ports:
       - '7028:8080'
     depends_on:
-      - sqlserver
+      - mysql
     networks:
-      - teste
+      - backend

@@ -96,13 +96,13 @@ public class BaseRepository<TContext, TEntity> : IRepository<TEntity>
 
     public async Task<PagedResult<TEntity>> ToListAsync(int pageNumber, int pageSize, Expression<Func<TEntity, bool>> where, CancellationToken cancellationToken = default)
     {
-        return await _context.Set<TEntity>().Where(where).PaginationAsync(pageNumber, pageSize, cancellationToken);
+        return await _context.Set<TEntity>().Where(where).OrderByDescending(a => a.DataCriacao).PaginationAsync(pageNumber, pageSize, cancellationToken);
     }
 
     public async Task<PagedResult<TModel>> ToListAsync<TModel>(int pageNumber, int pageSize, Expression<Func<TEntity, bool>> where, CancellationToken cancellationToken = default)
         where TModel : BaseModel
     {
-        return await _context.Set<TEntity>().Where(where).PaginationAsync<TEntity, TModel>(pageNumber, pageSize, cancellationToken);
+        return await _context.Set<TEntity>().Where(where).OrderByDescending(a => a.DataCriacao).PaginationAsync<TEntity, TModel>(pageNumber, pageSize, cancellationToken);
     }
 
     public virtual IQueryable<TEntity> AsQueriableTracking(CancellationToken cancellationToken = default)

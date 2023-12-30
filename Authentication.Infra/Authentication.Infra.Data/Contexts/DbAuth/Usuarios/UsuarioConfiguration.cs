@@ -13,7 +13,6 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
         builder.HasKey(u => u.Id);
 
         builder.Property(u => u.Id)
-            .HasMaxLength(50)
             .ValueGeneratedOnAdd()
             .IsRequired();
 
@@ -38,8 +37,8 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
             .IsRequired();
 
         builder.Property(u => u.DataCriacao)
-            .HasDefaultValueSql("getdate()")
-            .ValueGeneratedOnAdd();
+          .HasColumnType("datetime")
+          .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
         builder.Property(u => u.DataAtualizacao);
     }
