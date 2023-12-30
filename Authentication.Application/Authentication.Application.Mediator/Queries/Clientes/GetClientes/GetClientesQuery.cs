@@ -20,5 +20,5 @@ public class GetClientesQuery : IRequest<Result>, IHandler<GetUsuariosQueryHandl
     public string Nome { get; set; }
 
     [FromQuery(Name = "situacao")]
-    public int Situacao { get; set; }
+    public int? Situacao { get; set; }
 }

@@ -3,6 +3,7 @@ using Authentication.Application.Domain.Structure.Models;
 using Authentication.Application.Domain.Structure.Pagination;
 using Authentication.Application.Mediator.Commands.Clientes.PostCliente;
 using Authentication.Application.Mediator.Commands.Clientes.PutCliente;
+using Authentication.Application.Mediator.Queries.Clientes.GeClientesPorId;
 using Authentication.Application.Mediator.Queries.Clientes.GetClientes;
 
 namespace Architecture.WebApi.Endpoints;
@@ -22,6 +23,11 @@ public static class ClientesEndpoint
             async ([FromServices] IMediator mediator, [AsParameters] GetClientesQuery getClientesQuery, CancellationToken cancellationToken) =>
                 await mediator.SendAsync(getClientesQuery, cancellationToken))
             .Authorization<ResponseDto<PagedResult<Cliente>>>();
+
+        clientesEndpoint.MapGet("/{id}",
+            async ([FromServices] IMediator mediator, [AsParameters] GetClientesPorIdQuery getClientesPorId, CancellationToken cancellationToken) =>
+                await mediator.SendAsync(getClientesPorId, cancellationToken))
+            .Authorization<ResponseDto>();
 
         clientesEndpoint.MapPut("/{id}",
             async ([FromServices] IMediator mediator, [AsParameters] PutClienteCommand putClientCommand, CancellationToken cancellationToken) =>

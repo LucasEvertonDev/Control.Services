@@ -65,6 +65,7 @@ public class Startup(IConfiguration configuration)
             c.RegisterSwaggerDefaultConfig(true, appSettings.Swagger.FlowLogin);
         });
 
+        // services.AddSingleton<IAuthorizationHandler, PermissionHandler>()
         services.AddSingleton<AppSettings>(appSettings);
 
         services.AddSingleton<IAuthorizationPolicyProvider, DatabasePolicyProvider>();
@@ -113,8 +114,9 @@ public class Startup(IConfiguration configuration)
                 .WithOpenApi()
                 .AddAuthEndpoints("auth", "Auth")
                 .AddUsuariosEndpoint("usuarios", "Usuarios")
-                .AddClientesEndpoint("clientes", "Clientes")
-                ;
+                .AddClientesEndpoint("clientes", "Clientes");
+
+            endpoints.MapMetrics().RequireAuthorization("ReadMetrics");
         });
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using Authentication.Application.Domain.Structure.Models;
 using Authentication.Application.Domain.Structure.Pagination;
 
 namespace Authentication.Application.Domain.Structure.Repositories;
@@ -17,11 +18,17 @@ public interface IRepository<TEntity>
 
     Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> where, CancellationToken cancellationToken = default);
 
+    Task<TModel> FirstOrDefaultAsync<TModel>(Expression<Func<TEntity, bool>> where, CancellationToken cancellationToken = default)
+        where TModel : BaseModel;
+
     Task<IEnumerable<TEntity>> ToListAsync(Expression<Func<TEntity, bool>> where, CancellationToken cancellationToken = default);
+
+    Task<IEnumerable<TEntity>> ToListAsync(CancellationToken cancellationToken = default);
 
     Task<PagedResult<TEntity>> ToListAsync(int pageNumber, int pageSize, Expression<Func<TEntity, bool>> where, CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<TEntity>> ToListAsync(CancellationToken cancellationToken = default);
+    Task<PagedResult<TModel>> ToListAsync<TModel>(int pageNumber, int pageSize, Expression<Func<TEntity, bool>> where, CancellationToken cancellationToken = default)
+        where TModel : BaseModel;
 
     Task<TEntity> FirstOrDefaultTrackingAsync(Expression<Func<TEntity, bool>> where, CancellationToken cancellationToken = default);
 
