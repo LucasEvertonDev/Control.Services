@@ -116,6 +116,8 @@ public class Startup(IConfiguration configuration)
                 .AddAuthEndpoints("auth", "Auth")
                 .AddUsuariosEndpoint("usuarios", "Usuarios")
                 .AddClientesEndpoint("clientes", "Clientes")
+                .AddServicosEndpoint("servicos", "Servicos");
+                .AddClientesEndpoint("clientes", "Clientes")
                 .AddCustosEndpoint("custos", "Custos");
 
             endpoints.MapMetrics().RequireAuthorization("ReadMetrics");

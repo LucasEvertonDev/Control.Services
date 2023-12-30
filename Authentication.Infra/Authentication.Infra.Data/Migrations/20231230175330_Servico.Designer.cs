@@ -3,6 +3,7 @@ using System;
 using Authentication.Infra.Data.Contexts.DbAuth;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Authentication.Infra.Data.Migrations
 {
     [DbContext(typeof(DbAuthContext))]
-    partial class DbAuthContextModelSnapshot : ModelSnapshot
+    [Migration("20231230175330_Servico")]
+    partial class Servico
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -125,35 +128,6 @@ namespace Authentication.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Servicos", (string)null);
-                });
-
-            modelBuilder.Entity("Authentication.Application.Domain.Contexts.DbAuth.Custos.Custo", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime?>("Data")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("DataAtualizacao")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("DataCriacao")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("Situacao")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Custos");
                 });
 
             modelBuilder.Entity("Authentication.Application.Domain.Contexts.DbAuth.Usuarios.Usuario", b =>

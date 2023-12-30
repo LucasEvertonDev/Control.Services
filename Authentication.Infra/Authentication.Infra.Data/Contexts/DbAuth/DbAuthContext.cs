@@ -2,6 +2,7 @@
 using Authentication.Application.Domain.Contexts.DbAuth.Audits;
 using Authentication.Application.Domain.Contexts.DbAuth.Audits.Enums;
 using Authentication.Application.Domain.Contexts.DbAuth.Clientes;
+using Authentication.Application.Domain.Contexts.DbAuth.Servicos;
 using Authentication.Application.Domain.Contexts.DbAuth.Custos;
 using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Application.Domain.Plugins.JWT.Contants;
@@ -38,6 +39,8 @@ public class DbAuthContext : DbContext
     public virtual DbSet<Audit> Audits { get; set; }
 
     public virtual DbSet<Cliente> Clientes { get; set; }
+
+    public virtual DbSet<Servico> Servicos { get; set; }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
