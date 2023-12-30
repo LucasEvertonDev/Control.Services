@@ -1,4 +1,5 @@
 ﻿using Authentication.Application.Domain.Contexts.DbAuth.Clientes;
+using Authentication.Application.Domain.Contexts.DbAuth.Custos;
 using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Application.Domain.Structure.Repositories;
 
@@ -9,4 +10,6 @@ public interface IUnitOfWorkRepos
     IUsuarioRepository UsuarioRepository { get; }
 
     IRepository<Cliente> ClienteRepository { get; }
+
+    IRepository<Custo> CustoRepository { get; }
 }

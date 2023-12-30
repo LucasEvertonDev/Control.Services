@@ -2,6 +2,7 @@
 using Authentication.Application.Domain.Contexts.DbAuth.Audits;
 using Authentication.Application.Domain.Contexts.DbAuth.Audits.Enums;
 using Authentication.Application.Domain.Contexts.DbAuth.Clientes;
+using Authentication.Application.Domain.Contexts.DbAuth.Custos;
 using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Application.Domain.Plugins.JWT.Contants;
 using Authentication.Application.Domain.Structure.Extensions;
@@ -31,6 +32,8 @@ public class DbAuthContext : DbContext
     }
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
+
+    public virtual DbSet<Custo> Custos { get; set; }
 
     public virtual DbSet<Audit> Audits { get; set; }
 

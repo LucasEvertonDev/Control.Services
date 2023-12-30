@@ -3,6 +3,7 @@ using Architecture.WebApi.Endpoints;
 using Authentication.Application.Domain;
 using Authentication.Application.Domain.Structure.Models;
 using Authentication.Infra.IoC;
+using Authentication.WebApi.EndPoints;
 using Authentication.WebApi.Structure.Filters;
 using Authentication.WebApi.Structure.Middlewares;
 using Authentication.WebApi.Structure.PolicyProviders;
@@ -114,7 +115,8 @@ public class Startup(IConfiguration configuration)
                 .WithOpenApi()
                 .AddAuthEndpoints("auth", "Auth")
                 .AddUsuariosEndpoint("usuarios", "Usuarios")
-                .AddClientesEndpoint("clientes", "Clientes");
+                .AddClientesEndpoint("clientes", "Clientes")
+                .AddCustosEndpoint("custos", "Custos");
 
             endpoints.MapMetrics().RequireAuthorization("ReadMetrics");
         });
