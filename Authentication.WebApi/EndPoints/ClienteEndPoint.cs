@@ -1,4 +1,4 @@
-﻿using Authentication.Application.Domain.Contexts.DbAuth.Clientes;
+﻿using Authentication.Application.Domain.Contexts.DbAuth.Clientes.Results;
 using Authentication.Application.Domain.Structure.Models;
 using Authentication.Application.Domain.Structure.Pagination;
 using Authentication.Application.Mediator.Commands.Clientes.PostCliente;
@@ -22,12 +22,12 @@ public static class ClientesEndpoint
         clientesEndpoint.MapGet($"/{Params.GetRoute<GetClientesQuery>()}",
             async ([FromServices] IMediator mediator, [AsParameters] GetClientesQuery getClientesQuery, CancellationToken cancellationToken) =>
                 await mediator.SendAsync(getClientesQuery, cancellationToken))
-            .Authorization<ResponseDto<PagedResult<Cliente>>>();
+            .Authorization<ResponseDto<PagedResult<ClienteModel>>>();
 
         clientesEndpoint.MapGet("/{id}",
             async ([FromServices] IMediator mediator, [AsParameters] GetClientesPorIdQuery getClientesPorId, CancellationToken cancellationToken) =>
                 await mediator.SendAsync(getClientesPorId, cancellationToken))
-            .Authorization<ResponseDto>();
+            .Authorization<ResponseDto<ClienteModel>>();
 
         clientesEndpoint.MapPut("/{id}",
             async ([FromServices] IMediator mediator, [AsParameters] PutClienteCommand putClientCommand, CancellationToken cancellationToken) =>

@@ -1,4 +1,5 @@
 ﻿using Authentication.Application.Domain.Contexts.DbAuth.Clientes;
+using Authentication.Application.Domain.Contexts.DbAuth.Servicos;
 using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Infra.Data.Contexts.DbAuth;
 using Authentication.Infra.Data.Contexts.DbAuth.Usuarios;
@@ -13,6 +14,7 @@ public class UnitOfWork(
     private IUsuarioRepository _usuarioRepository;
     private List<IDbContextTransaction> transactions;
     private IRepository<Cliente> _clienteRepository;
+    private IRepository<Servico> _servicoRepository;
 
     public IUsuarioRepository UsuarioRepository
     {
@@ -31,6 +33,16 @@ public class UnitOfWork(
             _clienteRepository ??= new BaseRepository<DbAuthContext, Cliente>(serviceProvider);
 
             return _clienteRepository;
+        }
+    }
+
+    public IRepository<Servico> ServicoRepository
+    {
+        get
+        {
+            _servicoRepository ??= new BaseRepository<DbAuthContext, Servico>(serviceProvider);
+
+            return _servicoRepository;
         }
     }
 
