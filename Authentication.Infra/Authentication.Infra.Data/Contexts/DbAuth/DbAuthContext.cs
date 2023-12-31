@@ -2,8 +2,8 @@
 using Authentication.Application.Domain.Contexts.DbAuth.Audits;
 using Authentication.Application.Domain.Contexts.DbAuth.Audits.Enums;
 using Authentication.Application.Domain.Contexts.DbAuth.Clientes;
-using Authentication.Application.Domain.Contexts.DbAuth.Servicos;
 using Authentication.Application.Domain.Contexts.DbAuth.Custos;
+using Authentication.Application.Domain.Contexts.DbAuth.Servicos;
 using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Application.Domain.Plugins.JWT.Contants;
 using Authentication.Application.Domain.Structure.Extensions;

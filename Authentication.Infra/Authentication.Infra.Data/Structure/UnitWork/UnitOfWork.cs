@@ -1,6 +1,6 @@
 ﻿using Authentication.Application.Domain.Contexts.DbAuth.Clientes;
-using Authentication.Application.Domain.Contexts.DbAuth.Servicos;
 using Authentication.Application.Domain.Contexts.DbAuth.Custos;
+using Authentication.Application.Domain.Contexts.DbAuth.Servicos;
 using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Infra.Data.Contexts.DbAuth;
 using Authentication.Infra.Data.Contexts.DbAuth.Usuarios;
