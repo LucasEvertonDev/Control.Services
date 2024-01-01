@@ -19,7 +19,8 @@ public class PostServicoCommandHandler(
 
         var servico = new Servico(
             nome: request.Nome,
-            descricao: request.Descricao);
+            descricao: request.Descricao,
+            situacao: request.Situacao);
 
         if (servico.HasFailures())
         {

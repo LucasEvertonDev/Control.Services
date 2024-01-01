@@ -4,4 +4,6 @@ public class PostServicoCommand : IRequest<Result>, IHandler<PostServicoCommandH
     public string Nome { get; set; }
 
     public string Descricao { get; set; }
+
+    public int Situacao { get; set; }
 }

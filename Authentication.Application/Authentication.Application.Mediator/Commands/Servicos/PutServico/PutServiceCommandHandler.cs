@@ -20,7 +20,8 @@ public class PutServiceCommandHandler(
 
         servico.UpdateServico(
             nome: request.Body.Nome,
-            descricao: request.Body.Descricao);
+            descricao: request.Body.Descricao,
+            situacao: request.Body.Situacao);
 
         if (servico.HasFailures())
         {

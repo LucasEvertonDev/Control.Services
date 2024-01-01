@@ -18,4 +18,6 @@ public class ServicoEdit
     public string Nome { get; set; }
 
     public string Descricao { get; set; }
+
+    public int Situacao { get; set; }
 }
