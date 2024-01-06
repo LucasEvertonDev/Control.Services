@@ -4,7 +4,7 @@ using Authentication.Infra.Data.Structure.Exceptions;
 namespace Authentication.Infra.Data.Structure.Repositories;
 
 public class BaseRepository<TContext, TEntity> : IRepository<TEntity>
-    where TEntity : BaseEntity<TEntity>
+    where TEntity : BasicEntity<TEntity>
     where TContext : DbContext
 {
     private readonly TContext _context;

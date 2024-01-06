@@ -1,5 +1,7 @@
-﻿using Authentication.Application.Domain.Contexts.DbAuth.Clientes;
+﻿using Authentication.Application.Domain.Contexts.DbAuth.Atendimentos;
+using Authentication.Application.Domain.Contexts.DbAuth.Clientes;
 using Authentication.Application.Domain.Contexts.DbAuth.Custos;
+using Authentication.Application.Domain.Contexts.DbAuth.MapAtendimentosServicos;
 using Authentication.Application.Domain.Contexts.DbAuth.Servicos;
 using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Infra.Data.Contexts.DbAuth;
@@ -17,6 +19,8 @@ public class UnitOfWork(
     private IRepository<Cliente> _clienteRepository;
     private IRepository<Servico> _servicoRepository;
     private IRepository<Custo> _custoRepository;
+    private IRepository<Atendimento> _atendimentoRepository;
+    private IRepository<MapAtendimentoServico> _mapAtendimentoServicoRepository;
 
     public IUsuarioRepository UsuarioRepository
     {
@@ -54,6 +58,24 @@ public class UnitOfWork(
         {
             _custoRepository ??= new BaseRepository<DbAuthContext, Custo>(serviceProvider);
             return _custoRepository;
+        }
+    }
+
+    public IRepository<Atendimento> AtendimentoRepository
+    {
+        get
+        {
+            _atendimentoRepository ??= new BaseRepository<DbAuthContext, Atendimento>(serviceProvider);
+            return _atendimentoRepository;
+        }
+    }
+
+    public IRepository<MapAtendimentoServico> MapAtendimentoServicoRepository
+    {
+        get
+        {
+            _mapAtendimentoServicoRepository ??= new BaseRepository<DbAuthContext, MapAtendimentoServico>(serviceProvider);
+            return _mapAtendimentoServicoRepository;
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using Authentication.Application.Domain.Contexts.DbAuth.Servicos;
+using Authentication.Application.Domain.Structure.Enuns;
 using Authentication.Application.Mediator.Commands.Servicos.PutServico;
 using Notification.Extensions;
 
@@ -21,7 +22,7 @@ public class PutServiceCommandHandler(
         servico.UpdateServico(
             nome: request.Body.Nome,
             descricao: request.Body.Descricao,
-            situacao: request.Body.Situacao);
+            situacao: (Situacao)request.Body.Situacao);
 
         if (servico.HasFailures())
         {

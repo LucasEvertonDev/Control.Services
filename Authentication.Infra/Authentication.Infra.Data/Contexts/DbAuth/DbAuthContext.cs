@@ -1,8 +1,10 @@
 ﻿using Authentication.Application.Domain;
+using Authentication.Application.Domain.Contexts.DbAuth.Atendimentos;
 using Authentication.Application.Domain.Contexts.DbAuth.Audits;
 using Authentication.Application.Domain.Contexts.DbAuth.Audits.Enums;
 using Authentication.Application.Domain.Contexts.DbAuth.Clientes;
 using Authentication.Application.Domain.Contexts.DbAuth.Custos;
+using Authentication.Application.Domain.Contexts.DbAuth.MapAtendimentosServicos;
 using Authentication.Application.Domain.Contexts.DbAuth.Servicos;
 using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Application.Domain.Plugins.JWT.Contants;
@@ -17,10 +19,6 @@ public class DbAuthContext : DbContext
 {
     private readonly AppSettings _appSettings;
     private readonly IHttpContextAccessor _httpContextAccessor;
-
-    public DbAuthContext()
-    {
-    }
 
     public DbAuthContext(
         DbContextOptions<DbAuthContext> options,
@@ -41,6 +39,10 @@ public class DbAuthContext : DbContext
     public virtual DbSet<Cliente> Clientes { get; set; }
 
     public virtual DbSet<Servico> Servicos { get; set; }
+
+    public virtual DbSet<Atendimento> Atendimentos { get; set; }
+
+    public virtual DbSet<MapAtendimentoServico> MapAtendimentosServicos { get; set; }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {

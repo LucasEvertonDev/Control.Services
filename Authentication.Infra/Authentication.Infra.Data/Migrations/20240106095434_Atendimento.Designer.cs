@@ -3,6 +3,7 @@ using System;
 using Authentication.Infra.Data.Contexts.DbAuth;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Authentication.Infra.Data.Migrations
 {
     [DbContext(typeof(DbAuthContext))]
-    partial class DbAuthContextModelSnapshot : ModelSnapshot
+    [Migration("20240106095434_Atendimento")]
+    partial class Atendimento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

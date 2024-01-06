@@ -8,7 +8,7 @@ using Authentication.Application.Mediator.Queries.Servicos.GetServicos;
 
 namespace Authentication.WebApi.EndPoints;
 
-public static class ServicoEndpoint
+public static class ServicoEndPoints
 {
     public static IEndpointRouteBuilder AddServicosEndpoint(this IEndpointRouteBuilder app, string route, string tag)
     {

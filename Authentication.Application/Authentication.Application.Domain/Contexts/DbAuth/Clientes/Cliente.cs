@@ -1,4 +1,5 @@
-﻿using Authentication.Application.Domain.Structure.Enuns;
+﻿using Authentication.Application.Domain.Contexts.DbAuth.Atendimentos;
+using Authentication.Application.Domain.Structure.Enuns;
 
 namespace Authentication.Application.Domain.Contexts.DbAuth.Clientes;
 public class Cliente : BaseEntity<Cliente>
@@ -21,6 +22,8 @@ public class Cliente : BaseEntity<Cliente>
     public DateTime? DataNascimento { get; private set; }
 
     public string Telefone { get; private set; }
+
+    public virtual ICollection<Atendimento> Atendimentos { get; private set; }
 
     public void UpdateUsuario(string cpf, string nome, DateTime? dataNascimento, string telefone, int situacao)
     {

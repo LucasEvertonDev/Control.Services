@@ -1,5 +1,7 @@
-﻿using Authentication.Application.Domain.Contexts.DbAuth.Clientes;
+﻿using Authentication.Application.Domain.Contexts.DbAuth.Atendimentos;
+using Authentication.Application.Domain.Contexts.DbAuth.Clientes;
 using Authentication.Application.Domain.Contexts.DbAuth.Custos;
+using Authentication.Application.Domain.Contexts.DbAuth.MapAtendimentosServicos;
 using Authentication.Application.Domain.Contexts.DbAuth.Servicos;
 using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Application.Domain.Structure.Repositories;
@@ -15,4 +17,8 @@ public interface IUnitOfWorkRepos
     IRepository<Servico> ServicoRepository { get; }
 
     IRepository<Custo> CustoRepository { get; }
+
+    IRepository<Atendimento> AtendimentoRepository { get; }
+
+    IRepository<MapAtendimentoServico> MapAtendimentoServicoRepository { get; }
 }

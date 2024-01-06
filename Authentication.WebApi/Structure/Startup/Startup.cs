@@ -117,7 +117,8 @@ public class Startup(IConfiguration configuration)
                 .AddUsuariosEndpoint("usuarios", "Usuarios")
                 .AddClientesEndpoint("clientes", "Clientes")
                 .AddServicosEndpoint("servicos", "Servicos")
-                .AddCustosEndpoint("custos", "Custos");
+                .AddCustosEndpoint("custos", "Custos")
+                .AddAtendimentosEndpoint("atendimentos", "Atendimentos");
 
             endpoints.MapMetrics().RequireAuthorization("ReadMetrics");
         });

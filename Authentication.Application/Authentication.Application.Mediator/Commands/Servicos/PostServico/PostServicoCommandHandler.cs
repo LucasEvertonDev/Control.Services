@@ -1,4 +1,5 @@
 ﻿using Authentication.Application.Domain.Contexts.DbAuth.Servicos;
+using Authentication.Application.Domain.Structure.Enuns;
 using Notification.Extensions;
 
 namespace Authentication.Application.Mediator.Commands.Servicos.PostServico;
@@ -20,7 +21,7 @@ public class PostServicoCommandHandler(
         var servico = new Servico(
             nome: request.Nome,
             descricao: request.Descricao,
-            situacao: request.Situacao);
+            situacao: (Situacao)request.Situacao);
 
         if (servico.HasFailures())
         {
