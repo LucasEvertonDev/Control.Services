@@ -4,11 +4,11 @@ public class GetAtendimentosQueryHandler(IServiceProvider serviceProvider) : Bas
     public async Task<Result> Handle(GetAtendimentosQuery request, CancellationToken cancellationToken)
     {
         var atendimentos = await UnitOfWork.AtendimentoRepository.GetAtendimentos(
-            dataInicio: null,
-            dataFim: null,
-            clienteId: null,
-            pageNumber: 1,
-            pageSize: 100,
+            dataInicio: request.DataInicial,
+            dataFim: request.DataFinal,
+            clienteId: request.ClienteId,
+            pageNumber: request.PageNumber,
+            pageSize: request.PageSize,
             cancellationToken: cancellationToken);
 
         return Result.Ok(atendimentos);

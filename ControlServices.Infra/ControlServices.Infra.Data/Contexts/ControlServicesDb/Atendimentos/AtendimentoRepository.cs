@@ -34,8 +34,8 @@ public class AtendimentoRepository(IServiceProvider serviceProvider) : BaseRepos
     public async Task<PagedResult<AtendimentoModel>> GetAtendimentos(DateTime? dataInicio, DateTime? dataFim, Guid? clienteId, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
     {
         return await Context.Atendimentos
-            .Where(atendimento => (!dataInicio.HasValue || atendimento.Data.Date >= dataInicio.Value)
-                && (!dataInicio.HasValue || atendimento.Data.Date <= dataFim.Value)
+            .Where(atendimento => (!dataInicio.HasValue || atendimento.Data.Date >= dataInicio.Value.Date)
+                && (!dataInicio.HasValue || atendimento.Data.Date <= dataFim.Value.Date)
                 && (!clienteId.HasValue || atendimento.ClienteId == clienteId.Value))
             .Include(atendimento => atendimento.Cliente)
             .Include(atendimento => atendimento.MapAtendimentosServicos)
