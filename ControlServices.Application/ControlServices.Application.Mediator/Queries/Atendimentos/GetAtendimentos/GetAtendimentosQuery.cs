@@ -19,5 +19,5 @@ public class GetAtendimentosQuery : IRequest<Result>, IHandler<GetAtendimentosQu
     public DateTime? DataFinal { get; set; }
 
     [FromQuery(Name = "clienteid")]
-    public Guid ClienteId { get; set; }
+    public Guid? ClienteId { get; set; }
 }
