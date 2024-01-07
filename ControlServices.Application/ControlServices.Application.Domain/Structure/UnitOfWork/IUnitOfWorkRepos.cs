@@ -1,9 +1,9 @@
-﻿using ControlServices.Application.Domain.Contexts.DbAuth.Atendimentos;
-using ControlServices.Application.Domain.Contexts.DbAuth.Clientes;
-using ControlServices.Application.Domain.Contexts.DbAuth.Custos;
-using ControlServices.Application.Domain.Contexts.DbAuth.MapAtendimentosServicos;
-using ControlServices.Application.Domain.Contexts.DbAuth.Servicos;
-using ControlServices.Application.Domain.Contexts.DbAuth.Usuarios;
+﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Atendimentos;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.Clientes;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.Custos;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.MapAtendimentosServicos;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.Servicos;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.Usuarios;
 using ControlServices.Application.Domain.Structure.Repositories;
 
 namespace ControlServices.Application.Domain.Structure.UnitOfWork;

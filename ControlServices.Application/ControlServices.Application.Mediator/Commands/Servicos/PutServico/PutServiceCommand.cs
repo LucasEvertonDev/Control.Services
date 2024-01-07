@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using ControlServices.Application.Mediator.Commands.Servicos.PostServico;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControlServices.Application.Mediator.Commands.Servicos.PutServico;

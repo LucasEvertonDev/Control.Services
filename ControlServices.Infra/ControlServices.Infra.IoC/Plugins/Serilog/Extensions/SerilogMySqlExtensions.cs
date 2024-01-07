@@ -31,7 +31,7 @@ public static class SerilogMySqlExtensions
         // Para customizar colunas tem que ir lá no github e customizar mas o código é bastante bossal molezinha
         Log.Logger = new LoggerConfiguration()
             .Enrich.FromLogContext()
-            .Enrich.With<UserEnricher>()
+            .Enrich.With<UserEnricher>()1
             .WriteTo.MySQL(
                 appSettings.ConnectionStrings.DefaultConnection,
                 "AppLogs",

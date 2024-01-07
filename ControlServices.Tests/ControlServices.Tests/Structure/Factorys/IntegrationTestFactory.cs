@@ -1,5 +1,5 @@
 ﻿using ControlServices.Application.Domain.Structure.UnitOfWork;
-using ControlServices.Infra.Data.Contexts.DbAuth;
+using ControlServices.Infra.Data.Contexts.ControlServicesDb;
 using ControlServices.Infra.Data.Structure.UnitWork;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -16,7 +16,7 @@ public class IntegrationTestInMemoryDbFactory<TStartup> : WebApplicationFactory<
         builder.UseEnvironment("TestInMemoryDb")
             .ConfigureServices(services =>
             {
-                var descritor = services.SingleOrDefault(d => d.ServiceType == typeof(DbAuthContext));
+                var descritor = services.SingleOrDefault(d => d.ServiceType == typeof(ControlServicesDbContext));
                 if (descritor is not null)
                 {
                     services.Remove(descritor);
@@ -24,7 +24,7 @@ public class IntegrationTestInMemoryDbFactory<TStartup> : WebApplicationFactory<
 
                 var provider = services.AddEntityFrameworkInMemoryDatabase().BuildServiceProvider();
 
-                services.AddDbContext<DbAuthContext>(options =>
+                services.AddDbContext<ControlServicesDbContext>(options =>
                 {
                     options.UseInMemoryDatabase("InMemoryDbForTesting");
                     options.UseInternalServiceProvider(provider);
@@ -38,7 +38,7 @@ public class IntegrationTestInMemoryDbFactory<TStartup> : WebApplicationFactory<
                 using var scope = serviceProvider.CreateScope();
                 var scopeService = scope.ServiceProvider;
 
-                var database = scopeService.GetRequiredService<DbAuthContext>();
+                var database = scopeService.GetRequiredService<ControlServicesDbContext>();
 
                 database.Database.EnsureDeleted();
             });

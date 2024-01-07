@@ -1,6 +1,4 @@
-﻿using ControlServices.Application.Mediator.Queries.Usuarios.GetUsuarioQuerry;
-
-namespace ControlServices.Application.Mediator.Queries.Usuarios.GetUsuarioQuery;
+﻿namespace ControlServices.Application.Mediator.Queries.Usuarios.GetUsuario;
 public class GetUsuariosQueryHandler(IServiceProvider serviceProvider) : BaseHandler(serviceProvider), IRequestHandler<GetUsuariosQuery, Result>
 {
     public async Task<Result> Handle(GetUsuariosQuery request, CancellationToken cancellationToken)

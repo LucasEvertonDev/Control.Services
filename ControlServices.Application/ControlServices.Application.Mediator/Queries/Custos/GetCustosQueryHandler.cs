@@ -1,4 +1,4 @@
-﻿using ControlServices.Application.Domain.Contexts.DbAuth.Custos.Results;
+﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Custos.Results;
 
 namespace ControlServices.Application.Mediator.Queries.Custos;
 public class GetCustosQueryHandler(IServiceProvider serviceProvider) : BaseHandler(serviceProvider), IRequestHandler<GetCustosQuery, Result>

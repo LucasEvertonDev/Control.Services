@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using Architecture.WebApi.Endpoints;
 using ControlServices.Application.Domain;
 using ControlServices.Application.Domain.Structure.Models;
 using ControlServices.Infra.IoC;

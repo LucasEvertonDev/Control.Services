@@ -1,4 +1,4 @@
-﻿using ControlServices.Application.Domain.Contexts.DbAuth.Clientes.Results;
+﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Clientes.Results;
 
 namespace ControlServices.Application.Mediator.Queries.Clientes.GeClientesPorId;
 

@@ -1,4 +1,4 @@
-﻿using ControlServices.Application.Domain.Contexts.DbAuth.Clientes.Results;
+﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Clientes.Results;
 using ControlServices.Application.Domain.Structure.Models;
 using ControlServices.Application.Domain.Structure.Pagination;
 using ControlServices.Application.Mediator.Commands.Clientes.PostCliente;
@@ -6,7 +6,7 @@ using ControlServices.Application.Mediator.Commands.Clientes.PutCliente;
 using ControlServices.Application.Mediator.Queries.Clientes.GeClientesPorId;
 using ControlServices.Application.Mediator.Queries.Clientes.GetClientes;
 
-namespace Architecture.WebApi.Endpoints;
+namespace ControlServices.WebApi.EndPoints;
 
 public static class ClientesEndpoint
 {

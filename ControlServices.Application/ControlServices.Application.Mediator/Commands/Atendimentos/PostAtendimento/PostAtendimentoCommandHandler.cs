@@ -1,6 +1,6 @@
-﻿using ControlServices.Application.Domain.Contexts.DbAuth.Atendimentos;
-using ControlServices.Application.Domain.Contexts.DbAuth.Atendimentos.Enuns;
-using ControlServices.Application.Domain.Contexts.DbAuth.MapAtendimentosServicos;
+﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Atendimentos;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.Atendimentos.Enuns;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.MapAtendimentosServicos;
 using Notification.Extensions;
 
 namespace ControlServices.Application.Mediator.Commands.Atendimentos.PostAtendimento;

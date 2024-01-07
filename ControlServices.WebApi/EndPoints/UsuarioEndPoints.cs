@@ -1,12 +1,12 @@
-﻿using ControlServices.Application.Domain.Contexts.DbAuth.Usuarios.Results;
+﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Usuarios.Results;
 using ControlServices.Application.Domain.Structure.Models;
 using ControlServices.Application.Domain.Structure.Pagination;
 using ControlServices.Application.Mediator.Commands.Usuarios.DeleteUsuario;
 using ControlServices.Application.Mediator.Commands.Usuarios.PostUsuario;
 using ControlServices.Application.Mediator.Commands.Usuarios.PutUsuario;
-using ControlServices.Application.Mediator.Queries.Usuarios.GetUsuarioQuerry;
+using ControlServices.Application.Mediator.Queries.Usuarios.GetUsuario;
 
-namespace Architecture.WebApi.Endpoints;
+namespace ControlServices.WebApi.EndPoints;
 
 public static class UsuariosEndpoints
 {

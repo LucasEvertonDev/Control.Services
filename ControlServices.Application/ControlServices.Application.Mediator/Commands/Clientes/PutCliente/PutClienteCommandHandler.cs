@@ -1,4 +1,4 @@
-﻿using ControlServices.Application.Domain.Contexts.DbAuth.Clientes;
+﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Clientes;
 using Notification.Extensions;
 
 namespace ControlServices.Application.Mediator.Commands.Clientes.PutCliente;

@@ -1,4 +1,4 @@
-﻿using ControlServices.Application.Domain.Contexts.DbAuth.Servicos;
+﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Servicos;
 using ControlServices.Application.Domain.Structure.Enuns;
 using Notification.Extensions;
 

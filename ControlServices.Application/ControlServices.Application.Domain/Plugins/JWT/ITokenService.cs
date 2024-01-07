@@ -1,4 +1,4 @@
-﻿using ControlServices.Application.Domain.Contexts.DbAuth.Usuarios;
+﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Usuarios;
 
 namespace ControlServices.Application.Domain.Plugins.JWT;
 

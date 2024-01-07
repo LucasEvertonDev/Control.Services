@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using ControlServices.Application.Domain;
-using ControlServices.Application.Domain.Contexts.DbAuth.Usuarios;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.Usuarios;
 using ControlServices.Application.Domain.Plugins.JWT;
 using ControlServices.Application.Domain.Plugins.JWT.Contants;
 using Microsoft.IdentityModel.Tokens;

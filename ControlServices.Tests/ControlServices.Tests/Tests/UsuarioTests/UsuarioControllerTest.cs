@@ -1,5 +1,4 @@
 ﻿using ControlServices.Application.Domain;
-using ControlServices.Application.Domain.Contexts.DbAuth.Usuarios;
 using ControlServices.Application.Mediator.Commands.Auth.PostLogin;
 using ControlServices.Application.Mediator.Commands.Auth.PostRefreshToken;
 using ControlServices.Application.Mediator.Commands.Usuarios.PostUsuario;
@@ -12,6 +11,7 @@ using Bogus;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Notification.Notifications.Enum;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.Usuarios;
 
 namespace ControlServices.Tests.Tests.UsuarioTests;
 public class UsuarioControllerTest : BaseTestInDatabase

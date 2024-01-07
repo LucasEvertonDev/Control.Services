@@ -1,9 +1,9 @@
-﻿using ControlServices.Application.Domain.Contexts.DbAuth.Usuarios.Results;
+﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Usuarios.Results;
 using ControlServices.Application.Domain.Structure.Models;
 using ControlServices.Application.Mediator.Commands.Auth.PostLogin;
 using ControlServices.Application.Mediator.Commands.Auth.PostRefreshToken;
 
-namespace Architecture.WebApi.Endpoints;
+namespace ControlServices.WebApi.EndPoints;
 
 public static class AuthEndpoints
 {

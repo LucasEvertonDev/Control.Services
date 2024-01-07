@@ -1,19 +1,19 @@
-﻿using ControlServices.Application.Domain.Contexts.DbAuth.Atendimentos;
-using ControlServices.Application.Domain.Contexts.DbAuth.Clientes;
-using ControlServices.Application.Domain.Contexts.DbAuth.Custos;
-using ControlServices.Application.Domain.Contexts.DbAuth.MapAtendimentosServicos;
-using ControlServices.Application.Domain.Contexts.DbAuth.Servicos;
-using ControlServices.Application.Domain.Contexts.DbAuth.Usuarios;
-using ControlServices.Infra.Data.Contexts.DbAuth;
-using ControlServices.Infra.Data.Contexts.DbAuth.Atendimentos;
-using ControlServices.Infra.Data.Contexts.DbAuth.Usuarios;
+﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Atendimentos;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.Clientes;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.Custos;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.MapAtendimentosServicos;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.Servicos;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.Usuarios;
+using ControlServices.Infra.Data.Contexts.ControlServicesDb;
+using ControlServices.Infra.Data.Contexts.ControlServicesDb.Atendimentos;
+using ControlServices.Infra.Data.Contexts.ControlServicesDb.Usuarios;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace ControlServices.Infra.Data.Structure.UnitWork;
 
 public class UnitOfWork(
     IServiceProvider serviceProvider,
-    DbAuthContext dbAuthContext) : IUnitOfWorkTransaction
+    ControlServicesDbContext controlServicesDbContext) : IUnitOfWorkTransaction
 {
     private IUsuarioRepository _usuarioRepository;
     private List<IDbContextTransaction> transactions;
@@ -37,7 +37,7 @@ public class UnitOfWork(
     {
         get
         {
-            _clienteRepository ??= new BaseRepository<DbAuthContext, Cliente>(serviceProvider);
+            _clienteRepository ??= new BaseRepository<ControlServicesDbContext, Cliente>(serviceProvider);
 
             return _clienteRepository;
         }
@@ -47,7 +47,7 @@ public class UnitOfWork(
     {
         get
         {
-            _servicoRepository ??= new BaseRepository<DbAuthContext, Servico>(serviceProvider);
+            _servicoRepository ??= new BaseRepository<ControlServicesDbContext, Servico>(serviceProvider);
 
             return _servicoRepository;
         }
@@ -57,7 +57,7 @@ public class UnitOfWork(
     {
         get
         {
-            _custoRepository ??= new BaseRepository<DbAuthContext, Custo>(serviceProvider);
+            _custoRepository ??= new BaseRepository<ControlServicesDbContext, Custo>(serviceProvider);
             return _custoRepository;
         }
     }
@@ -75,7 +75,7 @@ public class UnitOfWork(
     {
         get
         {
-            _mapAtendimentoServicoRepository ??= new BaseRepository<DbAuthContext, MapAtendimentoServico>(serviceProvider);
+            _mapAtendimentoServicoRepository ??= new BaseRepository<ControlServicesDbContext, MapAtendimentoServico>(serviceProvider);
             return _mapAtendimentoServicoRepository;
         }
     }
@@ -104,7 +104,7 @@ public class UnitOfWork(
 
     private async Task OpenTransaction(CancellationToken cancellationToken = default)
     {
-        transactions.Add(await dbAuthContext.Database.BeginTransactionAsync(cancellationToken));
+        transactions.Add(await controlServicesDbContext.Database.BeginTransactionAsync(cancellationToken));
     }
 
     private async Task CommitTransaction(CancellationToken cancellationToken = default)

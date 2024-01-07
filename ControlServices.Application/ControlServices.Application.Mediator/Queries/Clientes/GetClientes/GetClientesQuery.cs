@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using ControlServices.Application.Mediator.Queries.Usuarios.GetUsuarioQuery;
+using ControlServices.Application.Mediator.Queries.Usuarios.GetUsuario;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControlServices.Application.Mediator.Queries.Clientes.GetClientes;

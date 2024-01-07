@@ -1,9 +1,9 @@
 ﻿using System.Text.Json;
-using ControlServices.Application.Domain.Contexts.DbAuth.Audits;
-using ControlServices.Application.Domain.Contexts.DbAuth.Audits.Enums;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.Audits;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.Audits.Enums;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace ControlServices.Infra.Data.Structure.Log;
+namespace ControlServices.Infra.Data.Structure.AuditLog;
 public class AuditEntry
 {
     public AuditEntry(EntityEntry entry) => Entry = entry;

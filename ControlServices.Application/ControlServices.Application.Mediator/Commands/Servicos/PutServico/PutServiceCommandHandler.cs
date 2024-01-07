@@ -1,9 +1,8 @@
-﻿using ControlServices.Application.Domain.Contexts.DbAuth.Servicos;
+﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Servicos;
 using ControlServices.Application.Domain.Structure.Enuns;
-using ControlServices.Application.Mediator.Commands.Servicos.PutServico;
 using Notification.Extensions;
 
-namespace ControlServices.Application.Mediator.Commands.Servicos.PostServico;
+namespace ControlServices.Application.Mediator.Commands.Servicos.PutServico;
 
 public class PutServiceCommandHandler(
     IServiceProvider serviceProvider) : BaseHandler(serviceProvider), IRequestHandler<PutServiceCommand, Result>

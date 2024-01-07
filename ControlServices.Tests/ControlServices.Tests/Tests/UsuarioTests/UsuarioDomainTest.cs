@@ -1,5 +1,4 @@
-﻿using ControlServices.Application.Domain.Contexts.DbAuth.Usuarios;
-using ControlServices.Application.Domain.Plugins.Cryptography;
+﻿using ControlServices.Application.Domain.Plugins.Cryptography;
 using ControlServices.Tests.Structure;
 using ControlServices.Tests.Structure.Attribute;
 using ControlServices.Tests.Structure.Factorys;
@@ -8,6 +7,7 @@ using Bogus;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Notification.Extensions;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.Usuarios;
 
 namespace ControlServices.Tests.Tests.UsuarioTests;
 public class UsuarioDomainTest : BaseTestInMemoryDb

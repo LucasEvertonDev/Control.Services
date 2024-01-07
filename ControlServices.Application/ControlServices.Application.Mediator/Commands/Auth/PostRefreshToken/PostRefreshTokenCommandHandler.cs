@@ -1,4 +1,4 @@
-﻿using ControlServices.Application.Domain.Contexts.DbAuth.Usuarios.Results;
+﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Usuarios.Results;
 using ControlServices.Application.Domain.Plugins.JWT.Contants;
 using ControlServices.Application.Domain.Structure.Extensions;
 

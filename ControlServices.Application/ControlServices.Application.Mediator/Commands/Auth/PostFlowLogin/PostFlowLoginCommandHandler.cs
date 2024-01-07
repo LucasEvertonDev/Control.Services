@@ -1,4 +1,4 @@
-﻿using ControlServices.Application.Domain.Contexts.DbAuth.Usuarios.Results;
+﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Usuarios.Results;
 using ControlServices.Application.Domain.Plugins.Cryptography;
 
 namespace ControlServices.Application.Mediator.Commands.Auth.PostFlowLogin;

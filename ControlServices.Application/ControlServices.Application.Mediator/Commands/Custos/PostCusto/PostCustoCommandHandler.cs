@@ -1,4 +1,4 @@
-﻿using ControlServices.Application.Domain.Contexts.DbAuth.Custos;
+﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Custos;
 using Notification.Extensions;
 
 namespace ControlServices.Application.Mediator.Commands.Custos.PostCusto;

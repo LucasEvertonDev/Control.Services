@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel;
-using ControlServices.Application.Mediator.Queries.Usuarios.GetUsuarioQuery;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ControlServices.Application.Mediator.Queries.Usuarios.GetUsuarioQuerry;
+namespace ControlServices.Application.Mediator.Queries.Usuarios.GetUsuario;
 public class GetUsuariosQuery : IRequest<Result>, IHandler<GetUsuariosQueryHandler>
 {
     [DefaultValue("1")]

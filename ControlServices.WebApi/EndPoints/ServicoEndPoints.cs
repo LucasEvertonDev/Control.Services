@@ -1,4 +1,4 @@
-﻿using ControlServices.Application.Domain.Contexts.DbAuth.Servicos.Results;
+﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Servicos.Results;
 using ControlServices.Application.Domain.Structure.Models;
 using ControlServices.Application.Domain.Structure.Pagination;
 using ControlServices.Application.Mediator.Commands.Servicos.PostServico;
