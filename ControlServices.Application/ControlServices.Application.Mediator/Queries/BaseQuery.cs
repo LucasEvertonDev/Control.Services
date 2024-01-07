@@ -1,0 +1,1 @@
+﻿namespace ControlServices.Application.Mediator.Queries;

@@ -23,9 +23,9 @@ services:
     expose:
       - 3306
 
-  authentication.webapi_auth:
-    image: authentication.webapi_auth
-    container_name: authentication.webapi_auth
+  ControlServices.webapi_auth:
+    image: ControlServices.webapi_auth
+    container_name: ControlServices.webapi_auth
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings:DefaultConnection=server=mysql;port=3306;userid=root;password=root;database=DbAuth;"
@@ -40,7 +40,7 @@ services:
 
     build:
       context: .
-      dockerfile: ./Authentication.WebApi/Dockerfile
+      dockerfile: ./ControlServices.WebApi/Dockerfile
     ports:
       - '7028:8080'
     depends_on:
