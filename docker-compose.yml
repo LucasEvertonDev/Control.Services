@@ -23,12 +23,12 @@ services:
     expose:
       - 3306
 
-  ControlServices.webapi_auth:
-    image: ControlServices.webapi_auth
-    container_name: ControlServices.webapi_auth
+  controlservices.webapi_auth:
+    image: controlservices.webapi_auth
+    container_name: controlservices.webapi_auth
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings:DefaultConnection=server=mysql;port=3306;userid=root;password=root;database=DbAuth;"
+      - "ConnectionStrings:DefaultConnection=server=mysql;port=3306;userid=root;password=root;database=ControlServicesDb;"
       - "Jwt:Key=15e0e0beaaac6edb63dc815b5a732481ef2ff6fc7ee412ecbdd43d989f121069"
       - "Jwt:ExpireInMinutes=60"
       - "Logging:LogLevel:SerilogDb=Warning"

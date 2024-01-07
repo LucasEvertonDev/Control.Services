@@ -17,7 +17,7 @@ public static class AtendimentosEndPoints
                  await mediator.SendAsync(postAtendimentoCommand, cancellationToken))
             .Authorization<ResponseDto>();
 
-        atendimentosEndPoint.MapGet("/",
+        atendimentosEndPoint.MapGet($"/{Params.GetRoute<GetAtendimentosQuery>()}",
           async ([FromServices] IMediator mediator, [AsParameters] GetAtendimentosQuery getAtendimentosQuery, CancellationToken cancellationToken) =>
                await mediator.SendAsync(getAtendimentosQuery, cancellationToken))
           .Authorization<ResponseDto<PagedResult<AtendimentoModel>>>();
