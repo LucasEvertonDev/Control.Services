@@ -18,7 +18,7 @@ public interface IUnitOfWorkRepos
 
     IRepository<Custo> CustoRepository { get; }
 
-    IRepository<Atendimento> AtendimentoRepository { get; }
+    IAtendimentoRepository AtendimentoRepository { get; }
 
     IRepository<MapAtendimentoServico> MapAtendimentoServicoRepository { get; }
 }

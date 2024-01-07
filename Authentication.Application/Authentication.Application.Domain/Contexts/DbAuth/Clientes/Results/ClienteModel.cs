@@ -15,7 +15,7 @@ public class ClienteModel : BaseModel
 
     public int Situacao { get; protected set; }
 
-    public override BaseModel FromEntity(IEntity entity)
+    public override ClienteModel FromEntity(IEntity entity)
     {
         var cliente = (Cliente)entity;
 

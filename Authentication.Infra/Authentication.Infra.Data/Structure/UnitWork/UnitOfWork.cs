@@ -5,6 +5,7 @@ using Authentication.Application.Domain.Contexts.DbAuth.MapAtendimentosServicos;
 using Authentication.Application.Domain.Contexts.DbAuth.Servicos;
 using Authentication.Application.Domain.Contexts.DbAuth.Usuarios;
 using Authentication.Infra.Data.Contexts.DbAuth;
+using Authentication.Infra.Data.Contexts.DbAuth.Atendimentos;
 using Authentication.Infra.Data.Contexts.DbAuth.Usuarios;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -19,7 +20,7 @@ public class UnitOfWork(
     private IRepository<Cliente> _clienteRepository;
     private IRepository<Servico> _servicoRepository;
     private IRepository<Custo> _custoRepository;
-    private IRepository<Atendimento> _atendimentoRepository;
+    private IAtendimentoRepository _atendimentoRepository;
     private IRepository<MapAtendimentoServico> _mapAtendimentoServicoRepository;
 
     public IUsuarioRepository UsuarioRepository
@@ -61,11 +62,11 @@ public class UnitOfWork(
         }
     }
 
-    public IRepository<Atendimento> AtendimentoRepository
+    public IAtendimentoRepository AtendimentoRepository
     {
         get
         {
-            _atendimentoRepository ??= new BaseRepository<DbAuthContext, Atendimento>(serviceProvider);
+            _atendimentoRepository ??= new AtendimentoRepository(serviceProvider);
             return _atendimentoRepository;
         }
     }
