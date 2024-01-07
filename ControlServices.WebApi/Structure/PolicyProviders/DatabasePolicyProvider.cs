@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.ControlServices.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ControlServices.WebApi.Structure.PolicyProviders;
@@ -7,7 +7,7 @@ public class DatabasePolicyProvider(IHttpContextAccessor httpContextAccessor) : 
 {
     // Quando não tem nada conforme documentação da microsoft só validar se está logado
     public Task<AuthorizationPolicy> GetDefaultPolicyAsync() =>
-          Task.FromResult(new AuthorizationPolicyBuilder(JwtBearerDefaults.ControlServicesScheme).RequireAuthenticatedUser().Build());
+          Task.FromResult(new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme).RequireAuthenticatedUser().Build());
 
     public Task<AuthorizationPolicy> GetFallbackPolicyAsync() =>
         Task.FromResult<AuthorizationPolicy>(null);

@@ -7,7 +7,7 @@ using ControlServices.WebApi.EndPoints;
 using ControlServices.WebApi.Structure.Filters;
 using ControlServices.WebApi.Structure.Middlewares;
 using ControlServices.WebApi.Structure.PolicyProviders;
-using Microsoft.AspNetCore.ControlServices.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Prometheus;
@@ -41,10 +41,10 @@ public class Startup(IConfiguration configuration)
         // Binding model
         services.Configure<ApiBehaviorOptions>(options => options.SuppressInferBindingSourcesForParameters = true);
 
-        services.AddControlServices(options =>
+        services.AddAuthentication(options =>
         {
-            options.DefaultAuthenticateScheme = JwtBearerDefaults.ControlServicesScheme;
-            options.DefaultChallengeScheme = JwtBearerDefaults.ControlServicesScheme;
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
             .AddJwtBearer(options =>
             {
@@ -91,7 +91,7 @@ public class Startup(IConfiguration configuration)
 
         app.UseRouting();
 
-        app.UseControlServices();
+        app.UseAuthentication();
 
         app.UseAuthorization();
 
