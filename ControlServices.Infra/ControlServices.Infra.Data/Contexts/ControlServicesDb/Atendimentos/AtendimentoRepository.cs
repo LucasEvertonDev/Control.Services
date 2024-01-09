@@ -31,7 +31,7 @@ public class AtendimentoRepository(IServiceProvider serviceProvider) : BaseRepos
         Console.WriteLine(aux.Count);
     }
 
-    public async Task<PagedResult<AtendimentoModel>> GetAtendimentos(DateTime? dataInicio, DateTime? dataFim, Guid? clienteId, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
+    public async Task<PagedResult<AtendimentoModel>> GetAtendimentosAsync(DateTime? dataInicio, DateTime? dataFim, Guid? clienteId, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
     {
         return await Context.Atendimentos
             .Where(atendimento => (!dataInicio.HasValue || atendimento.Data.Date >= dataInicio.Value.Date)
@@ -42,5 +42,15 @@ public class AtendimentoRepository(IServiceProvider serviceProvider) : BaseRepos
             .ThenInclude(mapAtendimentoServico => mapAtendimentoServico.Servico)
             .OrderByDescending(atendimento => atendimento.Data.Date)
             .PaginationAsync<Atendimento, AtendimentoModel>(pageNumber, pageSize, cancellationToken);
+    }
+
+    public async Task<Atendimento> FindByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        return await Context.Atendimentos
+            .Where(atendimento => atendimento.Id == id)
+            .Include(atendimento => atendimento.Cliente)
+            .Include(atendimento => atendimento.MapAtendimentosServicos)
+            .ThenInclude(mapAtendimentoServico => mapAtendimentoServico.Servico)
+            .FirstOrDefaultAsync();
     }
 }

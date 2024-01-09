@@ -2,6 +2,8 @@
 using ControlServices.Application.Domain.Structure.Models;
 using ControlServices.Application.Domain.Structure.Pagination;
 using ControlServices.Application.Mediator.Commands.Atendimentos.PostAtendimento;
+using ControlServices.Application.Mediator.Commands.Atendimentos.PutAtendimento;
+using ControlServices.Application.Mediator.Queries.Atendimentos.GetAtendimentoPorId;
 using ControlServices.Application.Mediator.Queries.Atendimentos.GetAtendimentos;
 
 namespace ControlServices.WebApi.EndPoints;
@@ -21,6 +23,16 @@ public static class AtendimentosEndPoints
           async ([FromServices] IMediator mediator, [AsParameters] GetAtendimentosQuery getAtendimentosQuery, CancellationToken cancellationToken) =>
                await mediator.SendAsync(getAtendimentosQuery, cancellationToken))
           .Authorization<ResponseDto<PagedResult<AtendimentoModel>>>();
+
+        atendimentosEndPoint.MapPut("/{id}",
+            async ([FromServices] IMediator mediator, [AsParameters] PutAtendimentoCommand putAtendimentoCommand, CancellationToken cancellationToken) =>
+                await mediator.SendAsync(putAtendimentoCommand, cancellationToken))
+            .Authorization<ResponseDto>();
+
+        atendimentosEndPoint.MapGet("/{id}",
+            async ([FromServices] IMediator mediator, [AsParameters] GetAtendimentoPorIdQuery getAtendimentoPorIdQuery, CancellationToken cancellationToken) =>
+                await mediator.SendAsync(getAtendimentoPorIdQuery, cancellationToken))
+            .Authorization<ResponseDto<AtendimentoModel>>();
 
         return app;
     }

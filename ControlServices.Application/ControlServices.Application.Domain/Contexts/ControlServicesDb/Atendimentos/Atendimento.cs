@@ -49,6 +49,29 @@ public class Atendimento() : BasicEntity<Atendimento>
 
     public virtual ICollection<MapAtendimentoServico> MapAtendimentosServicos { get; private set; }
 
+    public void UpdateAtendimento(
+        DateTime data,
+        Cliente cliente,
+        bool clienteAtrasado,
+        decimal? valorAtendimento,
+        decimal? valorPago,
+        string observacaoAtendimento,
+        SituacaoAtendimento situacao)
+    {
+        Ensure(cliente).ForContext(a => a.Cliente)
+            .NotNull(AtendimentoFailures.ClienteObrigatorio)
+            .NoFailures();
+
+        Data = data;
+        Cliente = cliente;
+        ClienteAtrasado = clienteAtrasado;
+        ValorAtendimento = valorAtendimento;
+        ValorPago = valorPago;
+        Situacao = situacao;
+        ObservacaoAtendimento = observacaoAtendimento;
+        MapAtendimentosServicos = new List<MapAtendimentoServico>();
+    }
+
     public void AddServico(MapAtendimentoServico mapAtendimentoServico)
     {
         Ensure(mapAtendimentoServico).ForContext(atendimento => atendimento.MapAtendimentosServicos, MapAtendimentosServicos)

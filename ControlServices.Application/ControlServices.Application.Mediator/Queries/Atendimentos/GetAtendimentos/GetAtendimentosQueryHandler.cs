@@ -3,7 +3,7 @@ public class GetAtendimentosQueryHandler(IServiceProvider serviceProvider) : Bas
 {
     public async Task<Result> Handle(GetAtendimentosQuery request, CancellationToken cancellationToken)
     {
-        var atendimentos = await UnitOfWork.AtendimentoRepository.GetAtendimentos(
+        var atendimentos = await UnitOfWork.AtendimentoRepository.GetAtendimentosAsync(
             dataInicio: request.DataInicial,
             dataFim: request.DataFinal,
             clienteId: request.ClienteId,

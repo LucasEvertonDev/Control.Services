@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ControlServices.Application.Mediator.Queries.Custos;
+namespace ControlServices.Application.Mediator.Queries.Custos.GetCustos;
 public class GetCustosQuery : IRequest<Result>
 {
     [FromQuery(Name = "data")]

@@ -4,7 +4,7 @@ using ControlServices.Application.Domain.Structure.Pagination;
 using ControlServices.Application.Mediator.Commands.Custos.PostCusto;
 using ControlServices.Application.Mediator.Commands.Custos.PutCusto;
 using ControlServices.Application.Mediator.Queries.Clientes.GetClientes;
-using ControlServices.Application.Mediator.Queries.Custos;
+using ControlServices.Application.Mediator.Queries.Custos.GetCustos;
 
 namespace ControlServices.WebApi.EndPoints;
 
