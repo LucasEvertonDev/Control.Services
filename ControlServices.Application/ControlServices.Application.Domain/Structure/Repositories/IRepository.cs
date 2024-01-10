@@ -33,4 +33,6 @@ public interface IRepository<TEntity>
     Task<TEntity> FirstOrDefaultTrackingAsync(Expression<Func<TEntity, bool>> where, CancellationToken cancellationToken = default);
 
     Task<TEntity> UpdateAsync(TEntity domain, CancellationToken cancellationToken = default);
+
+    Task<IEnumerable<TEntity>> ToListTrackingAsync(Expression<Func<TEntity, bool>> where, CancellationToken cancellationToken = default);
 }

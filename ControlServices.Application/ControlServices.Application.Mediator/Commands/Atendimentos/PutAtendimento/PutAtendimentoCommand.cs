@@ -33,7 +33,7 @@ public class AtendimentoEdit
 
 public class MapAtendimentoServicoEditModel
 {
-    public Guid Id { get; set; }
+    public Guid? Id { get; set; }
 
     public Guid ServicoId { get; set; }
 

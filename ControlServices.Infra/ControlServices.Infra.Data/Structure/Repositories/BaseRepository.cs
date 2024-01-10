@@ -105,6 +105,11 @@ public class BaseRepository<TContext, TEntity> : IRepository<TEntity>
         return await _context.Set<TEntity>().Where(where).OrderByDescending(a => a.DataCriacao).PaginationAsync<TEntity, TModel>(pageNumber, pageSize, cancellationToken);
     }
 
+    public virtual async Task<IEnumerable<TEntity>> ToListTrackingAsync(Expression<Func<TEntity, bool>> where, CancellationToken cancellationToken = default)
+    {
+        return await _context.Set<TEntity>().Where(where).AsTracking().ToListAsync(cancellationToken);
+    }
+
     public virtual IQueryable<TEntity> AsQueriableTracking(CancellationToken cancellationToken = default)
     {
         return _context.Set<TEntity>().AsTracking();

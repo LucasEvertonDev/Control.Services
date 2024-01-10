@@ -35,6 +35,17 @@ public class PutAtendimentoCommandHandler(IServiceProvider serviceProvider) : Ba
             observacaoAtendimento: request.Body.ObservacaoAtendimento,
             situacao: (SituacaoAtendimento)request.Body.Situacao);
 
+        var servicos = await UnitOfWork.MapAtendimentoServicoRepository.ToListTrackingAsync(
+                where: servico => servico.AtendimentoId == atendimento.Id,
+                cancellationToken: cancellationToken);
+
+        var servicosExcluidos = servicos.Where(mapDb =>
+            !request.Body.MapAtendimentosServicos.Exists(map => map.Id == mapDb.Id)).ToArray();
+
+        await UnitOfWork.MapAtendimentoServicoRepository.DeleteAsync(
+            entidadesParaExcluir: servicosExcluidos,
+            cancellationToken: cancellationToken);
+
         foreach (var map in request.Body.MapAtendimentosServicos)
         {
             var mapServico = await UnitOfWork.MapAtendimentoServicoRepository.FirstOrDefaultTrackingAsync(
