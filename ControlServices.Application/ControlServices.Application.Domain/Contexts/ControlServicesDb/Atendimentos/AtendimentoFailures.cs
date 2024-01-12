@@ -6,6 +6,8 @@ public static class AtendimentoFailures
 
     public static readonly FailureModel ClienteObrigatorio = new("ClienteObrigatorio", "Cliente é obrigatório!");
 
+    public static readonly FailureModel DataObrigatoria = new("DataObrigatoria", "Data do agendamento é obrigatória!");
+
     public static readonly FailureModel EObrigatorioVincularServico = new("EObrigatorioVincularServico", "É obrigatório ao associar ao menos um serviço");
 
     public static readonly FailureModel ClienteInvalido = new("ClienteInvalido", "O cliente informado não é um cliente válido.");

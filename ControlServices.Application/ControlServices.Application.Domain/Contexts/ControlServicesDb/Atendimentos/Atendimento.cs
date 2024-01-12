@@ -72,6 +72,14 @@ public class Atendimento() : BasicEntity<Atendimento>
         MapAtendimentosServicos = new List<MapAtendimentoServico>();
     }
 
+    public void RemarcarAgendamento(DateTime dataAgendamento)
+    {
+        Ensure(dataAgendamento).ForContext(a => a.Data)
+            .NotMinValue(AtendimentoFailures.DataObrigatoria);
+
+        Data = dataAgendamento;
+    }
+
     public void AddServico(MapAtendimentoServico mapAtendimentoServico)
     {
         Ensure(mapAtendimentoServico).ForContext(atendimento => atendimento.MapAtendimentosServicos, MapAtendimentosServicos)

@@ -3,6 +3,7 @@ using ControlServices.Application.Domain.Structure.Models;
 using ControlServices.Application.Domain.Structure.Pagination;
 using ControlServices.Application.Mediator.Commands.Atendimentos.PostAtendimento;
 using ControlServices.Application.Mediator.Commands.Atendimentos.PutAtendimento;
+using ControlServices.Application.Mediator.Commands.Atendimentos.PutDataAtendimento;
 using ControlServices.Application.Mediator.Queries.Atendimentos.GetAtendimentoPorId;
 using ControlServices.Application.Mediator.Queries.Atendimentos.GetAtendimentos;
 
@@ -27,6 +28,11 @@ public static class AtendimentosEndPoints
         atendimentosEndPoint.MapPut("/{id}",
             async ([FromServices] IMediator mediator, [AsParameters] PutAtendimentoCommand putAtendimentoCommand, CancellationToken cancellationToken) =>
                 await mediator.SendAsync(putAtendimentoCommand, cancellationToken))
+            .Authorization<ResponseDto>();
+
+        atendimentosEndPoint.MapPut("remarcar/{id}",
+            async ([FromServices] IMediator mediator, [AsParameters] PutRemarcarAtendimentoCommand putRemarcarAtendimentoCommand, CancellationToken cancellationToken) =>
+                await mediator.SendAsync(putRemarcarAtendimentoCommand, cancellationToken))
             .Authorization<ResponseDto>();
 
         atendimentosEndPoint.MapGet("/{id}",
