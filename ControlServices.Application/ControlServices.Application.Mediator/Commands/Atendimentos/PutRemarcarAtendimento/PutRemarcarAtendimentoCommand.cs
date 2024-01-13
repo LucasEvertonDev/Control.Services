@@ -15,5 +15,5 @@ public class PutRemarcarAtendimentoCommand : IRequest<Result>, IHandler<PutRemar
 
 public class RemarcarAgendamentoModel
 {
-    public DateTime Data { get; set; }
+    public DateTimeOffset Data { get; set; }
 }

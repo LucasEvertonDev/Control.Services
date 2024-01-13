@@ -23,7 +23,7 @@ public class PutRemarcarAtendimentoHandler(IServiceProvider serviceProvider) : B
            cancellationToken: cancellationToken);
 
         atendimento.RemarcarAgendamento(
-            dataAgendamento: request.Body.Data);
+            dataAgendamento: request.Body.Data.LocalDateTime);
 
         if (atendimento.HasFailures())
         {
