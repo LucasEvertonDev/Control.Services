@@ -29,4 +29,18 @@ public class MapAtendimentoServico() : BaseEntity<MapAtendimentoServico>
     public virtual Servico Servico { get; set; }
 
     public virtual Atendimento Atendimento { get; set; }
+
+    public void UpdateMapAtendimento(Servico servico, Atendimento atendimento, decimal? valorCobrado)
+    {
+        Ensure(servico).ForContext(map => map.Servico)
+            .NotNull(MapAtendimentoServicoFailures.ServicoObrigatorio);
+
+        Ensure(atendimento).ForContext(map => map.Atendimento)
+            .NotNull(MapAtendimentoServicoFailures.AtendimentoObrigatorio)
+            .NoFailures();
+
+        Servico = servico;
+        Atendimento = atendimento;
+        ValorCobrado = valorCobrado;
+    }
 }

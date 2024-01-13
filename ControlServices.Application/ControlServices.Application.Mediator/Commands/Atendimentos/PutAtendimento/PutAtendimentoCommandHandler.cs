@@ -30,7 +30,7 @@ public class PutAtendimentoCommandHandler(IServiceProvider serviceProvider) : Ba
         atendimento.UpdateAtendimento(data: request.Body.Data,
             cliente: cliente,
             clienteAtrasado: request.Body.ClienteAtrasado,
-            valorAtendimento: request.Body.ValorAtendimento,
+            valorAtendimento: request.Body.MapAtendimentosServicos.Sum(r => r.ValorCobrado),
             valorPago: request.Body.ValorPago,
             observacaoAtendimento: request.Body.ObservacaoAtendimento,
             situacao: (SituacaoAtendimento)request.Body.Situacao);
@@ -52,16 +52,23 @@ public class PutAtendimentoCommandHandler(IServiceProvider serviceProvider) : Ba
                 where: servico => servico.Id == map.Id,
                 cancellationToken: cancellationToken);
 
+            var servico = await UnitOfWork.ServicoRepository.FirstOrDefaultTrackingAsync(
+                where: servico => servico.Id == map.ServicoId,
+                cancellationToken: cancellationToken);
+
             if (mapServico == null)
             {
-                var servico = await UnitOfWork.ServicoRepository.FirstOrDefaultTrackingAsync(
-                    where: servico => servico.Id == map.ServicoId,
-                    cancellationToken: cancellationToken);
-
                 mapServico = new MapAtendimentoServico(
                     servico: servico,
                     atendimento: atendimento,
                     valorCobrado: map.ValorCobrado);
+            }
+            else
+            {
+                mapServico.UpdateMapAtendimento(
+                        servico: servico,
+                        atendimento: atendimento,
+                        valorCobrado: map.ValorCobrado);
             }
 
             atendimento.AddServico(mapServico);
