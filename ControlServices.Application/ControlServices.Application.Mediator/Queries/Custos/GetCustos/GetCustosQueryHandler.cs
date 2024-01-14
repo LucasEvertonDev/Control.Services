@@ -9,7 +9,8 @@ public class GetCustosQueryHandler(IServiceProvider serviceProvider) : BaseHandl
             pageNumber: 1,
             pageSize: 10,
             where: custo =>
-            (request.Data == null || custo.Data.Date == request.Data.GetValueOrDefault().Date)
+            (request.DataInicial == null || custo.Data.Date == request.DataInicial.GetValueOrDefault().Date)
+            && (request.DataFinal == null || custo.Data.Date == request.DataFinal.GetValueOrDefault().Date)
             && (request.Valor == null || custo.Valor == request.Valor)
             && (string.IsNullOrWhiteSpace(request.Descricao) || custo.Descricao.Contains(request.Descricao)), cancellationToken: cancellationToken);
 
