@@ -1,4 +1,5 @@
 ﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Atendimentos;
+using ControlServices.Application.Domain.Contexts.ControlServicesDb.Atendimentos.Enuns;
 using ControlServices.Application.Domain.Contexts.ControlServicesDb.Atendimentos.Results;
 using Atendimento = ControlServices.Application.Domain.Contexts.ControlServicesDb.Atendimentos.Atendimento;
 
@@ -52,5 +53,28 @@ public class AtendimentoRepository(IServiceProvider serviceProvider) : BaseRepos
             .Include(atendimento => atendimento.MapAtendimentosServicos)
             .ThenInclude(mapAtendimentoServico => mapAtendimentoServico.Servico)
             .FirstOrDefaultAsync();
+    }
+
+    public async Task<TotalizadoresModel> GetTotalizadores(DateTime? dataInicio, DateTime? dataFim, CancellationToken cancellationToken = default)
+    {
+        var atendimentos = await Context.Atendimentos
+            .Where(atendimento => (!dataInicio.HasValue || atendimento.Data.Date >= dataInicio.Value.Date)
+                && (!dataInicio.HasValue || atendimento.Data.Date <= dataFim.Value.Date))
+            .Include(atendimento => atendimento.MapAtendimentosServicos)
+        .ToListAsync();
+
+        var custos = await Context.Custos.Where(custo => (!dataInicio.HasValue || custo.Data.Date >= dataInicio.Value.Date)
+                && (!dataInicio.HasValue || custo.Data.Date <= dataFim.Value.Date))
+            .ToListAsync(cancellationToken);
+
+        return new TotalizadoresModel()
+        {
+            Agendados = atendimentos.Count(a => a.Situacao == SituacaoAtendimento.Agendado),
+            Concluidos = atendimentos.Count(a => a.Situacao == SituacaoAtendimento.Concluido),
+            Lucro = atendimentos.Where(a => a.Situacao == SituacaoAtendimento.Concluido).Sum(a => a.ValorPago.GetValueOrDefault())
+                    - custos.Sum(a => a.Valor),
+            Receber = atendimentos.Where(a => a.Situacao == SituacaoAtendimento.Concluido).Sum(a => a.ValorAtendimento.GetValueOrDefault())
+                    - atendimentos.Where(a => a.Situacao == SituacaoAtendimento.Concluido).Sum(a => a.ValorPago.GetValueOrDefault())
+        };
     }
 }

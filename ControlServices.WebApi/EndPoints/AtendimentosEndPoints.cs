@@ -6,6 +6,7 @@ using ControlServices.Application.Mediator.Commands.Atendimentos.PutAtendimento;
 using ControlServices.Application.Mediator.Commands.Atendimentos.PutDataAtendimento;
 using ControlServices.Application.Mediator.Queries.Atendimentos.GetAtendimentoPorId;
 using ControlServices.Application.Mediator.Queries.Atendimentos.GetAtendimentos;
+using ControlServices.Application.Mediator.Queries.Atendimentos.GetTotalizadores;
 
 namespace ControlServices.WebApi.EndPoints;
 
@@ -39,6 +40,11 @@ public static class AtendimentosEndPoints
             async ([FromServices] IMediator mediator, [AsParameters] GetAtendimentoPorIdQuery getAtendimentoPorIdQuery, CancellationToken cancellationToken) =>
                 await mediator.SendAsync(getAtendimentoPorIdQuery, cancellationToken))
             .Authorization<ResponseDto<AtendimentoModel>>();
+
+        atendimentosEndPoint.MapGet($"/totalizadores/{Params.GetRoute<GetTotalizadoresQuery>()}",
+            async ([FromServices] IMediator mediator, [AsParameters] GetTotalizadoresQuery getTotalizadoresQuery, CancellationToken cancellationToken) =>
+                await mediator.SendAsync(getTotalizadoresQuery, cancellationToken))
+            .Authorization<ResponseDto<TotalizadoresModel>>();
 
         return app;
     }

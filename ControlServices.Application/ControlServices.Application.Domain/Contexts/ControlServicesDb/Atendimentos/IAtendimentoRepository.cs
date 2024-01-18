@@ -10,4 +10,5 @@ public interface IAtendimentoRepository : IRepository<Atendimento>
     Task<PagedResult<AtendimentoModel>> GetAtendimentosAsync(DateTime? dataInicio, DateTime? dataFim, Guid? clienteId, int pageNumber, int pageSize, CancellationToken cancellationToken = default);
 
     Task GetAtendimentos2(DateTime? dataInicio, DateTime? dataFim, Guid? clienteId, int pageNumber, int pageSize, CancellationToken cancellationToken = default);
+    Task<TotalizadoresModel> GetTotalizadores(DateTime? dataInicio, DateTime? dataFim, CancellationToken cancellationToken = default);
 }
