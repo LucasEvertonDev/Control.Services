@@ -26,4 +26,16 @@ RUN dotnet publish "./ControlServices.WebApi.csproj" -c $BUILD_CONFIGURATION -o 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+
+# Instale o Chromium e outras dependências
+USER root
+# Instale o Chromium e outras dependências
+RUN apt-get update && \
+    apt-get install -y chromium
+
+# Defina variáveis de ambiente para o PuppeteerSharp
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+
 ENTRYPOINT ["dotnet", "ControlServices.WebApi.dll"]
+
