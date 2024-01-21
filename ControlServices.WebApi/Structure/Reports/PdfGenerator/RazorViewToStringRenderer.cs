@@ -36,6 +36,7 @@ public class RazorViewToStringRenderer : IRazorViewToStringRenderer
                 throw new ArgumentNullException($"{viewName} does not match any available view");
             }
 
+            // se for passar modelo seria aqui com parametros etc
             var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary()) { };
 
             var viewContext = new ViewContext(
