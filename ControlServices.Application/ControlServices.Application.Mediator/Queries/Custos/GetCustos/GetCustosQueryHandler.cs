@@ -6,13 +6,14 @@ public class GetCustosQueryHandler(IServiceProvider serviceProvider) : BaseHandl
     public async Task<Result> Handle(GetCustosQuery request, CancellationToken cancellationToken)
     {
         var custo = await UnitOfWork.CustoRepository.ToListAsync<CustoModel>(
-            pageNumber: 1,
-            pageSize: 10,
+            pageNumber: request.PageNumber,
+            pageSize: request.PageSize,
             where: custo =>
-            (request.DataInicial == null || custo.Data.Date == request.DataInicial.GetValueOrDefault().Date)
-            && (request.DataFinal == null || custo.Data.Date == request.DataFinal.GetValueOrDefault().Date)
-            && (request.Valor == null || custo.Valor == request.Valor)
-            && (string.IsNullOrWhiteSpace(request.Descricao) || custo.Descricao.Contains(request.Descricao)), cancellationToken: cancellationToken);
+                (request.DataInicial == null || custo.Data.Date >= request.DataInicial.GetValueOrDefault().Date)
+                && (request.DataFinal == null || custo.Data.Date <= request.DataFinal.GetValueOrDefault().Date)
+                && (request.Valor == null || custo.Valor == request.Valor)
+                && (string.IsNullOrWhiteSpace(request.Descricao) || custo.Descricao.Contains(request.Descricao)),
+            cancellationToken: cancellationToken);
 
         return Result.Ok(custo);
     }

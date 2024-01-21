@@ -5,7 +5,7 @@ public class PostClienteCommand : IRequest<Result>, IHandler<PostClienteCommandH
 
     public string Nome { get; set; }
 
-    public DateTime DataNascimento { get; set; }
+    public DateTime? DataNascimento { get; set; }
 
     public string Telefone { get; set; }
 }

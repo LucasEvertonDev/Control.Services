@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControlServices.Application.Mediator.Queries.Custos.GetCustos;
-public class GetCustosQuery : IRequest<Result>
+public class GetCustosQuery : IRequest<Result>, IHandler<GetCustosQueryHandler>
 {
     [DefaultValue("1")]
     [FromRoute(Name = "pagenumber")]
