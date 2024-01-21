@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IronPdf" Version="2024.1.20" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
     <PackageReference Include="prometheus-net.AspNetCore" Version="8.1.0" />
@@ -23,6 +24,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ControlServices.Infra\ControlServices.Infra.IoC\ControlServices.Infra.IoC.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Structure\Pdf\Index.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

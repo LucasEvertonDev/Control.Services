@@ -1,0 +1,16 @@
+﻿@page
+@inject ControlServices.Infra.Data.Contexts.ControlServicesDb.ControlServicesDbContext Control
+
+@model ControlServices.WebApi.Structure.Pdf.IndexModel
+@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Page @Control.Clientes.First().Nome</title>
+</head>
+<body>
+    <h1>Hello IronPDF!</h1>
+    <p>This is a sample Razor Page content for generating a PDF.</p>
+</body>
+</html>

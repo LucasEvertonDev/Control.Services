@@ -5,6 +5,7 @@ using ControlServices.Infra.IoC;
 using ControlServices.WebApi.EndPoints;
 using ControlServices.WebApi.Structure.Filters;
 using ControlServices.WebApi.Structure.Middlewares;
+using ControlServices.WebApi.Structure.Pdf;
 using ControlServices.WebApi.Structure.PolicyProviders;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -39,7 +40,9 @@ public class Startup(IConfiguration configuration)
 
         // Binding model
         services.Configure<ApiBehaviorOptions>(options => options.SuppressInferBindingSourcesForParameters = true);
-
+        services.AddRazorPages();
+        services.AddScoped<IRazorViewToStringRenderer, RazorViewToStringRenderer>();
+        services.AddScoped<IPdfService, PdfService>();
         services.AddAuthentication(options =>
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -109,6 +112,13 @@ public class Startup(IConfiguration configuration)
 
         app.UseEndpoints(endpoints =>
         {
+            endpoints.MapGet("download", async ([FromServices] IPdfService pdfService) =>
+            {
+                // Results.File(await pdfService.GeneratePdfAsync(), "application/pdf", "newsletter.pdf")
+                await pdfService.GeneratePdfAsync();
+                return "teste";
+            }).WithOpenApi().AllowAnonymous();
+
             endpoints
                 .MapGroup("api/v1/")
                 .WithOpenApi()
@@ -117,8 +127,8 @@ public class Startup(IConfiguration configuration)
                 .AddClientesEndpoint("clientes", "Clientes")
                 .AddServicosEndpoint("servicos", "Servicos")
                 .AddCustosEndpoint("custos", "Custos")
-                .AddAtendimentosEndpoint("atendimentos", "Atendimentos");
-
+                .AddAtendimentosEndpoint("atendimentos", "Atendimentos")
+                ;
             endpoints.MapMetrics().RequireAuthorization("ReadMetrics");
         });
     }
