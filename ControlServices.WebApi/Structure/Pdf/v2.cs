@@ -23,11 +23,26 @@ public class PdfService : IPdfService
         await using var page = await browser.NewPageAsync();
         await page.SetContentAsync(htmlContent);
 #pragma warning disable S1075 // URIs should not be hardcoded
-        await page.PdfAsync(@"C:\\Temp\\teste3.pdf", new PdfOptions() { HeaderTemplate = "<P>Teste</p>", DisplayHeaderFooter = true, FooterTemplate = string.Empty });
+        byte[] pdfBytes = await page.PdfDataAsync(new PdfOptions()
+        {
+            DisplayHeaderFooter = true,
+            HeaderTemplate = "<header style='font-size: 12px; text-align: center;'>Cabeçalho</header>",
+            FooterTemplate = "<footer style='font-size: 12px; text-align: center;'>Rodapé</footer>",
+            PrintBackground = true,
+            MarginOptions = new PuppeteerSharp.Media.MarginOptions()
+            {
+                Bottom = "80",
+                Left = "20",
+                Right = "20",
+                Top = "150"
+            }
+        });
 #pragma warning restore S1075 // URIs should not be hardcoded
 
+        await browser.CloseAsync();
+
         // Retorna o PDF como um array de bytes
-        return null;
+        return pdfBytes;
     }
 
     public class TesteModel

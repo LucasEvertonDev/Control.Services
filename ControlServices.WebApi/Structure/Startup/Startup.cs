@@ -114,9 +114,8 @@ public class Startup(IConfiguration configuration)
         {
             endpoints.MapGet("download", async ([FromServices] IPdfService pdfService) =>
             {
-                // Results.File(await pdfService.GeneratePdfAsync(), "application/pdf", "newsletter.pdf")
-                await pdfService.GeneratePdfAsync();
-                return "teste";
+                var file = await pdfService.GeneratePdfAsync();
+                return Results.File(file, "application/octet-stream", "nome-do-arquivo.pdf");
             }).WithOpenApi().AllowAnonymous();
 
             endpoints
