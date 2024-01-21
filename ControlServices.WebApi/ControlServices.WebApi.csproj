@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Structure\Pdf\Index.cshtml">
+    <Content Update="Structure\Reports\Index.cshtml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

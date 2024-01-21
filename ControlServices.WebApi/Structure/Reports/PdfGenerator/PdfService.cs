@@ -1,6 +1,6 @@
 ﻿using PuppeteerSharp;
 
-namespace ControlServices.WebApi.Structure.Pdf;
+namespace ControlServices.WebApi.Structure.Reports.PdfGenerator;
 
 public class PdfService : IPdfService
 {
@@ -14,15 +14,19 @@ public class PdfService : IPdfService
     public async Task<byte[]> GeneratePdfAsync()
     {
         // Renderiza a Razor Page para HTML
-        var htmlContent = await _razorViewToStringRenderer.RenderViewToStringAsync<IndexModel>("/Structure/Pdf/Index.cshtml", new IndexModel());
+        var htmlContent = await _razorViewToStringRenderer.RenderViewToStringAsync("/Structure/Reports/Index.cshtml");
 
         // Gera o PDF usando o IronPDF
         using var browserFetcher = new BrowserFetcher();
+
         await browserFetcher.DownloadAsync();
+
         await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true, });
+
         await using var page = await browser.NewPageAsync();
+
         await page.SetContentAsync(htmlContent);
-#pragma warning disable S1075 // URIs should not be hardcoded
+
         byte[] pdfBytes = await page.PdfDataAsync(new PdfOptions()
         {
             DisplayHeaderFooter = true,
@@ -37,16 +41,10 @@ public class PdfService : IPdfService
                 Top = "150"
             }
         });
-#pragma warning restore S1075 // URIs should not be hardcoded
 
         await browser.CloseAsync();
 
         // Retorna o PDF como um array de bytes
         return pdfBytes;
-    }
-
-    public class TesteModel
-    {
-        public string Teste { get; set; }
     }
 }

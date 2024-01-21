@@ -1,4 +1,4 @@
-﻿namespace ControlServices.WebApi.Structure.Pdf;
+﻿namespace ControlServices.WebApi.Structure.Reports.PdfGenerator;
 
 public interface IPdfService
 {

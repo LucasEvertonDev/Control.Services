@@ -4,18 +4,9 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-#pragma warning disable S3903 // Types should be defined in named namespaces
-#pragma warning disable SA1649 // File name should match first type name
-public interface IRazorViewToStringRenderer
-#pragma warning restore SA1649 // File name should match first type name
-#pragma warning restore S3903 // Types should be defined in named namespaces
-{
-    Task<string> RenderViewToStringAsync<TModel>(string viewName, TModel model);
-}
+namespace ControlServices.WebApi.Structure.Reports.PdfGenerator;
 
-#pragma warning disable S3903 // Types should be defined in named namespaces
 public class RazorViewToStringRenderer : IRazorViewToStringRenderer
-#pragma warning restore S3903 // Types should be defined in named namespaces
 {
     private readonly IRazorViewEngine _razorViewEngine;
     private readonly ITempDataProvider _tempDataProvider;
@@ -31,7 +22,7 @@ public class RazorViewToStringRenderer : IRazorViewToStringRenderer
         _serviceProvider = serviceProvider;
     }
 
-    public async Task<string> RenderViewToStringAsync<TModel>(string viewName, TModel model)
+    public async Task<string> RenderViewToStringAsync(string viewName)
     {
         var httpContext = new DefaultHttpContext { RequestServices = _serviceProvider };
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
@@ -45,10 +36,7 @@ public class RazorViewToStringRenderer : IRazorViewToStringRenderer
                 throw new ArgumentNullException($"{viewName} does not match any available view");
             }
 
-            var viewDictionary = new ViewDataDictionary<TModel>(new EmptyModelMetadataProvider(), new ModelStateDictionary())
-            {
-                Model = model
-            };
+            var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary()) { };
 
             var viewContext = new ViewContext(
                 actionContext,

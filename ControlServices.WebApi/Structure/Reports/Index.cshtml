@@ -1,14 +1,28 @@
 ﻿@page
+@using Microsoft.AspNetCore.Mvc.RazorPages
 @inject ControlServices.Infra.Data.Contexts.ControlServicesDb.ControlServicesDbContext Control
 
-@model ControlServices.WebApi.Structure.Pdf.IndexModel
 @{
 }
 <!DOCTYPE html>
 <html>
+    <head>
+        <style>
+            h1 {
+                color: blue
+            }
+
+            div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+        </style>
+    </head>
 <body>
     <div style="display: flex; align-items:center; justify-content: center; flex-direction: column">
-        <h1 style="color: blue">PDF Page @Control.Clientes.First().Nome!</h1>
+        <h1 style="">PDF Page @Control.Clientes.First().Nome!</h1>
         <p>This is a sample Razor Page content for generating a PDF.</p>
         <p>
             Lorem ipsum dolor sit amet consectetur, adipiscing elit semper sodales aliquet fringilla, habitant accumsan felis tellus. Enim inceptos nunc mollis ex aliquet cursus ornare a elit condimentum, pretium auctor vivamus rhoncus phasellus praesent odio aptent tempus. Augue porttitor mus natoque morbi eu laoreet ligula, tempor neque ipsum nibh convallis feugiat facilisis, diam pellentesque vivamus vel class dis. Litora torquent facilisi efficitur ad arcu dui maximus dictum dolor, eu eget auctor convallis pulvinar consequat conubia ornare aenean imperdiet, felis integer tincidunt senectus quis sollicitudin suspendisse semper. Commodo scelerisque euismod elit ac pretium nascetur lacinia rhoncus neque taciti nullam odio, senectus urna ut egestas varius faucibus pulvinar et curae eros torquent. Leo fames est torquent vestibulum adipiscing varius purus magnis malesuada, tincidunt commodo quisque porta faucibus dolor nostra ornare turpis congue, semper dapibus luctus cubilia orci efficitur sollicitudin habitasse. Hac arcu accumsan class libero magnis nostra eu vel mus donec, tempus mauris montes etiam senectus viverra conubia praesent tellus vehicula, condimentum metus cubilia dolor pellentesque lobortis rhoncus ridiculus fames.
