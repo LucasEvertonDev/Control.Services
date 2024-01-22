@@ -15,6 +15,8 @@ public class ClienteModel : BaseModel
 
     public int Situacao { get; protected set; }
 
+    public int NumeroAtendimentos { get; protected set; }
+
     public override ClienteModel FromEntity(IEntity entity)
     {
         var cliente = (Cliente)entity;
@@ -26,7 +28,8 @@ public class ClienteModel : BaseModel
             Telefone = cliente.Telefone,
             DataNascimento = cliente.DataNascimento,
             Nome = cliente.Nome,
-            Situacao = (int)cliente.Situacao
+            Situacao = (int)cliente.Situacao,
+            NumeroAtendimentos = cliente.Atendimentos.Count()
         };
 
         return clienteModel;

@@ -5,7 +5,7 @@
 namespace ControlServices.Infra.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Servico : Migration
+    public partial class Servicos : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

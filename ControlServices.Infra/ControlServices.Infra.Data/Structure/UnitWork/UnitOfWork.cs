@@ -6,6 +6,8 @@ using ControlServices.Application.Domain.Contexts.ControlServicesDb.Servicos;
 using ControlServices.Application.Domain.Contexts.ControlServicesDb.Usuarios;
 using ControlServices.Infra.Data.Contexts.ControlServicesDb;
 using ControlServices.Infra.Data.Contexts.ControlServicesDb.Atendimentos;
+using ControlServices.Infra.Data.Contexts.ControlServicesDb.Clientes;
+using ControlServices.Infra.Data.Contexts.ControlServicesDb.Servicos;
 using ControlServices.Infra.Data.Contexts.ControlServicesDb.Usuarios;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -17,8 +19,8 @@ public class UnitOfWork(
 {
     private IUsuarioRepository _usuarioRepository;
     private List<IDbContextTransaction> transactions;
-    private IRepository<Cliente> _clienteRepository;
-    private IRepository<Servico> _servicoRepository;
+    private IClienteRepository _clienteRepository;
+    private IServicoRepository _servicoRepository;
     private IRepository<Custo> _custoRepository;
     private IAtendimentoRepository _atendimentoRepository;
     private IRepository<MapAtendimentoServico> _mapAtendimentoServicoRepository;
@@ -33,21 +35,21 @@ public class UnitOfWork(
         }
     }
 
-    public IRepository<Cliente> ClienteRepository
+    public IClienteRepository ClienteRepository
     {
         get
         {
-            _clienteRepository ??= new BaseRepository<ControlServicesDbContext, Cliente>(serviceProvider);
+            _clienteRepository ??= new ClienteRepository(serviceProvider);
 
             return _clienteRepository;
         }
     }
 
-    public IRepository<Servico> ServicoRepository
+    public IServicoRepository ServicoRepository
     {
         get
         {
-            _servicoRepository ??= new BaseRepository<ControlServicesDbContext, Servico>(serviceProvider);
+            _servicoRepository ??= new ServicoRepository(serviceProvider);
 
             return _servicoRepository;
         }

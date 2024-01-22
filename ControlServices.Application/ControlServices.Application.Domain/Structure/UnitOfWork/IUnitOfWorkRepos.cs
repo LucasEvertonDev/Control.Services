@@ -12,9 +12,9 @@ public interface IUnitOfWorkRepos
 {
     IUsuarioRepository UsuarioRepository { get; }
 
-    IRepository<Cliente> ClienteRepository { get; }
+    IClienteRepository ClienteRepository { get; }
 
-    IRepository<Servico> ServicoRepository { get; }
+    IServicoRepository ServicoRepository { get; }
 
     IRepository<Custo> CustoRepository { get; }
 

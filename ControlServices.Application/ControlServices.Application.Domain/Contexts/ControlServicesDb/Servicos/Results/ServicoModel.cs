@@ -9,6 +9,8 @@ public class ServicoModel : BaseModel
 
     public string Descricao { get; protected set; }
 
+    public int NumeroServicos { get; protected set; }
+
     public override ServicoModel FromEntity(IEntity entity)
     {
         var servico = (Servico)entity;
@@ -18,6 +20,7 @@ public class ServicoModel : BaseModel
             Descricao = servico.Descricao,
             Id = servico.Id,
             Nome = servico.Nome,
+            NumeroServicos = servico.MapAtendimentoServicos.Count(map => map.Atendimento.Situacao == Atendimentos.Enuns.SituacaoAtendimento.Concluido)
         };
     }
 }

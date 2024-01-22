@@ -1,6 +1,5 @@
 ﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Atendimentos;
 using ControlServices.Application.Mediator.Commands.Atendimentos.PostAtendimento;
-using ControlServices.Application.Mediator.Commands.Atendimentos.PutDataAtendimento;
 using Notification.Extensions;
 
 namespace ControlServices.Application.Mediator.Commands.Atendimentos.PutRemarcarAtendimento;

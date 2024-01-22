@@ -1,11 +1,11 @@
-﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Custos;
-using ControlServices.Application.Domain.Contexts.ControlServicesDb.Custos.Results;
+﻿using ControlServices.Application.Domain.Contexts.ControlServicesDb.Custos.Results;
 using ControlServices.Application.Domain.Structure.Models;
 using ControlServices.Application.Domain.Structure.Pagination;
 using ControlServices.Application.Mediator.Commands.Custos.PostCusto;
 using ControlServices.Application.Mediator.Commands.Custos.PutCusto;
 using ControlServices.Application.Mediator.Queries.Custos.GetCustoPorId;
 using ControlServices.Application.Mediator.Queries.Custos.GetCustos;
+using ControlServices.Application.Mediator.Queries.Custos.GetCustosXLucro;
 
 namespace ControlServices.WebApi.EndPoints;
 
@@ -24,6 +24,11 @@ public static class CustoEndPoints
             async ([FromServices] IMediator mediator, [AsParameters] GetCustosQuery getCustosQuery, CancellationToken cancellationToken) =>
                 await mediator.SendAsync(getCustosQuery, cancellationToken))
             .Authorization<ResponseDto<PagedResult<CustoModel>>>();
+
+        custosEndpoint.MapGet($"/{Params.GetRoute<GetCustosXLucroQuery>()}",
+            async ([FromServices] IMediator mediator, [AsParameters] GetCustosXLucroQuery getCustosQuery, CancellationToken cancellationToken) =>
+                await mediator.SendAsync(getCustosQuery, cancellationToken))
+            .Authorization<ResponseDto<IEnumerable<CustosXLucroModel>>>();
 
         custosEndpoint.MapGet($"/{Params.GetRoute<GetCustoPorIdQuery>()}",
             async ([FromServices] IMediator mediator, [AsParameters] GetCustoPorIdQuery getCustoPorIdQuery, CancellationToken cancellationToken) =>

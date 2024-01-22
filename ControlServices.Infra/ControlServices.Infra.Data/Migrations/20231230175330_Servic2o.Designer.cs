@@ -12,7 +12,7 @@ namespace ControlServices.Infra.Data.Migrations
 {
     [DbContext(typeof(ControlServicesDbContext))]
     [Migration("20231230175330_Servico")]
-    partial class Servico
+    partial class Servicos
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

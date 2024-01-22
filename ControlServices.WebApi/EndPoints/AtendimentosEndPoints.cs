@@ -3,7 +3,7 @@ using ControlServices.Application.Domain.Structure.Models;
 using ControlServices.Application.Domain.Structure.Pagination;
 using ControlServices.Application.Mediator.Commands.Atendimentos.PostAtendimento;
 using ControlServices.Application.Mediator.Commands.Atendimentos.PutAtendimento;
-using ControlServices.Application.Mediator.Commands.Atendimentos.PutDataAtendimento;
+using ControlServices.Application.Mediator.Commands.Atendimentos.PutRemarcarAtendimento;
 using ControlServices.Application.Mediator.Queries.Atendimentos.GetAtendimentoPorId;
 using ControlServices.Application.Mediator.Queries.Atendimentos.GetAtendimentos;
 using ControlServices.Application.Mediator.Queries.Atendimentos.GetTotalizadores;

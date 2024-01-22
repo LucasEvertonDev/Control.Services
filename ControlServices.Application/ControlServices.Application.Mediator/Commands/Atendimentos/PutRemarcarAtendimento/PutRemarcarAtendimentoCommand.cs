@@ -1,8 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using ControlServices.Application.Mediator.Commands.Atendimentos.PutRemarcarAtendimento;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ControlServices.Application.Mediator.Commands.Atendimentos.PutDataAtendimento;
+namespace ControlServices.Application.Mediator.Commands.Atendimentos.PutRemarcarAtendimento;
 public class PutRemarcarAtendimentoCommand : IRequest<Result>, IHandler<PutRemarcarAtendimentoHandler>
 {
     [JsonIgnore]

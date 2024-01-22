@@ -3,6 +3,7 @@ using ControlServices.Application.Domain.Structure.Models;
 using ControlServices.Application.Domain.Structure.Pagination;
 using ControlServices.Application.Mediator.Commands.Servicos.PostServico;
 using ControlServices.Application.Mediator.Commands.Servicos.PutServico;
+using ControlServices.Application.Mediator.Queries.Servicos.GetMelhoresServicos;
 using ControlServices.Application.Mediator.Queries.Servicos.GetServicoPorId;
 using ControlServices.Application.Mediator.Queries.Servicos.GetServicos;
 
@@ -23,6 +24,11 @@ public static class ServicoEndPoints
             async ([FromServices] IMediator mediator, [AsParameters] GetServicosQuery getServicoQuery, CancellationToken cancellationToken) =>
                 await mediator.SendAsync(getServicoQuery, cancellationToken))
             .Authorization<ResponseDto<PagedResult<ServicoModel>>>();
+
+        servicosEndPoint.MapGet($"/{Params.GetRoute<GetMelhoresServicosQuery>()}",
+         async ([FromServices] IMediator mediator, [AsParameters] GetMelhoresServicosQuery getServicoQuery, CancellationToken cancellationToken) =>
+             await mediator.SendAsync(getServicoQuery, cancellationToken))
+         .Authorization<ResponseDto<PagedResult<ServicoModel>>>();
 
         servicosEndPoint.MapPut("/{id}",
             async ([FromServices] IMediator mediator, [AsParameters] PutServiceCommand putServiceCommand, CancellationToken cancellationToken) =>

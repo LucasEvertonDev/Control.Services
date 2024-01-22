@@ -5,6 +5,7 @@ using ControlServices.Application.Mediator.Commands.Clientes.PostCliente;
 using ControlServices.Application.Mediator.Commands.Clientes.PutCliente;
 using ControlServices.Application.Mediator.Queries.Clientes.GeClientesPorId;
 using ControlServices.Application.Mediator.Queries.Clientes.GetClientes;
+using ControlServices.Application.Mediator.Queries.Clientes.GetMelhoresClientesQuery;
 
 namespace ControlServices.WebApi.EndPoints;
 
@@ -21,6 +22,11 @@ public static class ClientesEndpoint
 
         clientesEndpoint.MapGet($"/{Params.GetRoute<GetClientesQuery>()}",
             async ([FromServices] IMediator mediator, [AsParameters] GetClientesQuery getClientesQuery, CancellationToken cancellationToken) =>
+                await mediator.SendAsync(getClientesQuery, cancellationToken))
+            .Authorization<ResponseDto<PagedResult<ClienteModel>>>();
+
+        clientesEndpoint.MapGet($"/{Params.GetRoute<GetMelhoresClientesQuery>()}",
+            async ([FromServices] IMediator mediator, [AsParameters] GetMelhoresClientesQuery getClientesQuery, CancellationToken cancellationToken) =>
                 await mediator.SendAsync(getClientesQuery, cancellationToken))
             .Authorization<ResponseDto<PagedResult<ClienteModel>>>();
 
