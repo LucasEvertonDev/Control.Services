@@ -20,7 +20,7 @@ public class ServicoModel : BaseModel
             Descricao = servico.Descricao,
             Id = servico.Id,
             Nome = servico.Nome,
-            NumeroServicos = servico.MapAtendimentoServicos.Count(map => map.Atendimento.Situacao == Atendimentos.Enuns.SituacaoAtendimento.Concluido)
+            NumeroServicos = servico.MapAtendimentoServicos?.Count(map => map.Atendimento.Situacao == Atendimentos.Enuns.SituacaoAtendimento.Concluido) ?? 0
         };
     }
 }

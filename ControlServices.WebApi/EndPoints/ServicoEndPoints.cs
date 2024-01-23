@@ -25,7 +25,7 @@ public static class ServicoEndPoints
                 await mediator.SendAsync(getServicoQuery, cancellationToken))
             .Authorization<ResponseDto<PagedResult<ServicoModel>>>();
 
-        servicosEndPoint.MapGet($"/{Params.GetRoute<GetMelhoresServicosQuery>()}",
+        servicosEndPoint.MapGet($"/melhores/{Params.GetRoute<GetMelhoresServicosQuery>()}",
          async ([FromServices] IMediator mediator, [AsParameters] GetMelhoresServicosQuery getServicoQuery, CancellationToken cancellationToken) =>
              await mediator.SendAsync(getServicoQuery, cancellationToken))
          .Authorization<ResponseDto<PagedResult<ServicoModel>>>();

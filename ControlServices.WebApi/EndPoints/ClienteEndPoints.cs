@@ -25,7 +25,7 @@ public static class ClientesEndpoint
                 await mediator.SendAsync(getClientesQuery, cancellationToken))
             .Authorization<ResponseDto<PagedResult<ClienteModel>>>();
 
-        clientesEndpoint.MapGet($"/{Params.GetRoute<GetMelhoresClientesQuery>()}",
+        clientesEndpoint.MapGet($"/melhores/{Params.GetRoute<GetMelhoresClientesQuery>()}",
             async ([FromServices] IMediator mediator, [AsParameters] GetMelhoresClientesQuery getClientesQuery, CancellationToken cancellationToken) =>
                 await mediator.SendAsync(getClientesQuery, cancellationToken))
             .Authorization<ResponseDto<PagedResult<ClienteModel>>>();

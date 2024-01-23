@@ -29,7 +29,7 @@ public class ClienteModel : BaseModel
             DataNascimento = cliente.DataNascimento,
             Nome = cliente.Nome,
             Situacao = (int)cliente.Situacao,
-            NumeroAtendimentos = cliente.Atendimentos.Count()
+            NumeroAtendimentos = cliente.Atendimentos?.Count(atendimento => atendimento.Situacao == Atendimentos.Enuns.SituacaoAtendimento.Concluido) ?? 0
         };
 
         return clienteModel;
