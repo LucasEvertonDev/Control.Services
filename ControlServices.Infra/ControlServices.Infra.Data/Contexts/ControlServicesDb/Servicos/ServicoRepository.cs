@@ -10,7 +10,7 @@ public class ServicoRepository(IServiceProvider serviceProvider) : BaseRepositor
             .Include(servico => servico.MapAtendimentoServicos)
             .ThenInclude(map => map.Atendimento)
             .Where(servico =>
-                servico.MapAtendimentoServicos.ToList().Exists(map => map.Atendimento.Data >= DateTime.Now.AddMonths(-12)))
+                servico.MapAtendimentoServicos.Any(map => map.Atendimento.Data >= DateTime.Now.AddMonths(-12)))
             .OrderByDescending(servico => servico.MapAtendimentoServicos.Count)
             .PaginationAsync<Servico, ServicoModel>(pageNumber, pageSize, cancellationToken);
     }
