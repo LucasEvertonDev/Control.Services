@@ -14,11 +14,11 @@ public class CustosXLucroModel
 
         return atendimentosAgrupados.Select(atendimentoAgrupado =>
         {
-            var custoAgrupado = custosAgrupados.Where(custoG => custoG.Key == atendimentoAgrupado.Key);
+            var custoAgrupado = custosAgrupados.Where(custoG => custoG.Key.ToString() == atendimentoAgrupado.Key.ToString());
 
             return new CustosXLucroModel
             {
-                Chave = $"{atendimentoAgrupado.Key.Month.ToString("00")} / {atendimentoAgrupado.Key.Year}",
+                Chave = $"{atendimentoAgrupado.Key.Month.ToString("00")}/{atendimentoAgrupado.Key.Year}",
                 Resultado = new ResultadoModel
                 {
                     Custo = custoAgrupado.Sum(g => g.Sum(custo => custo.Valor)),

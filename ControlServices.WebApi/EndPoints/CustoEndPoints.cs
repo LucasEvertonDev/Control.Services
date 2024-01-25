@@ -25,7 +25,7 @@ public static class CustoEndPoints
                 await mediator.SendAsync(getCustosQuery, cancellationToken))
             .Authorization<ResponseDto<PagedResult<CustoModel>>>();
 
-        custosEndpoint.MapGet($"/{Params.GetRoute<GetCustosXLucroQuery>()}",
+        custosEndpoint.MapGet($"/gastosxlucro/{Params.GetRoute<GetCustosXLucroQuery>()}",
             async ([FromServices] IMediator mediator, [AsParameters] GetCustosXLucroQuery getCustosQuery, CancellationToken cancellationToken) =>
                 await mediator.SendAsync(getCustosQuery, cancellationToken))
             .Authorization<ResponseDto<IEnumerable<CustosXLucroModel>>>();
