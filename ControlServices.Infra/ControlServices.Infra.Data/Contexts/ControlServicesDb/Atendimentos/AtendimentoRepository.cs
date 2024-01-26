@@ -37,7 +37,8 @@ public class AtendimentoRepository(IServiceProvider serviceProvider) : BaseRepos
         return await Context.Atendimentos
             .Where(atendimento => (!dataInicio.HasValue || atendimento.Data.Date >= dataInicio.Value.Date)
                 && (!dataInicio.HasValue || atendimento.Data.Date <= dataFim.Value.Date)
-                && (!clienteId.HasValue || atendimento.ClienteId == clienteId.Value))
+                && (!clienteId.HasValue || atendimento.ClienteId == clienteId.Value)
+                && atendimento.Situacao != SituacaoAtendimento.Cancelado)
             .Include(atendimento => atendimento.Cliente)
             .Include(atendimento => atendimento.MapAtendimentosServicos)
             .ThenInclude(mapAtendimentoServico => mapAtendimentoServico.Servico)

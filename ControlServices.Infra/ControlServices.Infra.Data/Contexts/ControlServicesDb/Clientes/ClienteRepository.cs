@@ -8,6 +8,7 @@ public class ClienteRepository(IServiceProvider serviceProvider) : BaseRepositor
     {
         return await Context.Clientes
             .Include(cliente => cliente.Atendimentos)
+            .Where(cliente => cliente.Atendimentos.Any(atendimento => atendimento.Data <= DateTime.Now.AddMonths(-12)))
             .OrderByDescending(cliente => cliente.Atendimentos.Count)
             .PaginationAsync<Cliente, ClienteModel>(pageNumber, pageSize, cancellationToken);
     }

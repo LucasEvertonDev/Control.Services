@@ -45,7 +45,7 @@ public class AtendimentoModel : BaseModel
             ValorAtendimento = atendimento.ValorAtendimento,
             ValorPago = atendimento.ValorPago,
             EmDebito = atendimento.ValorAtendimento > atendimento.ValorPago.GetValueOrDefault() && atendimento.Situacao == SituacaoAtendimento.Concluido,
-            AgendamentoPendenteAtualizacao = atendimento.Data < DateTime.Now,
+            AgendamentoPendenteAtualizacao = atendimento.Data < DateTime.Now && atendimento.Situacao != SituacaoAtendimento.Concluido,
             DataFim = atendimento.Data.AddHours(1),
             MapAtendimentosServicos = atendimento.MapAtendimentosServicos.Select(map => new MapAtendimentosServicosModel().FromEntity(map)).ToList()
         };

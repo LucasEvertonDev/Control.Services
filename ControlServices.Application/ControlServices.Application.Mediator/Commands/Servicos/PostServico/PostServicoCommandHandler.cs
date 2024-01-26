@@ -9,14 +9,14 @@ public class PostServicoCommandHandler(
 {
     public async Task<Result> Handle(PostServicoCommand request, CancellationToken cancellationToken)
     {
-        var servicodb = await UnitOfWork.ClienteRepository.FirstOrDefaultAsync(
-            where: servico => servico.Nome == request.Nome,
-            cancellationToken: cancellationToken);
+        //var servicodb = await UnitOfWork.ClienteRepository.FirstOrDefaultAsync(
+        //    where: servico => servico.Nome == request.Nome,
+        //    cancellationToken: cancellationToken);
 
-        if (servicodb != null)
-        {
-            return Result.Failure<PostServicoCommandHandler>(ServicoFailures.ServicoNaoEncontrado);
-        }
+        //if (servicodb != null)
+        //{
+        //    return Result.Failure<PostServicoCommandHandler>(ServicoFailures.ServicoDuplicado);
+        //}
 
         var servico = new Servico(
             nome: request.Nome,
@@ -32,6 +32,6 @@ public class PostServicoCommandHandler(
             domain: servico,
             cancellationToken: cancellationToken);
 
-        return Result.Ok();
+        return Result.Ok(servico);
     }
 }

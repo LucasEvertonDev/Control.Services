@@ -8,14 +8,14 @@ public class PostAtendimentoCommandHandler(IServiceProvider serviceProvider) : B
 {
     public async Task<Result> Handle(PostAtendimentoCommand request, CancellationToken cancellationToken)
     {
-        var atendimentosDia = await UnitOfWork.AtendimentoRepository.ToListAsync(
-                where: (atendimento) => atendimento.Data.Date == request.Data.Date,
-                cancellationToken: cancellationToken);
+        ////var atendimentosDia = await UnitOfWork.AtendimentoRepository.ToListAsync(
+        ////        where: (atendimento) => atendimento.Data.Date == request.Data.Date,
+        ////        cancellationToken: cancellationToken);
 
-        if (atendimentosDia != null && atendimentosDia.ToList().Exists(a => Math.Abs((a.Data - request.Data).TotalMinutes) < 60))
-        {
-            return Result.Failure<PostAtendimentoCommandHandler>(AtendimentoFailures.AtendimentoExistente);
-        }
+        ////if (atendimentosDia != null && atendimentosDia.ToList().Exists(a => Math.Abs((a.Data - request.Data).TotalMinutes) < 60))
+        ////{
+        ////    return Result.Failure<PostAtendimentoCommandHandler>(AtendimentoFailures.AtendimentoExistente);
+        ////}
 
         var cliente = await UnitOfWork.ClienteRepository.FirstOrDefaultTrackingAsync(
             where: cliente => cliente.Id == request.ClienteId,

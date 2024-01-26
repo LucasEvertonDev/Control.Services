@@ -28,6 +28,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlServices.Tests", "ControlServices.Tests\ControlServices.Tests\ControlServices.Tests.csproj", "{8C3B2A73-021D-4867-9972-2F3F84079242}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ControlServices.Carga", "ControlServices.Carga", "{C03E4902-97E6-49D5-9E48-2ED579B5F601}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlServices.Carga", "ControlServices.Carga\ControlServices.Carga.csproj", "{A6A99430-1DC3-4B87-9A3C-56C6D796EB12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +62,10 @@ Global
 		{8C3B2A73-021D-4867-9972-2F3F84079242}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C3B2A73-021D-4867-9972-2F3F84079242}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C3B2A73-021D-4867-9972-2F3F84079242}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6A99430-1DC3-4B87-9A3C-56C6D796EB12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6A99430-1DC3-4B87-9A3C-56C6D796EB12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6A99430-1DC3-4B87-9A3C-56C6D796EB12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6A99430-1DC3-4B87-9A3C-56C6D796EB12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +77,7 @@ Global
 		{D6951C5C-0531-4FDD-A660-64BA21146399} = {2A83DD42-A226-4695-A717-9A309AAFBA26}
 		{1436A71E-8480-471F-BF11-B5F6EB49FCC0} = {7D7006D7-4F20-4159-946C-4FA349EAE3EF}
 		{8C3B2A73-021D-4867-9972-2F3F84079242} = {F67375F9-476A-4FCE-AE40-73C29962C2B0}
+		{A6A99430-1DC3-4B87-9A3C-56C6D796EB12} = {C03E4902-97E6-49D5-9E48-2ED579B5F601}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3315056A-097B-42B7-B24D-CDFECD82A10F}

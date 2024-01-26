@@ -9,7 +9,7 @@ public class CustosXLucroModel
 
     public static IEnumerable<CustosXLucroModel> GetCustosPorLucro(List<Atendimento> atendimentos, List<Custo> custos)
     {
-        var atendimentosAgrupados = atendimentos.GroupBy(atendimento => new { atendimento.Data.Month, atendimento.Data.Year });
+        var atendimentosAgrupados = atendimentos.Where(atendimento => atendimento.Data <= DateTime.Now.Date).GroupBy(atendimento => new { atendimento.Data.Month, atendimento.Data.Year });
         var custosAgrupados = custos.GroupBy(custo => new { custo.Data.Month, custo.Data.Year });
 
         return atendimentosAgrupados.Select(atendimentoAgrupado =>
@@ -22,8 +22,8 @@ public class CustosXLucroModel
                 Resultado = new ResultadoModel
                 {
                     Custo = custoAgrupado.Sum(g => g.Sum(custo => custo.Valor)),
-                    Ganho = atendimentosAgrupados.Sum(g => g.Sum(custo => custo.ValorPago.GetValueOrDefault())),
-                    Lucro = atendimentosAgrupados.Sum(g => g.Sum(custo => custo.ValorPago.GetValueOrDefault())) - custoAgrupado.Sum(g => g.Sum(custo => custo.Valor))
+                    Ganho = atendimentoAgrupado.Sum(custo => custo.ValorPago.GetValueOrDefault()),
+                    Lucro = atendimentoAgrupado.Sum(custo => custo.ValorPago.GetValueOrDefault()) - custoAgrupado.Sum(g => g.Sum(custo => custo.Valor))
                 }
             };
         });

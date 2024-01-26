@@ -7,14 +7,14 @@ public class PostClienteCommandHandler(
 {
     public async Task<Result> Handle(PostClienteCommand request, CancellationToken cancellationToken)
     {
-        var clienteDb = await UnitOfWork.ClienteRepository.FirstOrDefaultAsync(
-            where: cliente => cliente.Nome == request.Nome,
-            cancellationToken: cancellationToken);
+        //var clienteDb = await UnitOfWork.ClienteRepository.FirstOrDefaultAsync(
+        //    where: cliente => cliente.Nome == request.Nome,
+        //    cancellationToken: cancellationToken);
 
-        if (clienteDb != null)
-        {
-            return Result.Failure<PostClienteCommandHandler>(ClienteFailures.ClienteJaCadastrado);
-        }
+        //if (clienteDb != null)
+        //{
+        //    return Result.Failure<PostClienteCommandHandler>(ClienteFailures.ClienteJaCadastrado);
+        //}
 
         var cliente = new Cliente(
             cpf: request.CPF,
@@ -31,6 +31,6 @@ public class PostClienteCommandHandler(
             domain: cliente,
             cancellationToken: cancellationToken);
 
-        return Result.Ok();
+        return Result.Ok(cliente);
     }
 }

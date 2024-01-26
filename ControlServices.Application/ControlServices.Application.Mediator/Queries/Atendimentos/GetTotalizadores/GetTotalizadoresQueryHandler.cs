@@ -3,9 +3,11 @@ public class GetTotalizadoresQueryHandler(IServiceProvider serviceProvider) : Ba
 {
     public async Task<Result> Handle(GetTotalizadoresQuery request, CancellationToken cancellationToken)
     {
+        DateTime dataInicio = Convert.ToDateTime($"{DateTime.Now.Year}-{DateTime.Now.Month}-01");
+
         var totalizadores = await UnitOfWork.AtendimentoRepository
-            .GetTotalizadores(dataInicio: request.DataInicial,
-                dataFim: request.DataFinal,
+            .GetTotalizadores(dataInicio: request.DataInicial ?? dataInicio,
+                dataFim: request.DataFinal ?? dataInicio.AddMonths(1).AddSeconds(-1),
                 cancellationToken: cancellationToken);
 
         return Result.Ok(totalizadores);
